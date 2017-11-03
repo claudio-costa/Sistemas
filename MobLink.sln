@@ -3,23 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.WebLeilao.Web", "MobLink.WebLeilao\MobLink.WebLeilao.Web\MobLink.WebLeilao.Web.csproj", "{7F88E760-CFA0-4D95-ACD2-3CB76C9E4AE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.LinkLeiloes.Web", "MobLink.WebLeilao\MobLink.WebLeilao.Web\MobLink.LinkLeiloes.Web.csproj", "{7F88E760-CFA0-4D95-ACD2-3CB76C9E4AE2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LinkLeiloes", "LinkLeiloes", "{75D832DA-9D55-4269-8629-31E2B40D7973}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.WebLeilao.Repositorio", "MobLink.WebLeilao\MobLink.WebLeilao.Repositorio\MobLink.WebLeilao.Repositorio.csproj", "{C0106801-D65C-4BCC-94AC-A7E0DE18A6D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.LinkLeiloes.Repositorio", "MobLink.WebLeilao\MobLink.WebLeilao.Repositorio\MobLink.LinkLeiloes.Repositorio.csproj", "{C0106801-D65C-4BCC-94AC-A7E0DE18A6D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.WebLeilao.Dominio", "MobLink.WebLeilao\MobLink.WebLeilao.Dominio\MobLink.WebLeilao.Dominio.csproj", "{46834F07-64AB-489A-ABC4-7149312EB1DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.LinkLeiloes.Dominio", "MobLink.WebLeilao\MobLink.WebLeilao.Dominio\MobLink.LinkLeiloes.Dominio.csproj", "{46834F07-64AB-489A-ABC4-7149312EB1DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows Service", "Windows Service", "{F050B862-8F0B-4A0B-8150-01FD1D66E985}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.WebLeilao.PreLeilao", "MobLink.WebLeilao\MobLink.WebLeilao.PreLeilao\MobLink.WebLeilao.PreLeilao.csproj", "{18AA7CDA-CC95-47C4-8914-D5FA248BD9F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.LinkLeiloes.PreLeilaoService", "MobLink.WebLeilao\MobLink.WebLeilao.PreLeilao\MobLink.LinkLeiloes.PreLeilaoService.csproj", "{18AA7CDA-CC95-47C4-8914-D5FA248BD9F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.Framework", "MobLink.Framework\MobLink.Framework\MobLink.Framework.csproj", "{A8233DB7-CC04-4C44-BCE5-475A0B9947EC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{46238FE8-90C2-4147-94A9-5EFDB79C511A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.Framework.WebServices", "MobLink.Framework\MobLink.Framework.WebServices\MobLink.Framework.WebServices.csproj", "{F5A8E902-E916-40D8-B094-7709FE361901}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LinkAutoAtendimento", "LinkAutoAtendimento", "{F1874CAC-E82C-4C0B-90EE-0C71AB4E691A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.LinkAutoAtendimento.Web", "MobLink.LinkAutoAtendimento\MobLink.LinkAutoAtendimento.Web\MobLink.LinkAutoAtendimento.Web.csproj", "{16EF52B9-FBD4-4164-947D-62FD3D720F4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{F5A8E902-E916-40D8-B094-7709FE361901}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5A8E902-E916-40D8-B094-7709FE361901}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5A8E902-E916-40D8-B094-7709FE361901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16EF52B9-FBD4-4164-947D-62FD3D720F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16EF52B9-FBD4-4164-947D-62FD3D720F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16EF52B9-FBD4-4164-947D-62FD3D720F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16EF52B9-FBD4-4164-947D-62FD3D720F4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +71,7 @@ Global
 		{18AA7CDA-CC95-47C4-8914-D5FA248BD9F4} = {F050B862-8F0B-4A0B-8150-01FD1D66E985}
 		{A8233DB7-CC04-4C44-BCE5-475A0B9947EC} = {46238FE8-90C2-4147-94A9-5EFDB79C511A}
 		{F5A8E902-E916-40D8-B094-7709FE361901} = {46238FE8-90C2-4147-94A9-5EFDB79C511A}
+		{16EF52B9-FBD4-4164-947D-62FD3D720F4B} = {F1874CAC-E82C-4C0B-90EE-0C71AB4E691A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AA140984-D972-4B6D-B2FF-D984A27655CB}

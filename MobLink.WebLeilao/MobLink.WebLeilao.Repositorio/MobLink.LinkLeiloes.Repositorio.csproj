@@ -97,9 +97,9 @@
     <Compile Include="UsuarioRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MobLink.WebLeilao.Dominio\MobLink.WebLeilao.Dominio.csproj">
+    <ProjectReference Include="..\MobLink.WebLeilao.Dominio\MobLink.LinkLeiloes.Dominio.csproj">
       <Project>{46834f07-64ab-489a-abc4-7149312eb1db}</Project>
-      <Name>MobLink.WebLeilao.Dominio</Name>
+      <Name>MobLink.LinkLeiloes.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

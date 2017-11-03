@@ -385,13 +385,13 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MobLink.WebLeilao.Dominio\MobLink.WebLeilao.Dominio.csproj">
+    <ProjectReference Include="..\MobLink.WebLeilao.Dominio\MobLink.LinkLeiloes.Dominio.csproj">
       <Project>{46834f07-64ab-489a-abc4-7149312eb1db}</Project>
-      <Name>MobLink.WebLeilao.Dominio</Name>
+      <Name>MobLink.LinkLeiloes.Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MobLink.WebLeilao.Repositorio\MobLink.WebLeilao.Repositorio.csproj">
+    <ProjectReference Include="..\MobLink.WebLeilao.Repositorio\MobLink.LinkLeiloes.Repositorio.csproj">
       <Project>{c0106801-d65c-4bcc-94ac-a7e0de18a6d3}</Project>
-      <Name>MobLink.WebLeilao.Repositorio</Name>
+      <Name>MobLink.LinkLeiloes.Repositorio</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
