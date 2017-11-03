@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace MobLink.WebLeilao.Web
+namespace MobLink.LinkLeiloes.Web
 {
     public class MSOffice
     {

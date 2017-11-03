@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Text;
 using System.Data;
-using MobLink.WebLeilao.Repositorio;
-using MobLink.WebLeilao.Dominio;
+using MobLink.LinkLeiloes.Repositorio;
+using MobLink.LinkLeiloes.Dominio;
 using MobLink.Framework.Database;
 using MobLink.Framework;
 
@@ -26,7 +26,7 @@ namespace ImportarExcel
                   WHERE id_leilao = 65";
 
             //LER TABELA DE LOTES
-            var lotes = ConsultaSQL(sql).ConverterParaLista<MobLink.WebLeilao.Dominio.Lote>();
+            var lotes = ConsultaSQL(sql).ConverterParaLista<MobLink.LinkLeiloes.Dominio.Lote>();
 
             //INSERIR PROPRIETARIOS
             foreach (var lote in lotes)
@@ -47,7 +47,7 @@ namespace ImportarExcel
                     continue; 
                 }
 
-                var proprietario = AutoMapper.Mapper.Map<CADASTRADOS, MobLink.WebLeilao.Dominio.Transacao005>(correspondencia);
+                var proprietario = AutoMapper.Mapper.Map<CADASTRADOS, MobLink.LinkLeiloes.Dominio.Transacao005>(correspondencia);
 
                 //COMPLEMENTAÇÃO DO LOTE
                 lote.numero_motor = proprietario.NumeroMotor;
@@ -96,7 +96,7 @@ namespace ImportarExcel
                     continue;
                 }
 
-                var restricao = AutoMapper.Mapper.Map<RESTRICOES, MobLink.WebLeilao.Dominio.Restricao>(correspondencia);
+                var restricao = AutoMapper.Mapper.Map<RESTRICOES, MobLink.LinkLeiloes.Dominio.Restricao>(correspondencia);
 
                 //COMPLEMENTAÇÃO DO LOTE
                 
@@ -135,7 +135,7 @@ namespace ImportarExcel
                     continue;
                 }
 
-                var roubofurto = AutoMapper.Mapper.Map<SITUACAO_ROUBOFURTO_BIN, MobLink.WebLeilao.Dominio.Restricao>(correspondencia);
+                var roubofurto = AutoMapper.Mapper.Map<SITUACAO_ROUBOFURTO_BIN, MobLink.LinkLeiloes.Dominio.Restricao>(correspondencia);
 
                 //COMPLEMENTAÇÃO DO LOTE
 

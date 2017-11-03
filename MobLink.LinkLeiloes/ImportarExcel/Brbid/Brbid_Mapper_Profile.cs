@@ -19,7 +19,7 @@ namespace ImportarExcel.Brbid
 
         //protected override void Configure()
         //{
-        //    Mapper.CreateMap<Brbid.Brbid_Arrematante, MobLink.WebLeilao.Dominio.Arrematante>()
+        //    Mapper.CreateMap<Brbid.Brbid_Arrematante, MobLink.LinkLeiloes.Dominio.Arrematante>()
 
         //    .ForMember(y => y.lote, opt => { opt.MapFrom(x => x.LOTE); })
         //    .ForMember(y => y.leilao, opt => { opt.MapFrom(x => x.LEILAO); })

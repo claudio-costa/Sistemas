@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MobLink.WebLeilao.Repositorio.Properties {
+namespace MobLink.LinkLeiloes.Repositorio.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

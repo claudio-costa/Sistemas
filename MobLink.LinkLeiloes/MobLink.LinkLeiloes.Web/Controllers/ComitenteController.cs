@@ -1,8 +1,8 @@
-﻿using MobLink.WebLeilao.Repositorio;
-using MobLink.WebLeilao.Web.Security;
+﻿using MobLink.LinkLeiloes.Repositorio;
+using MobLink.LinkLeiloes.Web.Security;
 using System.Web.Mvc;
 
-namespace MobLink.WebLeilao.Web.Controllers
+namespace MobLink.LinkLeiloes.Web.Controllers
 {
     [Authorize]
     [PermissoesFiltro(Roles = "COMITENTES")]

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobLink.WebLeilao.Dominio
+namespace MobLink.LinkLeiloes.Dominio
 {
     public class Leilao
     {

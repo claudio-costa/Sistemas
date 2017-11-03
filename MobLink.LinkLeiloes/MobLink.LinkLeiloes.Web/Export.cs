@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 
-namespace MobLink.WebLeilao.Web
+namespace MobLink.LinkLeiloes.Web
 {
     public class Export
     {

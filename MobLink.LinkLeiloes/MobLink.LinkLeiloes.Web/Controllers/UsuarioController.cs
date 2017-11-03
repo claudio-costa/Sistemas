@@ -1,9 +1,9 @@
-﻿using MobLink.WebLeilao.Dominio;
-using MobLink.WebLeilao.Repositorio;
+﻿using MobLink.LinkLeiloes.Dominio;
+using MobLink.LinkLeiloes.Repositorio;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace MobLink.WebLeilao.Web.Controllers
+namespace MobLink.LinkLeiloes.Web.Controllers
 {
     [Authorize]
     public class UsuarioController : Controller

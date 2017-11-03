@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using MobLink.WebLeilao.Repositorio;
-using MobLink.WebLeilao.Web.Security;
+using MobLink.LinkLeiloes.Repositorio;
+using MobLink.LinkLeiloes.Web.Security;
 
-namespace MobLink.WebLeilao.Web.Controllers
+namespace MobLink.LinkLeiloes.Web.Controllers
 {
     [Authorize]
     public class HomeController : Controller

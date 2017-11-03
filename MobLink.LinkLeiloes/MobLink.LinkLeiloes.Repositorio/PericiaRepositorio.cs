@@ -1,13 +1,13 @@
 ﻿using MobLink.Framework;
 using MobLink.Framework.Database;
 using MobLink.Framework.Interfaces;
-using MobLink.WebLeilao.Dominio;
+using MobLink.LinkLeiloes.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 
-namespace MobLink.WebLeilao.Repositorio
+namespace MobLink.LinkLeiloes.Repositorio
 {
     public class PericiaRepositorio : DbSqlServer, ICrud<Pericia, int>
     {

@@ -1,9 +1,9 @@
-﻿@model IEnumerable<MobLink.WebLeilao.Dominio.Lote>
+﻿@model IEnumerable<MobLink.LinkLeiloes.Dominio.Lote>
 
 @*TABELAS AUXILIARES*@
-@{ var TiposVeiculo = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.TipoVeiculo.SelecionarTudo().ToList(), "id", "Descricao", null); }
-@{ var Locais = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Lote.SelecionarLocalizacao().ToList(), "descricao", "descricao", null); }
-@{ var Leiloes = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Leilao.SelecionarTudo().ToList(), "Id", "Descricao", null); }
+@{ var TiposVeiculo = new SelectList(MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.TipoVeiculo.SelecionarTudo().ToList(), "id", "Descricao", null); }
+@{ var Locais = new SelectList(MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Lote.SelecionarLocalizacao().ToList(), "descricao", "descricao", null); }
+@{ var Leiloes = new SelectList(MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Leilao.SelecionarTudo().ToList(), "Id", "Descricao", null); }
 
 @{
     ViewBag.Title = "Conferência de Pátio";

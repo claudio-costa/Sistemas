@@ -1,6 +1,6 @@
 ﻿using Excel;
 using MobLink.Framework;
-using MobLink.WebLeilao.Repositorio;
+using MobLink.LinkLeiloes.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,12 +12,7 @@ namespace ImportarExcel
     {
         static void Main(string[] args)
         {
-            MobLink.Framework.WebServices.WSPatioxDetran ws = new MobLink.Framework.WebServices.WSPatioxDetran(Ambientes.Producao);
-            var rertyie = ws.ConsultaVeiculo("ICH6249", "ROOT");
-
-            var leil = ws.ConsultaVeiculoParaLeilao("ROOT", "LNA3631");
-
-            FileStream stream = File.Open(@"C:\Temp\GENESIS\GENESIS.xlsx", FileMode.Open, FileAccess.Read);
+            FileStream stream = File.Open(@"C:\Temp\Caruaru\Caruaru.xlsx", FileMode.Open, FileAccess.Read);
 
             IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
@@ -25,7 +20,7 @@ namespace ImportarExcel
 
             DataSet result = excelReader.AsDataSet();
 
-            var Arrematantes = result.Tables[0].ConverterParaLista<MobLink.WebLeilao.Dominio.Arrematante>();
+            var Arrematantes = result.Tables[0].ConverterParaLista<MobLink.LinkLeiloes.Dominio.Arrematante>();
 
 
 
@@ -61,17 +56,17 @@ namespace ImportarExcel
                     //                       WHERE l.descricao = '{0}'
                     //                         AND ll.placa = '{1}' OR ll.chassi = '{2}'", arrematante.leilao, arrematante.placa, arrematante.chassi);
 
-                    //var dtLote = RepositorioGlobal.Util.ConsultaGenerica(Util.DetectarConexao(), sql).ConverterParaLista<MobLink.WebLeilao.Dominio.Lote>();
+                    //var dtLote = RepositorioGlobal.Util.ConsultaGenerica(Util.DetectarConexao(), sql).ConverterParaLista<MobLink.LinkLeiloes.Dominio.Lote>();
 
                     //arrematante.numero_processo = dtLote.Count > 0 ? dtLote[0].numero_formulario_grv : string.Empty;
 
                     var sql = string.Format(@"SELECT * FROM tb_dep_grv WHERE numero_formulario_grv = '{0}'", arrematante.numero_processo);
 
-                    MobLink.WebLeilao.Dominio.GRV grv = new MobLink.WebLeilao.Dominio.GRV();
+                    MobLink.LinkLeiloes.Dominio.GRV grv = new MobLink.LinkLeiloes.Dominio.GRV();
 
                     try
                     {
-                        grv = RepositorioGlobal.Util.ConsultaGenerica(Util.LerConfiguracao("CONEXAO_DP"), sql).ConverterParaEntidade<MobLink.WebLeilao.Dominio.GRV>();
+                        grv = RepositorioGlobal.Util.ConsultaGenerica(Util.LerConfiguracao("CONEXAO_DP"), sql).ConverterParaEntidade<MobLink.LinkLeiloes.Dominio.GRV>();
                     }
                     catch (Exception e)
                     {
@@ -132,12 +127,12 @@ namespace ImportarExcel
             //    VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}','{8}')",
             //    item.patio, item.municipio, item.uf, item.drv, item.recolhimento, item.placa, item.marca_modelo, item.chassi, item.grv);
 
-            //    MobLink.WebLeilao.Repositorio.RepositorioGlobal.Util.ExecutaSqlGenerico(MobLink.Framework.Util.LerConfiguracao("CONEXAO"), sql);
+            //    MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Util.ExecutaSqlGenerico(MobLink.Framework.Util.LerConfiguracao("CONEXAO"), sql);
 
             //    Console.WriteLine(item.grv);
             //}
 
-            //var grvs = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Util.ConsultaGenerica(MobLink.Framework.Util.LerConfiguracao("CONEXAO"), 
+            //var grvs = MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Util.ConsultaGenerica(MobLink.Framework.Util.LerConfiguracao("CONEXAO"), 
             //                                                                                 "select grv from dbo.PRFPB");
 
 
@@ -146,7 +141,7 @@ namespace ImportarExcel
             //    var grv = item.ItemArray[0];
 
 
-            //    MobLink.WebLeilao.Dominio.GRV res = new MobLink.WebLeilao.Dominio.GRV();
+            //    MobLink.LinkLeiloes.Dominio.GRV res = new MobLink.LinkLeiloes.Dominio.GRV();
 
             //    try
             //    {

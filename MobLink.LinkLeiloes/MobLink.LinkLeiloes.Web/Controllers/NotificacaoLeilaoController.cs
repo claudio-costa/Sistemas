@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MobLink.WebLeilao.Web.Controllers
+namespace MobLink.LinkLeiloes.Web.Controllers
 {
     public class NotificacaoLeilaoController : Controller
     {

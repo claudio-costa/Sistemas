@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobLink.WebLeilao.Repositorio
+namespace MobLink.LinkLeiloes.Repositorio
 {
     public class SapRepositorio : Framework.Database.DbSqlServer
     {

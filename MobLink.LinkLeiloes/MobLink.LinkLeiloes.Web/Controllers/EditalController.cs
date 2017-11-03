@@ -1,5 +1,5 @@
-﻿using MobLink.WebLeilao.Dominio;
-using MobLink.WebLeilao.Repositorio;
+﻿using MobLink.LinkLeiloes.Dominio;
+using MobLink.LinkLeiloes.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MobLink.WebLeilao.Web.Controllers
+namespace MobLink.LinkLeiloes.Web.Controllers
 {
     [Authorize]
     public class EditalController : Controller

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MobLink.WebLeilao.Dominio
+namespace MobLink.LinkLeiloes.Dominio
 {
     public class GRV
     {

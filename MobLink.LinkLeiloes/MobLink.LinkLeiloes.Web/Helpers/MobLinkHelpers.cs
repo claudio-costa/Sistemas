@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MobLink.WebLeilao.Web
+namespace MobLink.LinkLeiloes.Web
 {
     public static class MobLinkHelpers
     {

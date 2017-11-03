@@ -1,9 +1,9 @@
-﻿@model IEnumerable<MobLink.WebLeilao.Dominio.Despesa_Leilao>
+﻿@model IEnumerable<MobLink.LinkLeiloes.Dominio.Despesa_Leilao>
 
 @{
     ViewBag.Title = "Despesas";
 
-    var leilao = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Leilao.SelecionarPorId(ViewBag.idleilao);
+    var leilao = MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Leilao.SelecionarPorId(ViewBag.idleilao);
 
     using (Html.BeginForm("InserirDespesa", "Leilao"))
     {

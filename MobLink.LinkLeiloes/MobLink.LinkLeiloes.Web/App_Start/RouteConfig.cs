@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MobLink.WebLeilao.Web
+namespace MobLink.LinkLeiloes.Web
 {
     public class RouteConfig
     {

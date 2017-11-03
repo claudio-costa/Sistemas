@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MobLink.WebLeilao.Dominio
+namespace MobLink.LinkLeiloes.Dominio
 {
     public class Cliente
     {

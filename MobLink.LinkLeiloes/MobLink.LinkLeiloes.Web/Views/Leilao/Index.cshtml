@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MobLink.WebLeilao.Dominio.Leilao>
+﻿@model IEnumerable<MobLink.LinkLeiloes.Dominio.Leilao>
 
 @{
     ViewBag.Title = "Pré-Leilão - Manutenção de Leilões";
@@ -75,10 +75,10 @@
                 }
                 else
                 {
-                    MobLink.WebLeilao.Repositorio.LeilaoRepositorio leilaoRep = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Leilao;
+                    MobLink.LinkLeiloes.Repositorio.LeilaoRepositorio leilaoRep = MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Leilao;
                     var leilao = leilaoRep.SelecionarPorId(item.id);
 
-                    MobLink.WebLeilao.Repositorio.ComitenteRepositorio comitRep = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Comitente;
+                    MobLink.LinkLeiloes.Repositorio.ComitenteRepositorio comitRep = MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Comitente;
                     var comitente = comitRep.SelecionarPorId(leilao.id_comitente);
 
                     if (comitente.tipo_importacao == 1)

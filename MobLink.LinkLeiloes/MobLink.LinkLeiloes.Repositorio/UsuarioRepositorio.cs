@@ -1,11 +1,11 @@
 ﻿using MobLink.Framework;
 using MobLink.Framework.Database;
-using MobLink.WebLeilao.Dominio;
+using MobLink.LinkLeiloes.Dominio;
 using System.Data;
 using System.Linq;
 
 
-namespace MobLink.WebLeilao.Repositorio
+namespace MobLink.LinkLeiloes.Repositorio
 {
     public class UsuarioRepositorio : DbSqlServer
     {

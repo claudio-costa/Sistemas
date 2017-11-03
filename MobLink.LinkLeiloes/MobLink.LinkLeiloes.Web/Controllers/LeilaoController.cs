@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using MobLink.WebLeilao.Dominio;
-using MobLink.WebLeilao.Repositorio;
+using MobLink.LinkLeiloes.Dominio;
+using MobLink.LinkLeiloes.Repositorio;
 using System;
-using MobLink.WebLeilao.Web.Security;
+using MobLink.LinkLeiloes.Web.Security;
 using System.IO;
 using System.Text;
 using MobLink.Framework;
 
-namespace MobLink.WebLeilao.Web.Controllers
+namespace MobLink.LinkLeiloes.Web.Controllers
 {
     [Authorize]
     [PermissoesFiltro(Roles = "LEILOES")]
@@ -376,7 +376,7 @@ namespace MobLink.WebLeilao.Web.Controllers
         {
             StringBuilder sb = new StringBuilder();
 
-            var proprietarios = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Proprietario.SelecionarNotificacoes(IdLeilao);
+            var proprietarios = MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Proprietario.SelecionarNotificacoes(IdLeilao);
 
             
 

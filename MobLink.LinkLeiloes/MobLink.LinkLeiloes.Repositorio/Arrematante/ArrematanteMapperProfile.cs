@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MobLink.Framework.WebServices;
 using System.Linq.Expressions;
 
-namespace MobLink.WebLeilao.Repositorio
+namespace MobLink.LinkLeiloes.Repositorio
 {
     public class ArrematanteMapperProfile : Profile
     {

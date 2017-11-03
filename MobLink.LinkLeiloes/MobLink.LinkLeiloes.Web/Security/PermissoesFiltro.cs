@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MobLink.WebLeilao.Web.Security
+namespace MobLink.LinkLeiloes.Web.Security
 {
     public class PermissoesFiltro : AuthorizeAttribute
     {

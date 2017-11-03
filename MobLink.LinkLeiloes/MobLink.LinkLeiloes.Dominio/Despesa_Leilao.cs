@@ -1,4 +1,4 @@
-﻿namespace MobLink.WebLeilao.Dominio
+﻿namespace MobLink.LinkLeiloes.Dominio
 {
     public class Despesa_Leilao
     {

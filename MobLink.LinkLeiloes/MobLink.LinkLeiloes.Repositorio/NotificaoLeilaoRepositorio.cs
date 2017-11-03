@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using MobLink.WebLeilao.Dominio;
+using MobLink.LinkLeiloes.Dominio;
 using MobLink.Framework;
 using MobLink.Framework.Database;
 using MobLink.Framework.Interfaces;
 
-namespace MobLink.WebLeilao.Repositorio
+namespace MobLink.LinkLeiloes.Repositorio
 {
     public class NotificaoLeilaoRepositorio : DbSqlServer, ICrud<NotificacaoLeilao, int>
     {

@@ -1,9 +1,9 @@
-﻿@model List<MobLink.WebLeilao.Dominio.Notificacao>
+﻿@model List<MobLink.LinkLeiloes.Dominio.Notificacao>
 
-@{ SelectList Leiloes = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Leilao.SelecionarTudo()); }
-@{ SelectList Clientes = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Cliente.SelecionarTudo(), "id", "nome"); }
-@{ SelectList Depositos = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Deposito.SelecionarTudo(), "id_deposito", "descricao"); }
-@{ SelectList Notificacoes = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Notificacao.SelecionarTiposNotificacao(), "id", "descricao"); }
+@{ SelectList Leiloes = new SelectList(MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Leilao.SelecionarTudo()); }
+@{ SelectList Clientes = new SelectList(MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Cliente.SelecionarTudo(), "id", "nome"); }
+@{ SelectList Depositos = new SelectList(MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Deposito.SelecionarTudo(), "id_deposito", "descricao"); }
+@{ SelectList Notificacoes = new SelectList(MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Notificacao.SelecionarTiposNotificacao(), "id", "descricao"); }
 
 @Html.Partial("../_SelecionarLeilao");
 

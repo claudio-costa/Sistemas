@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace MobLink.WebLeilao.Repositorio
+namespace MobLink.LinkLeiloes.Repositorio
 {
     public class BoletosRepositorio : Framework.Database.DbSqlServer
     {

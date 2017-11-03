@@ -1,4 +1,4 @@
-﻿@model MobLink.WebLeilao.Dominio.Leilao
+﻿@model MobLink.LinkLeiloes.Dominio.Leilao
 
 @{
     ViewBag.Title = "Geração de edital de leilão";
@@ -42,9 +42,9 @@
             </tr>
 
             @{
-                var editais = MobLink.WebLeilao.Repositorio
+                var editais = MobLink.LinkLeiloes.Repositorio
                     .RepositorioGlobal.Edital
-                    .SelecionarTudo(new MobLink.WebLeilao.Dominio.Leilao()
+                    .SelecionarTudo(new MobLink.LinkLeiloes.Dominio.Leilao()
                     {
                         Id = Convert.ToInt32(Model.Id)
                     });
@@ -58,7 +58,7 @@
                     </td>
 
                     <td>
-                        @MobLink.WebLeilao.Repositorio.RepositorioGlobal.Usuario.SelecionarUsuario(item.id_usuario_geracao).Login
+                        @MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Usuario.SelecionarUsuario(item.id_usuario_geracao).Login
                     </td>
 
                     <td>

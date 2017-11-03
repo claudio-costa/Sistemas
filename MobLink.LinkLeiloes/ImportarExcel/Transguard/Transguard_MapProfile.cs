@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MobLink.Framework;
-using MobLink.WebLeilao.Repositorio;
+using MobLink.LinkLeiloes.Repositorio;
 using System.Linq;
 
 namespace ImportarExcel.AutoMapperProfiles
@@ -35,9 +35,9 @@ namespace ImportarExcel.AutoMapperProfiles
 
         //protected override void Configure()
         //{
-        //    Mapper.CreateMap<SITUACAO_ROUBOFURTO_BIN, MobLink.WebLeilao.Dominio.Restricao>();
+        //    Mapper.CreateMap<SITUACAO_ROUBOFURTO_BIN, MobLink.LinkLeiloes.Dominio.Restricao>();
 
-        //    Mapper.CreateMap<RESTRICOES, MobLink.WebLeilao.Dominio.Restricao>()
+        //    Mapper.CreateMap<RESTRICOES, MobLink.LinkLeiloes.Dominio.Restricao>()
 
         //    .ForMember(y => y.codigo, opt => { opt.MapFrom(x => x.RESTRICAO); })
         //    .ForMember(y => y.restricao, opt => { opt.MapFrom(x => x.DESC_RESTRICAO); })
@@ -45,7 +45,7 @@ namespace ImportarExcel.AutoMapperProfiles
 
         //    ;
 
-        //    Mapper.CreateMap<CADASTRADOS, MobLink.WebLeilao.Dominio.Transacao005>()
+        //    Mapper.CreateMap<CADASTRADOS, MobLink.LinkLeiloes.Dominio.Transacao005>()
 
         //        .ForMember(p => p.Placa, opt => { opt.MapFrom(x => x.PLACA); })
         //        .ForMember(p => p.PlacaNova, opt => { opt.MapFrom(x => x.PLACA); })

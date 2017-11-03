@@ -1,7 +1,7 @@
-﻿@model MobLink.WebLeilao.Dominio.Lote
+﻿@model MobLink.LinkLeiloes.Dominio.Lote
 
 @{
-    List<MobLink.WebLeilao.Dominio.Cor> Cores = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Cor.SelecionarTudo().ToList();
+    List<MobLink.LinkLeiloes.Dominio.Cor> Cores = MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Cor.SelecionarTudo().ToList();
     SelectList ListaCores = new SelectList(Cores, "Descricao", "Descricao");
 
     List<SelectListItem> itensLL = new List<SelectListItem>();

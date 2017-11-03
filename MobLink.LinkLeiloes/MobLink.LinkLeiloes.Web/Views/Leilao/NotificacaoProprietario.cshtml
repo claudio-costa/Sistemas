@@ -1,4 +1,4 @@
-﻿@model MobLink.WebLeilao.Dominio.Leilao
+﻿@model MobLink.LinkLeiloes.Dominio.Leilao
 
 @{
     ViewBag.Title = "Notificação Proprietário - " + @Model.descricao;
@@ -14,7 +14,7 @@
         </tr>
 
         @{
-            var proprietarios = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Proprietario.SelecionarNotificacoes(Model.id);
+            var proprietarios = MobLink.LinkLeiloes.Repositorio.RepositorioGlobal.Proprietario.SelecionarNotificacoes(Model.id);
         }
 
         @if (proprietarios.Count <= 0)

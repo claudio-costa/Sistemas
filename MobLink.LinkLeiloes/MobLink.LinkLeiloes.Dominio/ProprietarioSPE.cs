@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MobLink.WebLeilao.Dominio
+namespace MobLink.LinkLeiloes.Dominio
 {
     public class ProprietarioSPE
     {

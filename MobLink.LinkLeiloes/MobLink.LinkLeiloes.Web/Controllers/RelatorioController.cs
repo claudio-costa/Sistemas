@@ -1,11 +1,11 @@
 ﻿using System.Web.Mvc;
-using MobLink.WebLeilao.Web.Security;
+using MobLink.LinkLeiloes.Web.Security;
 using System.Collections.Generic;
-using MobLink.WebLeilao.Repositorio;
+using MobLink.LinkLeiloes.Repositorio;
 using MobLink.Framework;
 using System.Data;
 
-namespace MobLink.WebLeilao.Web.Controllers
+namespace MobLink.LinkLeiloes.Web.Controllers
 {
     [Authorize]
     //[PermissoesFiltro(Roles = "RELATORIOS")]

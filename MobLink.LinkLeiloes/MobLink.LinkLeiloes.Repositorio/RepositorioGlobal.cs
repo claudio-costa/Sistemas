@@ -1,7 +1,7 @@
 ﻿using MobLink.Framework;
 using MobLink.Framework.Database;
 
-namespace MobLink.WebLeilao.Repositorio
+namespace MobLink.LinkLeiloes.Repositorio
 {
     public class RepositorioGlobal : DbSqlServer
     {

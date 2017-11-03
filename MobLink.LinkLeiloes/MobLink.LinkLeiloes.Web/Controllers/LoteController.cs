@@ -1,5 +1,5 @@
-﻿using MobLink.WebLeilao.Dominio;
-using MobLink.WebLeilao.Repositorio;
+﻿using MobLink.LinkLeiloes.Dominio;
+using MobLink.LinkLeiloes.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ using System.Data;
 using Newtonsoft.Json;
 
 
-namespace MobLink.WebLeilao.Web.Controllers
+namespace MobLink.LinkLeiloes.Web.Controllers
 {
     [Authorize]
     public class LoteController : Controller

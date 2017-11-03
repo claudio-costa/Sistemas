@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MobLink.WebLeilao.Web.Models
+namespace MobLink.LinkLeiloes.Web.Models
 {
     public class NuloOuVazio : ValidationAttribute
     {
