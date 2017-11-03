@@ -1,0 +1,221 @@
+﻿@{ List<WebPatios.Model.Entradas.EntradaHora> EntradasHora = ViewBag.EntradasHora; }
+@{ List<WebPatios.Model.Entradas.EntradaTiposVeiculo> EntradasTiposVeiculo = ViewBag.EntradasTipoVeiculo; }
+@{ List<WebPatios.Model.Entradas.EntradaDiaSemana> EntradasDiaSemana = ViewBag.EntradasDiaSemana; }
+@{ List<WebPatios.Model.Entradas.Entrada> Entrada = ViewBag.Entradas; }
+
+<div class="row">
+
+    @*Entradas por hora do dia*@
+    <div class="col-md-12">
+
+        <div class="panel" style="background-color: palegreen">
+            <div class="panel-heading">
+                <B>Entradas por hora do dia</B>
+            </div>
+
+            <div class="table-responsive small">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        @foreach (var item in EntradasHora)
+                        {
+                        <td>
+                            <span class="glyphicon glyphicon-time"></span><br />
+                            @Html.DisplayFor(modelItem => item.hora) Horas
+                        </td>
+                        }
+                    </tr>
+
+                    <tr>
+                        @foreach (var item in EntradasHora)
+                        {
+                        <td>
+                            <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span>
+                        </td>
+                        }
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    @*Entradas por divisão*@
+    <div class="col-md-4">
+        <div class="list-group">
+            @*<div class="list-group-item list-group-item-info">*@
+            <div class="list-group-item" style="background-color: burlywood">
+                <b>Entradas por divisão</b>
+            </div>
+
+            @{ int counterEntradasAutoridade2 = 0; }
+            @foreach (var item in Entrada)
+            {
+                <div class="list-group-item text-left">
+                    <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span>
+                    @Html.DisplayFor(modelItem => item.descricaoDivisao)
+                </div>
+                counterEntradasAutoridade2 += item.quantidade;
+            }
+
+            <div class="list-group-item text-left" style="background-color: burlywood">
+                @*style="background-color: gold">*@
+                <span class="badge"> @counterEntradasAutoridade2.ToString() </span>
+                <b>TOTAL</b>
+                <div class="glyphicon glyphicon-hand-right"></div>
+            </div>
+
+        </div>
+    </div>
+
+    @*Entradas por tipo de veículo*@
+    <div class="col-md-4">
+        <div class="list-group">
+            <div class="list-group-item list-group-item-info">
+                <b>Entradas por tipo de veículo</b>
+            </div>
+
+            @{ int counterEntradasTipoVeiculo = 0; }
+
+            @foreach (var item in EntradasTiposVeiculo)
+            {
+            <div class="list-group-item text-left">
+                <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span>
+                @Html.DisplayFor(modelItem => item.tipoVeiculo)
+            </div>
+                counterEntradasTipoVeiculo += item.quantidade;
+            }
+
+            <div class="list-group-item text-left list-group-item-info">
+                @*style="background-color: gold">*@
+                <span class="badge"> @counterEntradasTipoVeiculo.ToString() </span>
+                <b>TOTAL</b>
+                <div class="glyphicon glyphicon-hand-right"></div>
+            </div>
+
+        </div>
+    </div>
+
+    @*Entradas por dia de semana*@
+    <div class="col-md-4">
+        <div class="panel" style="background-color: gold">
+            <div class="panel-heading">
+                <B>Entradas por dia de semana</B>
+            </div>
+
+            <div class="table-responsive small">
+                <table class="table table-striped">
+                    <tbody>
+
+                        @{ int counterEntradasDiaSemana = 0; }
+                        @foreach (var item in EntradasDiaSemana)
+                        {
+                        <tr>
+                            <td class="text-left">@Html.DisplayFor(modelItem => item.diaSemana)</td>
+                            <td class="text-right">@Html.DisplayFor(modelItem => item.quantidade)</td>
+                        </tr>
+                            counterEntradasDiaSemana += item.quantidade;
+                        }
+
+
+
+                        <tr>
+                            <td>
+                                <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                            </td>
+                            <td>@counterEntradasDiaSemana.ToString()</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @*Ensaios*@
+    <div id="ensaios">
+        @*<div class="col-md-3">
+            <div class="panel" style="background-color: darkseagreen">
+                <div class="panel-heading">
+                    <B>Recolhimento por divisão</B>
+                </div>
+
+                <div class="table-responsive small">
+                    <table class="table table-striped">
+                        <tbody>
+
+                            @{ int counterEntradasAutoridade1 = 0; }
+                            @foreach (var item in Entrada)
+                            {
+                                <tr>
+                                    <td class="text-left">@Html.DisplayFor(modelItem => item.descricaoDivisao)</td>
+                                    <td class="text-right">@Html.DisplayFor(modelItem => item.quantidade) Entrada(s)</td>
+                                </tr>
+                                counterEntradasAutoridade1 += item.quantidade;
+                            }
+
+
+
+                            <tr>
+                                <td>
+                                    <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                                </td>
+                                <td>@counterEntradasAutoridade1.ToString()</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>*@
+
+        @*<div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>Recolhimento por autoridade</b>
+                </div>
+
+                <div class="table-responsive small">
+                    <table class="table table-striped">
+
+                        <thead>
+                            <tr>
+                                <th class="text-left">Divisão</th>
+                                <th class="text-right">Quantidade</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @{ int counterEntradasAutoridade = 0; }
+
+                            @foreach (var item in Entrada)
+                            {
+                                <tr>
+                                    <td class="text-left">@Html.DisplayFor(modelItem => item.descricaoDivisao)</td>
+                                    <td class="text-right">@Html.DisplayFor(modelItem => item.quantidade)</td>
+                                </tr>
+                                counterEntradasAutoridade += item.quantidade;
+                            }
+
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td class="text-left">
+                                    <b>Total: </b>
+                                </td>
+                                <td class="text-right">
+                                    <b>@counterEntradasAutoridade.ToString() Entrada(s)</b>
+                                </td>
+                            </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        </div>*@
+    </div>
+    
+
+</div>

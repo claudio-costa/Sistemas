@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Usando Chart Helper";
+}
+<h2>About</h2>
+<p>
+    @{
+        var macChart = new Chart(width: 600, height: 400)
+               .AddTitle("Campeonato Paulista - 2012")
+               .AddSeries(
+                name: "CampeonatoPaulista",
+                xValue: new[] { "São Paulo", "Corinthians", "Palmeiras", "Santos", "Mogi Mirim" },
+                yValues: new[] { "34", "34", "32", "30", "30" })
+            .Write();
+    }
+</p>

@@ -1,0 +1,70 @@
+﻿@model List<MobLink.WebLeilao.Dominio.Leilao>
+
+@{
+    ViewBag.Title = "Dashboard";
+    List<MobLink.WebLeilao.Dominio.StatusLeilao> listaStatus = ViewBag.Status;
+}
+
+<link href="~/css/dashboard.css" rel="stylesheet" />
+
+<div class="btn-group" role="group">
+    <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Selecione status
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        @foreach (var item in listaStatus)
+        {
+            <li>@Html.ActionLink(item.descricao.ToLowerInvariant(), "Index", "Home", new { Id = item.id }, null)</li>
+        }
+    </ul>
+</div>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="offer offer-radius offer-@item.comitente.cor">
+                <div class="shape">
+                    <div class="shape-text">
+                        <span class="glyphicon glyphicon-road"></span>
+                    </div>
+                </div>
+                <div class="offer-content">
+                    <h6><b>@item.comitente.descricao</b></h6>
+                    @*<h6>25 de agosto de 2017, 11:00Hrs - </h6>*@
+                    <h6><span class="glyphicon glyphicon-calendar"></span> @item.data_leilao, @item.hora_leilao - @item.nome_local</h6>
+                    <h2 class="lead">
+                        <a class="a-@item.comitente.cor" href='@Url.Action("Edit", "Leilao", new { Id = item.id })'>
+                            @item.descricao
+                        </a>
+                        &nbsp;
+                        <a href='@Url.Action("Index", "Lote", new { Id = item.id })'>
+                            @*<label class="label label-@item.Comitente.Cor">@item.Quantidade_Lotes Lotes</label>*@
+                            <input type="button" class="btn label-@item.comitente.cor btn-xs" value="@item.quantidade_lotes Lotes" />
+                        </a>
+
+
+                    </h2>
+
+                    @*<div class="small" id="piechart_3d_2"></div>*@
+
+                    <p>
+                        <h6><b><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;@item.status.descricao</b></h6>
+                        @*<br>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-@item.Comitente.Cor" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%">
+                                    78%
+                                </div>
+                            </div>*@
+                    </p>
+                    @*<h6>MENSAGEM DE CONFERENCIA QDO HOUVER</h6>*@
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@*</div>*@

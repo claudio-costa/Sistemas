@@ -1,0 +1,119 @@
+﻿@model MobLink.WebLeilao.Dominio.Comitente
+
+@{
+    ViewBag.Title = "Editar Comitente";
+
+    List<SelectListItem> AtivoInativo = new List<SelectListItem>();
+    AtivoInativo.Add(new SelectListItem() { Text = "ATIVO", Value = "ATIVO" });
+    AtivoInativo.Add(new SelectListItem() { Text = "INATIVO", Value = "INATIVO" });
+    SelectList ListaAtivoInativo = new SelectList(AtivoInativo, "Value", "Text");
+
+
+    SelectList TiposImportacao = new SelectList(ViewBag.TiposImportacao, "id", "descricao");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.id)
+
+        <h1></h1>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-1">Descrição</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.descricao, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(model => model.descricao)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-1">Contrato</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.contrato, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(model => model.contrato)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-1">Documento</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.documento, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(model => model.documento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-1">Status</label>
+            <div class="col-md-4">
+                @*@Html.TextBoxFor(model => model.Status, new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.status, ListaAtivoInativo, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(model => model.status)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-1">ISS(%)</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.iss, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(model => model.iss)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-1">Aq.Lotes</label>
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.tipo_importacao, TiposImportacao, new { @class = "form-control input-sm", @id = "combo", @onchange = "combochange()" })
+                @Html.ValidationMessageFor(model => model.status)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="control-label col-md-1">Usuário</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.usuario_cadastro, new { @class = "form-control input-sm", @disabled = "" })
+                @Html.ValidationMessageFor(model => model.usuario_cadastro)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar para lista", "Index")
+</div>
+
+@*<script>
+        window.onload = function () {
+            var select = document.getElementById('combo');
+
+            if (select.value == 1)
+                document.getElementById('parametros').style.display = "block";
+            else if (select.value == 2 || select.value == 3)
+                document.getElementById('parametros').style.display = "none";
+
+        };
+
+        //function combochange() {
+        //    var select = document.getElementById('combo');
+        //    select.onchange = function () {
+        //        if (this.value == 1)
+        //            document.getElementById('parametros').style.display = "block";
+        //        else if (this.value == 2 || this.value == 3)
+        //            document.getElementById('parametros').style.display = "none";
+        //    };
+        //}
+
+        function combochange() {
+            window.onload();
+        }
+
+    </script>*@

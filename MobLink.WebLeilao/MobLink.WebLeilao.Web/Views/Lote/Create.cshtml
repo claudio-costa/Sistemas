@@ -1,0 +1,99 @@
+﻿@model MobLink.WebLeilao.Dominio.Lote
+@{ SelectList StatusLote = ViewBag.StatusLote; }
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_leilao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id_leilao)
+                @Html.ValidationMessageFor(model => model.id_leilao)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.placa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.placa)
+                @Html.ValidationMessageFor(model => model.placa)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.chassi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.chassi)
+                @Html.ValidationMessageFor(model => model.chassi)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numero_formulario_grv, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numero_formulario_grv)
+                @Html.ValidationMessageFor(model => model.numero_formulario_grv)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_status_lote, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id_status_lote)
+
+                @Html.DropDownListFor(model => model.id_status_lote, StatusLote, "Selecione um status", new { @class="form-control small" })
+
+                @Html.ValidationMessageFor(model => model.id_status_lote)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.marca_modelo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.marca_modelo)
+                @Html.ValidationMessageFor(model => model.marca_modelo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cor)
+                @Html.ValidationMessageFor(model => model.cor)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.patio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.patio)
+                @Html.ValidationMessageFor(model => model.patio)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

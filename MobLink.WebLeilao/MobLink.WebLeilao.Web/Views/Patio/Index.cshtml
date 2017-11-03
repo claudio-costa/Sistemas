@@ -1,0 +1,123 @@
+﻿@model IEnumerable<MobLink.WebLeilao.Dominio.Lote>
+
+@*TABELAS AUXILIARES*@
+@{ var TiposVeiculo = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.TipoVeiculo.SelecionarTudo().ToList(), "id", "Descricao", null); }
+@{ var Locais = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Lote.SelecionarLocalizacao().ToList(), "descricao", "descricao", null); }
+@{ var Leiloes = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Leilao.SelecionarTudo().ToList(), "Id", "Descricao", null); }
+
+@{
+    ViewBag.Title = "Conferência de Pátio";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="col-md-3">
+        <span>Leilão</span>
+        @Html.DropDownList("IDLEILAO", Leiloes, "SELECIONE UM TIPO DE VEÍCULO", new { @class = "form-control input-sm" })
+    </div>
+
+    <div class="col-md-3">
+        <span>Tipo de Veículo</span>
+        @Html.DropDownList("TIPO_VEICULO", TiposVeiculo, "SELECIONE UM TIPO DE VEÍCULO", new { @class = "form-control input-sm" })
+    </div>
+
+    <div class="col-md-3">
+        <span>Localização</span>
+        @Html.DropDownList("LOCALIZACAO", Locais, "SELECIONE UM LOCAL", new { @class = "form-control input-sm" })
+    </div>
+
+    <div class="col-md-1">
+        <br /> <input type="submit" class="btn btn-primary input-sm" value="Consultar" /><br /><br />
+    </div>
+}
+
+@*@Html.Partial("_Pesquisa")*@
+
+<table class="table">
+    <tr>
+        <th>
+            Tipo de veículo
+
+            <a href='@Url.Action("Index", "Patio", new { Ordenacao = "TipoVeiculo" })'>
+                <span class="glyphicon glyphicon-sort text-primary"></span>
+            </a>
+        </th>
+        <th>
+            Localização
+
+            <a href='@Url.Action("Index", "Patio", new { Ordenacao = "Localizacao" })'>
+                <span class="glyphicon glyphicon-sort text-primary"></span>
+            </a>
+        </th>
+        <th>
+            Nº do lote
+
+            <a href='@Url.Action("Index", "Patio", new { Ordenacao = "Lote" })'>
+                <span class="glyphicon glyphicon-sort text-primary"></span>
+            </a>
+        </th>
+        <th>
+            Processo
+
+            <a href='@Url.Action("Index", "Patio", new { Ordenacao = "Processo" })'>
+                <span class="glyphicon glyphicon-sort text-primary"></span>
+            </a>
+        </th>
+        <th>
+            Placa
+
+            <a href='@Url.Action("Index", "Patio", new { Ordenacao = "Placa" })'>
+                <span class="glyphicon glyphicon-sort text-primary"></span>
+            </a>
+        </th>
+        <th>
+            Chassi
+
+            <a href='@Url.Action("Index", "Patio", new { Ordenacao = "Chassi" })'>
+                <span class="glyphicon glyphicon-sort text-primary"></span>
+            </a>
+        </th>
+        <th>
+            Marca / Modelo
+
+            <a href='@Url.Action("Index", "Patio", new { Ordenacao = "MarcaModelo" })'>
+                <span class="glyphicon glyphicon-sort text-primary"></span>
+            </a>
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo_veiculo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.localizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numero_lote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numero_formulario_grv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.placa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.chassi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.marca_modelo)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) @*|
+                    @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.id })*@
+            </td>
+        </tr>
+    }
+
+</table>

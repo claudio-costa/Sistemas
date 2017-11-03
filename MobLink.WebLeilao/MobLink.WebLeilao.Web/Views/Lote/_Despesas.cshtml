@@ -1,0 +1,126 @@
+﻿@{
+    var Despesas = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Despesa.SelecionarTudo();
+}
+
+<div class="modal fade"
+     id="ModalDespesas"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="ModalDespesas"
+     data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    <span class="glyphicon glyphicon-usd text-primary"></span>
+                    DESPESAS DE LOTE
+                </h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <select class="form-control input-sm" id="combo">
+
+                            @foreach (var item in Despesas)
+                            {
+                                <option value="@item.Id">@item.Descricao</option>
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm" >
+                            <input type="text" class="form-control" id="valor" placeholder="R$ 0,00">
+                            <span class="input-group-btn">
+                                <button class="btn btn-warning" type="button" onclick="InserirDespesa()">Inserir</button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </div>
+                </div>
+                
+                <table id="tabela" class="table">
+                    <tr>
+                        <th>#</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                    </tr>
+                    
+                </table>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
+                <input type="submit" class="btn btn-success btn-sm" onclick="CriarObjetoDespesas()" value="&nbsp;&nbsp;Gravar&nbsp;&nbsp;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function CriarObjetoDespesas() {
+
+        var despesas = new Array();
+        var despesa = new Object();
+
+        var table = document.getElementById('tabela'),
+            rows = table.rows, rowcount = rows.length, r,
+            cells, cellcount, c, cell;
+
+        for (r = 1; r < rowcount; r++) {
+            cells = rows[r].cells;
+
+            var despesa = new Object();
+            despesa.IdDespesa = cells[0].innerText;
+            despesa.DescricaoDespesa = cells[1].innerText;
+            despesa.Valor = cells[2].innerText;
+
+            despesas[r - 1] = despesa;
+
+            cellcount = cells.length;
+            for (c = 0; c < cellcount; c++) {
+                cell = cells[c];
+            }
+
+        };
+
+        var jsonText = JSON.stringify(despesas);
+
+        var caixa = document.getElementById('valores');
+
+        caixa.value = jsonText;
+        
+    }
+
+    function InserirDespesa() {
+        var e = document.getElementById("combo");
+        var itemSelecionado = e.options[e.selectedIndex].text;
+
+        var iddespesa = document.getElementById('combo').value;
+        var valor = document.getElementById('valor').value;
+
+        if (valor == "")
+        {
+            document.getElementById('valor').focus();
+            return;
+        }
+
+        $("#tabela").append("<tr><td>" + iddespesa + "</td><td>" + itemSelecionado + "</td><td>" + valor + "</td></tr><br/>");
+        document.getElementById('valor').value = "";
+
+    }
+
+</script>
+
+<script>
+
+    $('#valor').mask("#.##0,00", { reverse: true });
+
+</script>

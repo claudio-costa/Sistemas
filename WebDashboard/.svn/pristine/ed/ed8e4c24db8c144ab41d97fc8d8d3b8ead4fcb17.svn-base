@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace WebPatios.Business
+{
+    public class SaidaBLL : BaseBLL
+    {
+        public List<Model.Dashboard.Saida> getSaidas()
+        {
+            #region CONSULTA
+            string SQL;
+            SQL = string.Format(@"   
+                SELECT ISNULL(aut.divisao,'OUTROS') as divisao, COUNT(grv.id_grv) AS qtd
+                FROM tb_dep_grv grv 
+                LEFT JOIN tb_dep_autoridades_responsaveis aut ON grv.id_autoridade_responsavel = aut.id_autoridade_responsavel
+                WHERE id_cliente = 5 
+                AND id_deposito = 3
+                AND id_status_operacao = 'E'
+                GROUP BY grv.id_autoridade_responsavel, aut.divisao
+                ORDER BY qtd DESC");
+            #endregion
+
+            var saidas = new List<Model.Dashboard.Saida>();
+
+            try
+            {
+                var tbRes = ConsultaSQL(SQL.ToString());
+
+                if (tbRes.Rows.Count > 0)
+                {
+                    foreach (System.Data.DataRow linha in tbRes.Rows)
+                    {
+                        var itemEntrada = new Model.Dashboard.Saida();
+                        itemEntrada.descricaoDivisao = linha["divisao"].ToString();
+                        itemEntrada.quantidade = int.Parse(linha["qtd"].ToString());
+                        saidas.Add(itemEntrada);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return saidas;
+        }
+    }
+}

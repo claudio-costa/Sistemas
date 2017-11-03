@@ -1,0 +1,163 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Services;
+using System.Web.Helpers;
+
+namespace WebPatios.Dashboard.Controllers
+{
+    [Authorize]
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            ViewBag.Title = "Dashboard Portable";
+
+            Model.Deposito filtro = (HttpContext.Application["FILTRO"] != null &&
+                                     !string.IsNullOrEmpty(HttpContext.Application["FILTRO"].ToString())) ?
+                                     (Model.Deposito)HttpContext.Application["FILTRO"] : new Model.Deposito()
+                                     {
+                                         descricaoDeposito = "NENHUM PÁTIO SELECIONADO",
+                                         clienteDeposito = new Model.Cliente()
+                                         {
+                                             nomeCliente = "NENHUM"
+                                         }
+                                     };
+
+            ViewBag.DepositoFiltrado = filtro;
+
+
+            var dash = new Business.DashboardBLL(filtro);
+
+            ViewBag.Infracoes = dash.getInfracoes();
+            ViewBag.ResumoPeriodico = dash.getResumoPeriodico();
+            ViewBag.TicketMedio = dash.getTicketMedio();
+            ViewBag.TaxaLiberacao = dash.getTaxaLiberacao();
+            ViewBag.Usuario = HttpContext.Application["USUARIO"] as Model.Usuario;
+
+            return View();
+        }
+
+        [WebMethod]
+        [HttpPost]
+        public string testes()
+        {
+            return "OK";
+        }
+
+        public ActionResult getGraficoDB()
+        {
+            //var dados = new Business.DashboardBLL().getEntradasGrafico();
+
+            //var myChart = new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
+            // .AddTitle("Os 5 Produtos Vendidos")
+            // .DataBindTable(dataSource: dados, xField: "descricaoDivisao")
+            // .Write("png");
+
+            return null;
+        }
+
+        public ActionResult getGraficoEntradas()
+        {
+            //var dados = new Business.DashboardBLL().getEntradas("");
+
+            //var myChart = new Chart(width: 900, height: 400, theme: ChartTheme.Green)
+            // .AddTitle("Entradas")
+            // .DataBindTable(dataSource: dados, xField: "descricaoDivisao")
+            // .Write("png");
+
+            return null;
+        }
+
+        public ActionResult getGraficoDB2()
+        {
+            //var dados = new Business.DashboardBLL().getEntradasGrafico();
+
+            //var myChart = new Chart(width: 600, height: 400, theme: ChartTheme.Yellow)
+            // .AddTitle("Os 5 Produtos Vendidos")
+            // .DataBindTable(dataSource: dados, xField: "descricaoDivisao")
+            // .Write("png");
+
+            return null;
+        }
+
+        public ActionResult getGrafico()
+        {
+            #region orientações
+            //ar macChart = new Chart(width: 600, height: 400)
+            //A seguir, usamos os métodos da classe Chart:
+
+            //AddTitle – Adiciona um título à imagem do gráfico;
+            //AddSeries – Adicionar várias séries, ou seja, os dados que serão informados no gráfico, para serem impressos na imagem do Chart;
+            //name – Define o nome dado ao gráfico;
+            //xValue – Define os valores que serão apresentados no eixo X;
+            //yValues – Define os valores que serão apresentados no eixo Y;
+            //charType – Embora não tenha sido usado neste exemplo, este método define o 
+            //tipo de gráfico usado, que pode ser: bar, pie, column, stock, area e line.Ex: charType: “Line”;
+            //AddLegend – Também não foi usado no exemplo e adiciona uma legenda ao gráfico.
+            //Para exibir o gráfico no navegador nós usamos o método Write(): Ex: Write() ou Write(format : “gif”).
+            #endregion
+            var myChart = new Chart(width: 600, height: 400)
+           .AddTitle("Entradas no período")
+           .AddSeries(
+               name: "CampeonatoPaulista",
+               chartType: "pie",
+               legend: "Campeonato Paulista",
+               xValue: new[] { "São Paulo", "Corinthians", "Palmeiras", "Santos", "Mogi Mirim" },
+               yValues: new[] { "34", "34", "32", "30", "30" });
+            //.Write("png") ;
+
+            myChart.ToWebImage("png");
+            myChart.Write("png");
+
+            return null;
+        }
+
+        //public ActionResult filtro(int filtro)//, int filtroCliente)
+        //{
+        //    var dadosFiltrados = new Model.Deposito();
+
+        //    if (filtro <= 0)
+        //    {
+        //        dadosFiltrados = new Business.DashboardBLL().getDadosClientedeposito().FirstOrDefault();
+        //    }
+        //    else
+        //    {
+        //        // dadosFiltrados = new Business.DashboardBLL().getDadosClientedeposito().Where(x => x.clienteDeposito.idCliente == filtroCliente).FirstOrDefault();
+
+        //        dadosFiltrados = new Business.DashboardBLL().getDadosClientedeposito().Where(x => x.idDeposito == filtro).FirstOrDefault();
+
+        //    }
+            
+        //    HttpContext.Application["FILTRO"] = dadosFiltrados;
+
+        //    //return RedirectToActionPermanent("Index", "Home", new { deposito = 2 });
+        //    return RedirectToAction("Index", "Home");
+        //}
+
+        public ActionResult filtro(int filtroDeposito, int filtroCliente )//, int filtroCliente)
+        {
+            var dadosFiltrados = new Model.Deposito();
+
+            if (filtroDeposito <= 0)
+            {
+                dadosFiltrados = new Business.DashboardBLL().getDadosClientedeposito().FirstOrDefault();
+            }
+            else
+            {
+                // dadosFiltrados = new Business.DashboardBLL().getDadosClientedeposito().Where(x => x.clienteDeposito.idCliente == filtroCliente).FirstOrDefault();
+
+                dadosFiltrados = new Business.DashboardBLL().getDadosClientedeposito().Where(x => x.clienteDeposito.idCliente == filtroCliente && x.idDeposito == filtroDeposito).FirstOrDefault();
+
+            }
+
+            HttpContext.Application["FILTRO"] = dadosFiltrados;
+
+            //return RedirectToActionPermanent("Index", "Home", new { deposito = 2 });
+            return RedirectToAction("Index", "Home");
+        }
+
+    }
+}

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MobLink.Framework.WebServices.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MobLink_Framework_WebServices_wsboleto_WsBoleto" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://179.107.47.90:8088/wsboleto.asmx</Value>
+    </Setting>
+    <Setting Name="MobLink_Framework_WebServices_WSPatioxDetran_WSPatioxDetran" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://179.107.47.90:94/WSPatioxDetran.asmx</Value>
+    </Setting>
+    <Setting Name="MobLink_Framework_WebServices__VipBoletoWS_VipBoletoWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://ws-parceiros.vipleiloes.com/rodandolegal.asmx</Value>
+    </Setting>
+    <Setting Name="MobLink_Framework_WebServices_Correios_AtendeClienteService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

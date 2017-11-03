@@ -1,0 +1,34 @@
+﻿<div class="panel panel-warning">
+    <div class="panel-heading">
+        <span class="panel-title"></span>
+
+            @using (Html.BeginForm())
+            {
+                <div class="form-horizontal">
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            Placa: <input type="text" class="form-control input-sm" placeholder="Digite placa" name="placa" autofocus="" value="@ViewBag.pPlaca" />
+                        </div>
+
+                        <div class="col-md-2">
+                            Chassi: <input type="text" class="form-control input-sm" placeholder="Digite chassi" name="chassi" value="@ViewBag.pChassi" />
+                        </div>
+
+                        <div class="col-md-2">
+                            Nº GRV: <input type="text" class="form-control input-sm" placeholder="Digite GRV" name="GRV"/>
+                        </div>
+
+                        <div class="col-md-1">
+                            &nbsp;<input type="submit" class="form-control btn-primary input-sm" value="Consultar" />
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        
+    </div>
+</div>
+

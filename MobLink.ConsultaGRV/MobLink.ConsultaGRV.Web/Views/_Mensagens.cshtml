@@ -1,0 +1,10 @@
+﻿@if (!string.IsNullOrWhiteSpace(ViewBag.Erro))
+{
+    @*<div class="alert alert-danger small" role="alertdialog">@ViewBag.Erro</div>*@
+    <br /><div class="alert alert-danger" role="alert">@ViewBag.Erro</div>
+}
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.Msg))
+{
+    <br /><div class="alert alert-info" role="alert">@ViewBag.Msg</div>
+}

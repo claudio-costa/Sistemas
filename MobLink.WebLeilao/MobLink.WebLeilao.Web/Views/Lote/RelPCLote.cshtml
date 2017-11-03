@@ -1,0 +1,117 @@
+﻿@model MobLink.WebLeilao.Dominio.Rel_PC_Lote
+
+@{
+    ViewBag.Title = "FICHA INDIVIDUAL DE PRESTAÇÃO DE CONTAS";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<p>
+    <div class="row">
+        <div class="col-md-8">
+            Leilão @Model.descricao , realizado em @Model.data_leilao pelo leiloeiro(a) @Model.nome
+        </div>
+
+        <div class="col-md-2 col-md-offset-2 text-right">@Html.ActionLink("VOLTAR", "Index", new { Id = Model.id_leilao })</div>
+    </div>
+</p>
+
+
+<hr />
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">IDENTIFICAÇÃO DO VEÍCULO</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                1. PLACA / CHASSI: @Model.placa / @Model.chassi <br />
+                2. RENAVAM: @Model.renavan <br />
+                3. MARCA / MODELO: @Model.marca_modelo
+            </div>
+            <div class="col-md-6">
+                4. ANO FAB.: @Model.ano_fabricacao ANO MOD.: @Model.ano_modelo<br />
+                5. GRV/DIAS NO PÁTIO: @Model.numero_dias_patio <br />
+                6. LOTE/STATUS: @Model.numero_lote / @Model.tipo_veiculo
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">AVALIZAÇÃO E ARREMATAÇÃO</h3>
+    </div>
+    <div class="panel-body">
+        1. VALOR DE AVALIAÇÃO: @string.Format("{0:C}", Model.avaliacao) <br />
+        2. VALOR DE ARREMATAÇÃO: @string.Format("{0:C}", Model.arrematacao) <br />
+        3. TAXA DO COMITENTE: @String.Format("{0:C}", Model.taxa_comitente)
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">DESPESAS RATEADAS</h3>
+    </div>
+    <div class="panel-body">
+
+        @foreach (var item in Model.DespesasLeilao)
+        {
+            <span>
+                @item.DescricaoDespesa:
+                Valor: @String.Format("{0:C}", item.Valor)
+                Rateio: @String.Format("{0:C}", item.Rateio)
+            </span><br />
+        }
+
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">DESPESAS DO LOTE</h3>
+    </div>
+    <div class="panel-body">
+
+        @foreach (var item in Model.DespesasLote)
+        {
+            <span>@item.DescricaoDespesa:   @String.Format("{0:C}", item.Valor)</span><br />
+        }
+
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">RESUMO</h3>
+    </div>
+    <div class="panel-body">
+        @{
+            var despesasRateadas = Model.DespesasLeilao.Sum(X => X.Rateio);
+            var despesasLote = Model.DespesasLote.Sum(X => X.Valor);
+            var total = Model.arrematacao + despesasLote + despesasRateadas;
+         }
+
+        DESPESAS RATEADAS: @String.Format("{0:C}", despesasRateadas)<br />
+        DESPESAS DO LOTE: @String.Format("{0:C}", despesasLote)<br />
+
+        TOTAL: @String.Format("{0:C}", total)
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">OPÇÕES</h3>
+    </div>
+    <div class="panel-body">
+        <button type="button" class="btn btn-toolbar btn-info btn-sm"
+                onclick='window.location = "@Url.Action("Index", "Lote")"'>
+
+            <i class="glyphicon glyphicon-print"></i>
+            Exportar para PDF
+        </button>
+    </div>
+</div>

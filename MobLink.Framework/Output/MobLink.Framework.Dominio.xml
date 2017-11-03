@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MobLink.Framework.Dominio</name>
+    </assembly>
+    <members>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Transacao_SAP">
+            <summary>
+            IDTRANSACAO ID da solicitação do DSIN
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Codigo_Empresa">
+            <summary>
+            BUKRS           Código Empresa
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Organizacao_Vendas">
+            <summary>
+            VKORG           Organização de Vendas
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Nome_Cliente">
+            <summary>
+            NAME1           Nome do Cliente
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Endereco_Rua">
+            <summary>
+            STRAS           Endereço -Rua
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Endereco_Numero">
+            <summary>
+            HOUSE_NUM1      Endereço -Número
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Endereco_Edificio">
+            <summary>
+            BUILDING        Edifício
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Endereco_Edificio_Andar">
+            <summary>
+            FLOOR           Andar
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Endereco_Bairro">
+            <summary>
+            ORT02           Bairro
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Endereco_CEP">
+            <summary>
+            PSTLZ           Código Postal(CEP)
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Endereco_Cidade">
+            <summary>
+            MCOD3           Cidade
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Endereco_Regiao">
+            <summary>
+            REGIO           Região
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Telefone">
+            <summary>
+            TELF1           Contato -Telefone
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Email">
+            <summary>
+            SMTP_ADDR       Contato -E - mail
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.CNPJ">
+            <summary>
+            STCD1           CNPJ
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.CPF">
+            <summary>
+            STCD2           CPF
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Inscricao_Estadual">
+            <summary>
+            STCD3           Inscrição Estadual
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Inscricao_Municipal">
+            <summary>
+            STCD4           Inscrição Municipal
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Forma_Pagamento">
+            <summary>
+            ZWELS           Forma de Pagamento
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Condicao_Pagamento">
+            <summary>
+            ZTERM           Condição de Pagamento
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Endereco_Pais">
+            <summary>
+            LAND1           Pais(BR)
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Tipo_Parceiro">
+            <summary>
+            TIPO_PARCEIRO   Tipo de Parceiro (F - Fornecedores / C - Clientes)
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Codigo_Parceiro">
+            <summary>
+            COD_PARCEIRO    Codigo do parceiro para modificação
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.ClienteSap.Codigo_Organizacao_Parceiro">
+            <summary>
+            COD_ORG         Codigo da organização ( Compras / Vendas )
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.ITEMS.codigoMaterial">
+            <summary>
+            Código do Material ::: SAP=MATNR
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.ITEMS.quantidade">
+            <summary>
+            Quantidade ::: SAP=MENGE
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.ITEMS.valorBruto">
+            <summary>
+            Valor Bruto ::: SAP=KBETR
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.ITEMS.valorComDesconto">
+            <summary>
+            Valor com desconto ::: SAP=KBRTR_DESC
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.ITEMS.codigoOrdem">
+            <summary>
+            Código da Ordem ::: SAP=AUFNR
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.ITEMS.tipoDocumento">
+            <summary>
+            Tipo de documento ::: SAP=AUART
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.ITEMS.textoCabecalho">
+            <summary>
+            Para cada loop em itens, utilizar essa descricao por item
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.DOC_PAGAM.meioPagamento">
+            <summary>
+            Meio de Pagamento ::: SAP=MEIO_PAG ::: ( I = Deposito ; D = Boleto )
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.DOC_PAGAM.numeroDocumento">
+            <summary>
+            Número do documento de pagamento ::: SAP=DOCUMENTO
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.IDTRANSACAO">
+            <summary>
+            ID da solicitação do DSIN ::: SAP=IDTRANSACAO
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.centro">
+            <summary>
+            Centro ::: SAP=WERKS
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.numeroContrato">
+            <summary>
+            Número Contrato ::: SAP=VBELN
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.codigoCliente">
+            <summary>
+            Código do Cliente ::: SAP=KUNNR
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.codigoPedido">
+            <summary>
+            Código do Pedido do cliente no DSIN ::: SAP=BSTNK
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.textoCabecalho">
+            <summary>
+            Texto de cabeçalho ::: SAP=ORDER_TXT
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.itensVenda">
+            <summary>
+            Estrutura de Items ::: SAP=ITEMS
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.documentosPagamento">
+            <summary>
+            Estrutura para Documentos de Pagamento ::: SAP=DOC_PAGAM
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.NumeroProcesso">
+            <summary>
+            ZZPROC
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.Periodo">
+            <summary>
+            ZZPERI
+            </summary>
+        </member>
+        <member name="P:MobLink.Framework.Dominio.Sap.OrdemVendaSAP.NumeroLeilaoPatioLote">
+            <summary>
+            ZZLEIL
+            </summary>
+        </member>
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.Transacao_SAP" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.CodigoEmpresaMatriz" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.CodigoClienteSAP" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.DataEmissaoBoleto" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.ValorTotalBoleto" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.OrdemInternaSSG" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.Lote" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.CondicaoPagamento" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.ValorArrematacao" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.ValorTaxaAdministrativa" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.ValorComissao" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.ValorTarifaBancaria" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.ValorDesconto" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.DiferencaPagaMaior" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.ValorPago" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.Banco" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.FormaPagamento" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.DataPagamento" -->
+        <! -- Comentário XML mal formado ignorado para o membro "P:MobLink.Framework.Dominio.Sap.OrdemVendaLeilao.NumeroBoleto" -->
+    </members>
+</doc>

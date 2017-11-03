@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using WebPatios.DAL;
+
+namespace WebPatios.Business
+{
+    public abstract class BaseBLL
+    {
+        //Método para recuperar Connection Strings
+        //Método para gravar request
+
+        //private BaseBLL.Ambiente getAmbiente()
+        //{
+        //    var ambiente = System.Configuration.ConfigurationManager.AppSettings["AMBIENTE"].ToString();
+        //    return (BaseBLL.Ambiente)Enum.Parse(typeof(BaseBLL.Ambiente), ambiente, true);
+        //}
+
+        public BaseBLL()
+        {
+
+        }
+
+        public enum Ambiente
+        {
+            Desenvolvimento = 0, QA = 1, Produção = 2
+        }
+
+        public BaseBLL(Ambiente Ambiente)
+        {
+            ConnectionFactory.connectionString = getConnectionString(Ambiente);
+        }
+        
+        private string getConnectionString(Ambiente Ambiente)
+        {
+            string res = string.Empty;
+
+            switch (Ambiente)
+            {
+                case Ambiente.Desenvolvimento:
+                    res = @"Server = 179.107.47.90; Database = dbMobLinkSAP; User Id = sapdev; Password = Buracica#;";
+                    break;
+                case Ambiente.QA:
+                    res = @"Server = 179.107.47.91; Database = dbMobLinkSAP; User Id = sapdev; Password = Buracica#;";
+                    break;
+                case Ambiente.Produção:
+                    res = @"";
+                    break;
+                default:
+                    res = @"";
+                    break;
+            }
+
+            return res;
+        }
+
+
+        public int executaSQL(string SQL)
+        {
+            return ConnectionFactory.Executar(SQL);
+        }
+
+        public object executaSQLEscalar(string SQL)
+        {
+            return ConnectionFactory.ExecutarEscalar(SQL);
+        }
+
+        public System.Data.DataTable ConsultaSQL(string SQL)
+        {
+            return ConnectionFactory.Consulta(SQL);
+        }
+    }
+}

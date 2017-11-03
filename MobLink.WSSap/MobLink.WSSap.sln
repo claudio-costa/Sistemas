@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.WSSap.Repositorio", "MobLink.WSSap.Repositorio\MobLink.WSSap.Repositorio.csproj", "{FFCE4CC1-6B70-482F-B58C-CE5A7422F5D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.WSSap.WebService", "MobLink.WSSap.WebService\MobLink.WSSap.WebService.csproj", "{87C0BF25-2305-483F-8CEB-93AF51F5018B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.Utilitarios.Repositorio", "MobLink.Utilitarios.Repositorio\MobLink.Utilitarios.Repositorio.csproj", "{A4B218CD-32AF-44EA-9E88-717FE6829986}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.ConsoleTestes", "MobLink.ConsoleTestes\MobLink.ConsoleTestes.csproj", "{1A2CA1C2-B0DF-4209-A841-36568E60B8F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobLink.WSSap.Dominio", "MobLink.WSSap.Dominio\MobLink.WSSap.Dominio.csproj", "{C9B886CA-8211-4A42-863B-8C1B197FA337}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFCE4CC1-6B70-482F-B58C-CE5A7422F5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCE4CC1-6B70-482F-B58C-CE5A7422F5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCE4CC1-6B70-482F-B58C-CE5A7422F5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCE4CC1-6B70-482F-B58C-CE5A7422F5D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87C0BF25-2305-483F-8CEB-93AF51F5018B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87C0BF25-2305-483F-8CEB-93AF51F5018B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87C0BF25-2305-483F-8CEB-93AF51F5018B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87C0BF25-2305-483F-8CEB-93AF51F5018B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B218CD-32AF-44EA-9E88-717FE6829986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B218CD-32AF-44EA-9E88-717FE6829986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B218CD-32AF-44EA-9E88-717FE6829986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B218CD-32AF-44EA-9E88-717FE6829986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A2CA1C2-B0DF-4209-A841-36568E60B8F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A2CA1C2-B0DF-4209-A841-36568E60B8F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A2CA1C2-B0DF-4209-A841-36568E60B8F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A2CA1C2-B0DF-4209-A841-36568E60B8F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9B886CA-8211-4A42-863B-8C1B197FA337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B886CA-8211-4A42-863B-8C1B197FA337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B886CA-8211-4A42-863B-8C1B197FA337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B886CA-8211-4A42-863B-8C1B197FA337}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D372C82C-C85E-4E89-A162-F1B1B19A2EC0}
+	EndGlobalSection
+EndGlobal

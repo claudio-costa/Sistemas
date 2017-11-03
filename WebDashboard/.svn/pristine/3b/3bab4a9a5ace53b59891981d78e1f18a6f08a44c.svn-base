@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace WebPatios.Business
+{
+    public class ClienteBLL : BaseBLL
+    {
+        public Model.Cliente getDadosCliente()
+        {
+
+            //    select cli.nome, dep.descricao
+            //      from tb_dep_clientes cli
+            //      inner join tb_dep_clientes_depositos cdp on cli.id_cliente = cdp.id_cliente
+            //      inner join tb_dep_depositos dep on cdp.id_deposito = dep.id_deposito
+            //    where cli.id_cliente = 5
+            //    AND cdp.id_deposito = 3
+
+            var dep = new Model.Cliente.Depositos() { nome = "ITABUNA", endereco = "" };
+            List<Model.Cliente.Depositos> deps = new List<Model.Cliente.Depositos>();
+            deps.Add(dep);
+            return new Model.Cliente() { nome = "PREFEITURA DE ITABUNA", depositos = deps };
+        }
+    }
+}

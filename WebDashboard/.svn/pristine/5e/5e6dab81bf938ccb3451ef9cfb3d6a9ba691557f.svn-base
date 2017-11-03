@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace WebPatios.Business
+{
+    public class UsuarioBLL : BaseBLL
+    {
+        public Model.Usuario login(string usuario, string senha, string IP)
+        {
+            #region CONSULTA
+            string SQL;
+            SQL = string.Format(@"
+                
+                  SELECT clientes.id_cliente, clientes.nome,
+                         usuariodeposito.id_deposito , usuariodeposito.descricao,
+                         usuario.email, usuario.senha1, usuario.login, usuario.id_usuario,
+                         clientes.nome + ' - PÁTIO ' + usuariodeposito.descricao as clientedeposito
+                    FROM tb_dep_usuarios usuario
+              INNER JOIN vw_dep_usuarios_depositos usuariodeposito on usuario.id_usuario = usuariodeposito.id_usuario
+              INNER JOIN tb_dep_clientes_depositos clientedeposito on usuariodeposito.id_deposito = clientedeposito.id_deposito
+              INNER JOIN tb_dep_clientes clientes on clientedeposito.id_cliente = clientes.id_cliente
+                   WHERE usuario.login = '{0}'
+                     AND usuario.senha1 = HASHBYTES('MD5', '{1}')
+                     AND usuariodeposito.flag_ativo = 'S'
+                     AND usuario.flag_ativo = 'S'
+
+            ", usuario, senha.ToUpper());
+            #endregion
+
+            var usuarioLogado = new Model.Usuario();
+
+            try
+            {
+                var tbRes = ConsultaSQL(SQL.ToString());
+
+                if (tbRes.Rows.Count > 0)
+                {
+                    usuarioLogado.idUsuario = ConversaoSegura(tbRes.Rows[0]["id_usuario"], -1);
+                    usuarioLogado.loginUsuario = ConversaoSegura(tbRes.Rows[0]["login"], string.Empty);
+                    usuarioLogado.emailUsuario = ConversaoSegura(tbRes.Rows[0]["email"], string.Empty);
+                    usuarioLogado.ipUsuario = IP;
+
+                    foreach (System.Data.DataRow dep in tbRes.Rows)
+                    {
+                        var mdep = new Model.Deposito();
+                        mdep.idDeposito = ConversaoSegura(dep["id_deposito"], 0);
+                        mdep.descricaoDeposito = ConversaoSegura(dep["descricao"], string.Empty);
+                        mdep.descricaoClienteDeposito = ConversaoSegura(dep["clientedeposito"], string.Empty);
+                        usuarioLogado.depositosUsuario.Add(mdep);
+
+                        var mcli = new Model.Cliente();
+                        mcli.idCliente = ConversaoSegura(tbRes.Rows[0]["id_cliente"], -1);
+                        mcli.nomeCliente = ConversaoSegura(dep["nome"], string.Empty);
+                        usuarioLogado.clientesUsuario.Add(mcli);
+                    }
+                }
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+
+            return usuarioLogado;
+        }
+    }
+}

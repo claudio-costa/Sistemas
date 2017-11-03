@@ -1,0 +1,41 @@
+﻿@model List<MobLink.WebLeilao.Dominio.NotificacaoLeilao>
+
+@{
+    ViewBag.Title = "Pré-Leilão - Notificações - " + Model.FirstOrDefault().descricao_leilao;
+}
+
+<p>
+    @*@Html.MobLink_LinkJanelaModal("teste", "InserirNotificacao")*@
+
+    <a href="" data-toggle="modal" data-target="#modal_inserir_notificacao">Novo</a> | 
+    @Html.ActionLink("Voltar para lista", "Index", "Leilao")
+</p>
+
+<table class="table table-striped small">
+    <tr>
+        <th>DATA DE GERAÇÃO</th>
+        <th>TIPO DA NOTIFICAÇÃO</th>
+        <th>USUÁRIO CRIADOR</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.data_geracao)</td>
+            <td>@Html.DisplayFor(modelItem => item.descricao)</td>
+            <td>@Html.DisplayFor(modelItem => item.login)</td>
+            <td>@Html.ActionLink("ARQUIVO", "", "")</td>
+        </tr>
+    }
+
+
+</table>
+
+<!-- Formulário de Despesas -->
+@using (Html.BeginForm("Inserir", "NotificacaoLeilao"))
+{
+    <input type="hidden" id="id_leilao" name="id_leilao" value="@Model.FirstOrDefault().id_leilao" />
+    @Html.Partial("_InserirNotificacao")
+
+}

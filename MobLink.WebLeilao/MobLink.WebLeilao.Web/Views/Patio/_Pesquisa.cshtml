@@ -1,0 +1,45 @@
+﻿@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+
+        <div class="row small">
+            <div class="col-md-2">
+                <span for="TipoVeiculo">Tipo de Veículo</span>
+                <input type="text" class="form-control input-sm" placeholder="Digite tipo de veículo"
+                       name="TipoVeiculo" autofocus="" value="@ViewBag.TipoVeiculo" />
+            </div>
+
+            <div class="col-md-2">
+                <span for="Localizacao">Localização</span>
+                <input type="text" class="form-control input-sm" placeholder="Localizacao"
+                       name="Localizacao" value="@ViewBag.Localizacao" />
+            </div>
+
+            <div class="col-md-2">
+                <span for="pPlaca">Placa</span>
+                <input type="text" class="form-control input-sm" placeholder="Digite placa"
+                       name="Placa" value="@ViewBag.Placa" />
+            </div>
+
+            <div class="col-md-2">
+                <span for="pChassi">Chassi</span>
+                <input type="text" class="form-control input-sm" placeholder="Digite chassi"
+                       name="Chassi" value="@ViewBag.Chassi" />
+            </div>
+
+            <div class="col-md-2">
+                <span for="pProcesso">Processo</span>
+                <input type="text" class="form-control input-sm" placeholder="Nº do numero_formulario_grv"
+                       name="Processo" value="@ViewBag.Processo" />
+            </div>
+
+            <div class="col-md-1">
+                <br /> <input type="submit" class="btn btn-primary input-sm" value="Consultar" />
+            </div>
+
+        </div>
+
+    </div>
+}
+
+<br />

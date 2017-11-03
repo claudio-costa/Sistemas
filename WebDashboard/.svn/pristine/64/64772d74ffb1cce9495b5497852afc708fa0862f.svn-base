@@ -1,0 +1,39 @@
+﻿@{ List<WebPatios.Model.Dashboard.EstoqueTipoVeiculo> EstoqueTipoVeiculo = ViewBag.EstoqueTipoVeiculo; }
+
+<div class="col-md-3">
+    <div class="panel" style="background-color: indianred">
+        <div class="panel-heading">
+            <B>Estoque por tipo de veículo</B>
+        </div>
+
+        <div class="table-responsive small">
+            <table class="table table-striped">
+                <tbody>
+
+                    @{ int counterEstoque = 0; }
+                    @foreach (var item in EstoqueTipoVeiculo)
+                    {
+                        <tr>
+                            <td class="text-left">@Html.DisplayFor(modelItem => item.tipoVeiculo)</td>
+                            <td class="text-right">@Html.DisplayFor(modelItem => item.quantidade) Entrada(s)</td>
+                        </tr>
+                        counterEstoque += item.quantidade;
+                    }
+
+
+
+                    <tr>
+                        <td>
+                            <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                        </td>
+                        <td>@counterEstoque.ToString()</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

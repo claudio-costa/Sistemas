@@ -1,0 +1,55 @@
+﻿@model MobLink.WebLeilao.Dominio.LoteDSIN
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.Msg))
+{
+    <div class="alert alert-success" role="alert">@ViewBag.Msg</div>
+}
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.Erro))
+{
+    <div class="alert alert-danger" role="alert">@ViewBag.Erro</div>
+}
+
+@if (Model.COD_RETORNO == "000")
+{
+    using (Html.BeginForm("ImportarLotesServicoExterno", "Lote"))
+    {
+        <table class="table table-striped small">
+
+            <tr>
+                <th>Processo</th>
+                <th>Placa</th>
+                <th>Chassi</th>
+                <th>Marca/Modelo</th>
+                <th>Depósito</th>
+                @*<th><input type="submit" value="IMPORTAR" class="btn btn-danger btn-sm" /></th>*@
+            </tr>
+
+            @foreach (var item in Model.REGISTROS)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.PROCESSO)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PLACA)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CHASSI)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MARCA) / @Html.DisplayFor(modelItem => item.MODELO)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DEPOSITO)</td>
+                    @*<td></td>*@
+                </tr>
+            }
+
+
+        </table>
+    }
+
+    @Html.ActionLink("Editar Lotes", "Index", "Lote", new { id = ViewBag.IdLeilao }, null)
+
+}
+else
+{
+    <div class="alert alert-danger" role="alert">SEM REGISTROS</div>
+}
+
+
+
+
+

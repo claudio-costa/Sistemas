@@ -1,0 +1,166 @@
+﻿@model MobLink.WebLeilao.Dominio.Lote
+
+@{
+    List<MobLink.WebLeilao.Dominio.Cor> Cores = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Cor.SelecionarTudo().ToList();
+    SelectList ListaCores = new SelectList(Cores, "Descricao", "Descricao");
+
+    List<SelectListItem> itensLL = new List<SelectListItem>();
+    itensLL.Add(new SelectListItem() { Text = "LOCALIZADO", Value = "S" });
+    itensLL.Add(new SelectListItem() { Text = "NÃO LOCALIZADO", Value = "N" });
+    SelectList LL = new SelectList(itensLL, "Value", "Text");
+
+    List<SelectListItem> itensSP = new List<SelectListItem>();
+    itensSP.Add(new SelectListItem() { Selected = Model.situacao_placa == "S", Text = "COM PLACA", Value = "S" });
+    itensSP.Add(new SelectListItem() { Selected = Model.situacao_placa == "N", Text = "SEM PLACA", Value = "N" });
+    SelectList SP = new SelectList(itensSP, "Value", "Text");
+
+    List<SelectListItem> itensSC = new List<SelectListItem>();
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "CHASSI SEM PROBLEMAS", Value = "OK" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "CORTADO", Value = "C" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "RASPADO", Value = "R" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "OXIDADO", Value = "O" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "INACESSÍVEL", Value = "I" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "NÃO ENCONTRADO", Value = "N" });
+    SelectList SC = new SelectList(itensSC, "Value", "Text");
+
+    List<SelectListItem> itensKG = new List<SelectListItem>();
+    itensKG.Add(new SelectListItem() { Selected = false, Text = "POSSUI GNV", Value = "S" });
+    itensKG.Add(new SelectListItem() { Selected = false, Text = "NÃO POSSUI GNV", Value = "N" });
+    itensKG.Add(new SelectListItem() { Selected = false, Text = "INACESSÍVEL", Value = "I" });
+    SelectList KG = new SelectList(itensKG, "Value", "Text");
+
+    List<SelectListItem> itensEV = new List<SelectListItem>();
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "EXCELENTE", Value = "E" });
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "BOM", Value = "B" });
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "RUIM", Value = "R" });
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "PÉSSIMO", Value = "P" });
+    SelectList EV = new SelectList(itensEV, "Value", "Text");
+}
+
+
+
+@{
+    ViewBag.Title = "Edição pátio";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <h4>Leilão: @Model.nome_leilao Nº Lote: @Model.numero_lote Processo: @Model.numero_formulario_grv</h4>
+        
+        <label class="checkbox-inline"><input type="checkbox" name="flag_concluido" value="S" checked="checked"><strong>Marcar registro como Concluído</strong></label>
+        
+
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.placa)
+        @Html.HiddenFor(model => model.chassi)
+        @Html.HiddenFor(model => model.nome_leilao)
+        @Html.HiddenFor(model => model.numero_lote)
+
+        
+
+        Placa
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.placa, new { @class = "form-control", disabled = "" })
+                @Html.ValidationMessageFor(model => model.placa)
+            </div>
+        </div>
+
+        Chassi
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.chassi, new { @class = "form-control", disabled = "" })
+                @Html.ValidationMessageFor(model => model.chassi)
+            </div>
+        </div>
+
+        Marca / Modelo
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.marca_modelo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.marca_modelo)
+            </div>
+        </div>
+
+        Cor
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => model.cor, ListaCores, "* SELECIONE *", new { @class = "form-control" })
+            </div>
+        </div>
+
+        Cor ostentada
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => model.cor_ostentada, ListaCores, "* SELECIONE *", new { @class = "form-control" })
+            </div>
+        </div>
+
+        Situação lote
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => model.situacao_lote, LL, "* SELECIONE *", new { @class = "form-control" })
+            </div>
+        </div>
+
+        Situação placa
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => model.situacao_placa, SP, "* SELECIONE *", new { @class = "form-control" })
+            </div>
+        </div>
+
+        Situação chassi
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => model.situacao_chassi, SC, "* SELECIONE *", new { @class = "form-control" })
+            </div>
+        </div>
+
+        Situação GNV
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => model.situacao_GNV, KG, "* SELECIONE *", new { @class = "form-control" })
+            </div>
+        </div>
+
+        Situação veículo
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => model.situacao_veiculo, EV, "* SELECIONE *", new { @class = "form-control" })
+            </div>
+        </div>
+
+        Localização
+        <div class="form-group">
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.localizacao, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.localizacao)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-primary input-sm" />
+            </div>
+        </div>
+    </div>
+}
+
+@*@Html.Partial("../_Confirmacao")*@
+
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-cab="Confirmação" 
+        data-whatever="Conferência realizada com sucesso para o lote XXXX, do Leilão XX/XX\n " data-target="#confirmacao">
+    Launch demo modal
+</button>*@
+
+<div>
+    @Html.ActionLink("Voltar para a lista", "Index")
+</div>

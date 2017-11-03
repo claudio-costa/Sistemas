@@ -1,0 +1,51 @@
+﻿@model List<MobLink.WebLeilao.Dominio.Lote>
+
+@{
+    ViewBag.Title = "_CarregarLotes";
+}
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+@if (Model.Count > 0)
+{
+    using (Ajax.BeginForm("EnviarOrdemServico", "Pericia", new AjaxOptions { UpdateTargetId = "Lotes", OnBegin = "onBegin", OnComplete = "onComplete" }))
+    {
+        @Html.HiddenFor(p => p.FirstOrDefault().id_leilao)
+        @Html.HiddenFor(p => p.FirstOrDefault().id_status_lote)
+
+        <div class="alert alert-info" role="alert">
+            <div class="row">
+                <div class="col-md-6">
+                    QUANTIDADE DE LOTES ENCONTRADOS: @Model.Count
+                </div>
+                <div class="col-md-6 text-right">
+                    <input type="submit" value="Enviar para perícia" />
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    if (!string.IsNullOrEmpty(ViewBag.Msg))
+    {
+        <div class="alert alert-success" role="alert">@ViewBag.Msg</div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">SEM REGISTROS</div>
+    }
+}
+
+<div id="Lotes"></div>
+
+<script type="text/javascript">
+    function onBegin(data) {
+        $("#Lotes").html('');
+        $("#divLoading").html('<br /><br /><br /><br /> <image src="../Content/aguarde.gif" alt="Loading, please wait" />');
+    }
+    function onComplete() {
+        $("#divLoading").html('');
+        //$("#Lotes").html('<span>teste</span>');
+    }
+</script>

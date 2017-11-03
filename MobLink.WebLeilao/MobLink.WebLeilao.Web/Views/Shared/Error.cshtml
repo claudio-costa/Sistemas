@@ -1,0 +1,33 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h1 class="text-danger">Erro</h1>
+@*<h2 class="text-danger">An error occurred while processing your request.</h2>*@
+
+<div class="alert alert-danger" role="alert">Ocorreu um erro não mapeado durante a execução da última ação</div>
+
+
+
+<p>
+    <b>Controller que originou o erro:</b> @Model.ControllerName
+</p>
+<p>
+    <b>Action:</b> @Model.ActionName
+</p>
+<p>
+    <b>Tipo da Exceção:</b> @Model.Exception.GetType().FullName
+</p>
+
+
+<br />
+
+@Html.TextArea("teste", Model.Exception.Message, htmlAttributes: new { @class="form-control", rows = 15 })
+
+<br />
+
+@Html.ActionLink("Página Inicial", "Index", "Home")
+
+<br />

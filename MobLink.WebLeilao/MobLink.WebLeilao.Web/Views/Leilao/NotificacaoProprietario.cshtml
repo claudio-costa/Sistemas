@@ -1,0 +1,57 @@
+﻿@model MobLink.WebLeilao.Dominio.Leilao
+
+@{
+    ViewBag.Title = "Notificação Proprietário - " + @Model.descricao;
+}
+
+
+<div style="width:100%; height: 500px; overflow: auto; border-width: 0px; border-style: solid;">
+    <table class="table table-striped small table-hover table-condensed">
+        <tr>
+            <td>Proprietário</td>
+            <td>Financeira</td>
+            <td>Comunicado Venda</td>
+        </tr>
+
+        @{
+            var proprietarios = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Proprietario.SelecionarNotificacoes(Model.id);
+        }
+
+        @if (proprietarios.Count <= 0)
+        {
+            <tr>
+                <td>
+                    <span>Não foram encontrados proprietários ou ainda não foram normalizados.</span>
+                </td>
+
+                <td></td>
+                <td></td>
+            </tr>
+        }
+
+        @foreach (var item in proprietarios)
+        {
+            <tr>
+                <td>@item.nome_proprietario</td>
+                <td>@item.nome_financiamento_efet</td>
+                <td>@item.nome_comunicado_venda</td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<br />
+
+@if (proprietarios.Count > 0)
+{
+    using (Html.BeginForm())
+    {
+        @Html.Hidden("GERAR", "S");
+        <input type="submit" value="Gerar Arquivo" class="btn btn-primary btn-sm" />
+    }
+}
+
+
+
+

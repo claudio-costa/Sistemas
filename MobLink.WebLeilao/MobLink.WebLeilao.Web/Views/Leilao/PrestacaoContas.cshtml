@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Pós-leilão - prestação de contas";
+
+    var lista_leiloes = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Leilao.SelecionarTudo(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Status.Pagamento).ToList();
+}
+
+<p>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Leilão: TRGD02.17
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            @foreach (var item in lista_leiloes)
+            {
+                <li>@Html.ActionLink(item.descricao.ToUpper(), "PrestacaoContas", "Leilao", new { Id = item.id }, null)</li>
+            }
+        </ul>
+    </div>
+</p>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                DESPESAS LEILÃO
+
+                <p class="pull-right">Última Atualização: 25/09/2017</p>
+                @*<button class="btn btn-success pull-right btn-xs">Excel</button>
+                    <button class="btn btn-danger pull-right btn-xs">Pdf</button>*@
+            </div>
+            <div class="panel-body">
+
+                @*<div class="col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">Última Atualização</span>
+                        <input type="text" class="form-control" disabled="disabled" id="basic-url" aria-describedby="basic-addon3" value="25/09/2017">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> ROOT</span>
+                    </div>
+                </div>*@
+
+                <div class="col-md-3">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">Valor Total R$</span>
+                        <input type="text" class="form-control" disabled="disabled" id="basic-url" aria-describedby="basic-addon3" value="170.000,00">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                DÉBITOS
+                <p class="pull-right">Última Atualização: 25/09/2017</p>
+            </div>
+
+            <div class="panel-body">
+
+                <div class="col-md-2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">Dívida ativa</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="5.000,00">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">IPVA</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="15.000,00">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">DPVAT</span>
+                        <input type="text" class="form-control" id="basic-url" readonly="readonly" aria-describedby="basic-addon3" value="7.000,00">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">Multa orgão</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="2.500,00">
+                    </div>
+                </div>
+                
+                <div class="col-md-2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">Demais multas</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="500,00">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model MobLink.ConsultaGRV.Web.Models.Boleto
+@{
+    ViewBag.Title = "ImprimirBoletoAtendimento";
+}
+
+<body>
+    <div class="main">
+
+
+
+        <div class="row">
+            <br /><br />
+            <div class="panel panel-success">
+                <div class="panel-heading text-center">BOLETO <strong>@Model.IdBoleto.ToString()</strong> REGISTRADO COM SUCESSO!</div>
+                <div class="panel-body">
+                    <div class="alert alert-info text-center" role="alert">@Model.LinhaDigitavel</div>
+
+               
+                       
+                            <input type="submit" value="ENVIAR BOLETO POR E-MAIL" class="btn btn-primary" />
+                            <input type="submit" value="ENVIAR LINHA DIGITÁVEL POR E-MAIL" class="btn btn-primary" />
+                            <input type="submit" value="DOWNLOAD DO BOLETO" class="btn btn-primary" />
+                            <input type="submit" value="NOVA CONSULTA" class="btn btn-primary" />
+
+                     
+            
+
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+</body>

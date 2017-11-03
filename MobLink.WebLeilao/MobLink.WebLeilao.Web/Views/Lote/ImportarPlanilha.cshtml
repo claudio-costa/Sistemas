@@ -1,0 +1,43 @@
+﻿@model MobLink.WebLeilao.Dominio.Leilao
+@{
+    ViewBag.Title = "ImportarPlanilha";
+}
+
+<h1>@Model.Descricao - Importação inicial de lotes</h1>
+
+<hr />
+
+@*<p class="lead">*@
+<p>
+    Selecione o arquivo a ser importado e clique em <code>CARREGAR</code><br />
+    Formatos suportados: <code>XLS</code>&nbsp;<code>XLSX</code><br />
+</p>
+
+
+@using (Html.BeginForm("ImportarPlanilha", "Lote", Model, FormMethod.Post, new { enctype = "multipart/form-data", leilao = Model }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="input-group form-group">
+                <span class="btn btn-primary btn-file bg-danger">
+                    <input type="file" id="dataFile" name="upload">
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <input class="form-control btn-default" type="submit" value="Carregar" />
+            </div>
+        </div>
+    </div>
+
+    @Html.ValidationMessage("File")
+}
+
+

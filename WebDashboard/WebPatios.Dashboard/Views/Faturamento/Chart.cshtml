@@ -1,0 +1,51 @@
+﻿@model List<WebPatios.Business.FaturamentoBLL.GraficoModel>
+
+@{
+
+
+    //var basicChart = new Chart(width: 600, height: 400, theme: ChartTheme.Vanilla)
+    //    .AddTitle("Chart Title")
+
+    //    .AddSeries(
+    //        chartType: "Bar",
+    //        name: "Employee",
+    //        xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },   //Mes ano
+    //        yValues: new[] { "2", "9", "9", "9", "0" })                     //Faturamento
+    //    .AddSeries(
+    //        chartType: "Bar",
+    //        name: "dfr",
+    //        xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
+    //        yValues: new[] { "2", "6", "4", "5", "3" })
+
+    //    .AddSeries(
+    //        chartType: "Bar",
+    //        name: "tes",
+    //        xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
+    //        yValues: new[] { "2", "1", "5", "5", "3" })
+
+    //    .AddSeries(
+    //        chartType: "Bar",
+    //        name: "te",
+    //        xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
+    //        yValues: new[] { "0", "6", "1", "5", "1" })
+
+    //    .Write();
+
+    //WebPatios.Business.FaturamentoBLL fat = new WebPatios.Business.FaturamentoBLL();
+    //var dados = fat.GetDadosGrafico();
+
+    var myChart = new Chart(width: 600, height: 400)
+        .AddTitle("Product Sales")
+        .AddLegend()
+        .AddSeries("Default",
+            xValue: Model, xField: "X", axisLabel: "X",
+            yValues: Model, yFields: "Y",
+            chartType: "Bar")
+
+
+        
+
+        //.DataBindTable(dataSource: dados, xField: "X")
+
+        .Write();
+}

@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Gráfico de Evolucao Mensal Por Pátio";
+}
+
+@{
+    List<SelectListItem> ItemPeriodos = new List<SelectListItem>();
+    ItemPeriodos.Add(new SelectListItem() { Selected = false, Text = "Mês atual", Value = "0" });
+    ItemPeriodos.Add(new SelectListItem() { Selected = false, Text = "Mês anterior", Value = "1" });
+    ItemPeriodos.Add(new SelectListItem() { Selected = false, Text = "3 últimos meses", Value = "2" });
+    ItemPeriodos.Add(new SelectListItem() { Selected = false, Text = "6 últimos meses", Value = "3" });
+    SelectList Periodos = new SelectList(ItemPeriodos, "Value", "Text");
+}
+
+<h2>@ViewBag.Title</h2>
+
+Selecione um período e clique em "Gerar gráfico"<br /><br />
+
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            ViewBag.teste = "teste";
+            @Html.DropDownList("IDLEILAO", Periodos, "Selecione um período", new { @class = "form-control input-sm" })<br /><br />
+            <input type="submit" class="btn btn-primary" value="Gerar gráfico" />
+        }
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,308 @@
+﻿@model MobLink.WebLeilao.Dominio.Leilao
+@{ SelectList Comitentes = ViewBag.Comitentes; }
+@{ SelectList Leiloeiros = ViewBag.Leiloeiros; }
+@{ SelectList Expositores = ViewBag.Expositores; }
+@{ SelectList Empresas = ViewBag.Empresas; }
+@{ SelectList RegrasPC = ViewBag.RegrasPC; }
+
+
+@{
+    ViewBag.Title = "Criar Leilão";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!--Formulário de endereço-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Endereço do leilão</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-horizontal">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.cep, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.cep, new { @class = "form-control input-sm", Id = "txtcep", @autofocus = "" })
+                                @Html.ValidationMessageFor(model => model.cep)
+                            </div>
+
+                            <input type="button" id="btnConsultaCep" name="btnConsultaCep" value="Consultar" class="btn btn-primary btn-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.endereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.endereco, new { @class = "form-control input-sm", Id = "txtEndereco", @focus = "", @readonly = "readonly", name = "txtEndereco" })
+                                @Html.ValidationMessageFor(model => model.endereco)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.bairro, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.bairro, new { @class = "form-control input-sm", Id = "txtBairro", @focus = "", @readonly = "readonly", name = "txtBairro" })
+                                @Html.ValidationMessageFor(model => model.bairro)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.municipio, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.municipio, new { @class = "form-control input-sm", Id = "txtMunicipio", @focus = "", @readonly = "readonly", name = "txtMunicipio" })
+                                @Html.ValidationMessageFor(model => model.municipio)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.uf, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.uf, new { @class = "form-control input-sm", Id = "txtUF", @focus = "", @readonly = "readonly", name = "txtUF" })
+                                @Html.ValidationMessageFor(model => model.uf)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.end_numero, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.end_numero, new { @class = "form-control input-sm", Id = "txtNumero", name = "txtNumero" })
+                                @Html.ValidationMessageFor(model => model.end_numero)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.end_complemento, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.end_complemento, new { @class = "form-control input-sm", Id = "txtEndereco", @focus = "", name = "txtEndereco" })
+                                @Html.ValidationMessageFor(model => model.end_complemento)
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fim Formulário de endereço-->
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                LEILÃO
+            </div>
+
+            <div class="panel-body">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.descricao, new { @class = "form-control input-sm", @focus = "" })
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.ValidationMessageFor(model => model.descricao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nome_local, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.nome_local, new { @class = "form-control input-sm" })
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.ValidationMessageFor(model => model.nome_local)
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-map-marker"></span>&nbsp;Endereço
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.data_leilao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @*@Html.TextBoxFor(m => m.Data_Leilao, new { @class = "form-control input-sm", @Id = "dataleilao" })*@
+                        @Html.EditorFor(m => m.data_leilao, new { htmlAttributes = new { @class = "form-control  input-sm", @id = "dataleilao" } })
+                        @Html.ValidationMessageFor(model => model.data_leilao)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.id_leiloeiro, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.ValidationMessageFor(model => model.id_leiloeiro)
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.id_leiloeiro, Leiloeiros, "Selecione um leiloeiro", new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.id_empresa, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.id_empresa, Empresas, "Selecione uma empresa", new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ValidationMessageFor(model => model.id_empresa)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.id_comitente, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.id_comitente, Comitentes, "Selecione um comitente", new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ValidationMessageFor(model => model.id_comitente)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.id_expositor, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.id_expositor, Expositores, "Selecione um expositor", new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ValidationMessageFor(model => model.id_expositor)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.identificacao_leilao_orgao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.identificacao_leilao_orgao, new { @class = "form-control input-sm", Id = "" })
+                    </div>
+
+                    @Html.LabelFor(model => model.id_regra_prestacao_contas, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.id_regra_prestacao_contas, RegrasPC, "Selecione uma regra", new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.ValidationMessageFor(model => model.id_regra_prestacao_contas)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                DIÁRIO OFICIAL
+            </div>
+
+            <div class="panel-body">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.data_hora_publicacao_diario_oficial, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.data_hora_publicacao_diario_oficial, new { @class = "form-control input-sm", Id = "datado" })
+                        @Html.ValidationMessageFor(model => model.data_hora_publicacao_diario_oficial)
+                    </div>
+
+                    @Html.LabelFor(model => model.numero_diario_oficial, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.numero_diario_oficial, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(model => model.numero_diario_oficial)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                ORDEM INTERNA
+            </div>
+
+            <div class="panel-body">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ordem_interna_matriz, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.ordem_interna_matriz, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(model => model.ordem_interna_matriz)
+                    </div>
+
+                    @Html.LabelFor(model => model.ordem_interna_leilao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.ordem_interna_leilao, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(model => model.ordem_interna_leilao)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <input type="submit" value="Salvar" class="btn btn-primary" /><br /><br />
+        @Html.ActionLink("Voltar para lista", "Index")
+    </div>
+}
+
+
+<script>
+    //$("#dataleilao").mask("99/99/9999", {selectOnFocus: true});
+    $("#horaleilao").mask("99:99", { selectOnFocus: true });
+    $("#datado").mask("99/99/9999", { selectOnFocus: true });
+    $("#dataleilao").mask("99/99/9999", { selectOnFocus: true });
+    $("#txtcep").mask("99999-999", { selectOnFocus: true });
+
+    $("#datainiconf").mask("99/99/9999", { selectOnFocus: true });
+    $("#datafimconf").mask("99/99/9999", { selectOnFocus: true });
+
+
+    $("#txtcep").keydown(function () {
+        $("#txtEndereco").val("");
+        $("#txtBairro").val("");
+        $("#txtMunicipio").val("");
+        $("#txtUF").val("");
+    });
+
+    function PreencheEndereco() {
+        $.ajax({
+            url: '@Url.Action("ConsultaCEP")',
+            data: { cep: $("#txtcep").val() },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            type: "GET",
+            success: function (dados) {
+                $("#txtEndereco").val(dados.MeuCEP.end);
+                $("#txtBairro").val(dados.MeuCEP.bairro);
+                $("#txtMunicipio").val(dados.MeuCEP.cidade);
+                $("#txtUF").val(dados.MeuCEP.uf);
+                $("#txtNumero").focus();
+            },
+            error: function () {
+                alert("CEP não encontrado");
+            }
+        });
+    };
+
+    $(function () {
+        $("#btnConsultaCep").on("click", function () {
+            if ($("#txtcep").val() == "") {
+                alert("Preencha o CEP corretamente para pesquisa");
+            }
+            else {
+                PreencheEndereco();
+            }
+        });
+    });
+
+
+</script>

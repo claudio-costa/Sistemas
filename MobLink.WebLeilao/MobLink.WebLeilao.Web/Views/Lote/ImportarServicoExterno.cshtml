@@ -1,0 +1,61 @@
+﻿@model MobLink.WebLeilao.Dominio.Leilao
+
+@{
+    ViewBag.Title = "ImportarServicoExterno";
+}
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script type="text/javascript">
+    function onBegin() {
+        $("#Lotes").html("");
+        $("#divLoading").html('<br /><br /><br /><br /> <img src="../../Content/aguarde.gif" />');
+    }
+    function onComplete() {
+        $("#divLoading").html("");
+    }
+</script>
+
+<h2>@Model.Descricao - Importar Lotes de Servico Externo</h2><hr />
+
+
+<div class="row">
+
+    @using (Ajax.BeginForm("CarregarLotesServicoExterno", "Lote", new AjaxOptions { UpdateTargetId = "Lotes", OnBegin = "onBegin", OnComplete = "onComplete" }))
+    {
+        @*<div class="col-md-6">
+            @Html.DropDownList("IDLEILAO", Leiloes, "Selecione um leilão", new { @class = "form-control input-sm" })
+                </div>*@
+
+        <input type="hidden" name="IdLeilao" value="@Model.Id" />
+        
+        <div class="col-md-2">
+            <input type="number" id="txtNumLotes" name="NumLotes" placeholder="Nº de lotes" class="form-control input-sm" />
+        </div>
+
+        <div class="col-md-2">
+            <input type="number" id="txtNumDias" name="NumDias" placeholder="Nº de dias" class="form-control input-sm" />
+        </div>
+
+        <div class="col-md-1">
+            <input type="submit" value="Carregar Lotes" class="btn-primary btn-sm" />
+        </div>
+    }
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <div id="divLoading">
+            @*<image src="../Content/loader.gif" alt="Loading, please wait" />*@
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="Lotes" name="Lotes"></div>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+﻿@model MobLink.ConsultaGRV.Web.Models.Boleto
+@{
+    ViewBag.Title = "Boleto";
+}
+
+<body>
+    <div class="main">
+        <div class="row">
+            <br /><br />
+            <div class="panel panel-success">
+                <div class="panel-heading text-center">
+                    <span class="badge" style="font-size: x-large">@Model.IdBoleto.ToString() </span>
+                    <h1> BOLETO GERADO COM SUCESSO!</h1>
+                    <h2>
+                        <code name="linha">@Model.LinhaDigitavel</code>
+
+                    </h2>
+
+                    <h5>VENCIMENTO: @Model.Vencimento</h5>
+                    <h5>VALOR: @Model.Valor</h5>
+                </div>
+
+                <div class="panel-body">
+                    <div class="alert alert-info text-center" role="alert">
+
+                        @using (Html.BeginForm())
+                        {
+                            <input type="hidden" name="EXIBE_BOLETO" value="true" />
+                            <input type="hidden" name="GRV" value="@Model.IdGRV" />
+
+                            <button type="submit" class="btn btn-primary" value="true" name="ENVIA_EMAIL">
+                                <span class="glyphicon glyphicon-barcode"></span>&nbsp;ENVIAR POR E-MAIL
+                            </button>
+
+                            @*<input type="submit" value="DOWNLOAD (PDF)" class="btn btn-primary" />*@
+
+                            <button type="submit" class="btn btn-primary" value="true" name="NOVA_CONSULTA">
+                                <span class="glyphicon glyphicon-barcode"></span>&nbsp;NOVA CONSULTA
+                            </button>
+
+                            @*<input type="submit" value="true" name="NOVA_CONSULTA" class="btn btn-primary" />*@
+
+                            @*<button onclick="ClipBoard()" class="btn btn-primary">COPIAR LINHA DIGITÁVEL</button>*@
+                        }
+
+                        @*@{
+                            Response.Clear();
+                            MemoryStream ms = new MemoryStream(Model.ImagemBoleto);
+                            Response.ContentType = "application/pdf";
+                            Response.AddHeader("content-disposition", "attachment;filename=BOLETO.pdf");
+                            Response.Buffer = true;
+                            ms.WriteTo(Response.OutputStream);
+                            Response.End();
+                        }*@
+
+
+                    </div>
+                </div>
+
+                @{
+                    if (Model.ImagemBoleto != null)
+                    {
+                        var base64 = Convert.ToBase64String(Model.ImagemBoleto);
+                        var pdfSrc = String.Format("data:application/pdf;base64,{0}", base64);
+                        var imgSrc = String.Format("data:image/png;base64,{0}", Model.ImagemBoleto);
+
+
+                        <div class="text-center">
+                            <iframe src="@pdfSrc" height="800" width="800"></iframe>
+                        </div>
+                    }
+                    
+                }
+
+            </div>
+        </div>
+
+     
+
+        
+
+
+        
+
+    </div>
+</body>
+
+
+<script type="text/javascript">
+
+        function ClipBoard() {
+            if (window.clipboardData) {
+                alert("copied");
+                window.clipboardData.setData("Text", document.getElementById("linha").innerText);
+            }
+
+        }
+
+
+
+
+
+
+</script>
+
+<script type="text/javascript">
+        function resizeIframe(obj) {
+            obj.style.height = 0;
+            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        }
+</script>

@@ -1,0 +1,59 @@
+﻿@model List<MobLink.WebLeilao.Dominio.Lote>
+
+@if (Model.Count > 0)
+{
+
+    using (Html.BeginForm("Processar_DETRO_002", "Leilao", new { idleilao = Model.FirstOrDefault().id_leilao }))
+    {
+        <table class="table table-striped small">
+
+            <tr>
+                <th>Processo</th>
+                <th>Placa</th>
+                <th>Chassi</th>
+                <th>Marca/Modelo</th>
+                <th>Status de processamento</th>
+                @*<th><button type="submit" class="btn btn-danger btn-sm" value="@Model" name="lotes">Processar Registros</button></th>*@
+                <th>Mensagem de processamento</th>
+                <th><input type="submit" value="PROCESSAR" class="btn btn-danger btn-sm" /></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                var status = item.Status_Processamento_DETRO;
+                if (status == "N")
+                {
+                    status = "Não processado";
+                }
+                else
+                {
+                    status = "Processado";
+                }
+
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.numero_formulario_grv)</td>
+                    <td>@Html.DisplayFor(modelItem => item.placa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.chassi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.marca_modelo)</td>
+                    <td>@status</td>
+                    <td>@Html.DisplayFor(modelItem => item.Msg_Processamento_DETRO)</td>
+                    <td></td>
+                </tr>
+            }
+
+
+        </table>
+    }
+
+
+
+}
+else
+{
+    <div class="alert alert-danger" role="alert">SEM REGISTROS</div>
+}
+
+
+
+
+

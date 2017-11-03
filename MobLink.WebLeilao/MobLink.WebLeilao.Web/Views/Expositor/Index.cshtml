@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MobLink.WebLeilao.Dominio.Expositor>
+
+@{
+    ViewBag.Title = "Expositores";
+}
+
+<p>
+    @Html.ActionLink("Novo", "Create")
+</p>
+<table class="table table-striped small table-hover table-condensed">
+    <tr>
+        <th>
+            EXPOSITOR
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.descricao)
+            </td>
+            <td>
+                @Html.ActionLink("EDITAR", "", new { id = item.id })
+
+            </td>
+            <td>
+                @Html.ActionLink("EXCLUIR", "", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

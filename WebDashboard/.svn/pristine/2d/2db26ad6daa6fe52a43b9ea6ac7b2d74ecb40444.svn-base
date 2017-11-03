@@ -1,0 +1,325 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace WebPatios.Business
+{
+    public class DashboardBLL : BaseBLL
+    {
+        //public DashboardBLL(Ambiente Ambiente) : base(Ambiente)
+        //{
+
+        //}
+
+        
+        
+
+        public IList<Model.Dashboard.Infracao> getInfracoes()
+        {
+            #region CONSULTA
+            string SQL;
+            SQL = string.Format(@"
+                        SELECT TOP 10
+                            COUNT(tb_dep_condutor.id_grv) AS qtd,
+ 	                        tb_dep_enquadramento_infracoes.codigo_infracao as cod, tb_dep_enquadramento_infracoes.descricao AS descr
+                        FROM tb_dep_condutor 
+                    INNER JOIN tb_dep_enquadramento_infracoes 
+                            ON tb_dep_condutor.id_enquadramento_infracao = tb_dep_enquadramento_infracoes.id_enquadramento_infracao
+                    INNER JOIN tb_dep_grv 
+                            ON tb_dep_condutor.id_grv = tb_dep_grv.id_grv
+                        WHERE tb_dep_grv.id_cliente = 5 AND tb_dep_grv.id_deposito = 3
+                    GROUP BY tb_dep_enquadramento_infracoes.descricao,
+                            tb_dep_enquadramento_infracoes.codigo_infracao
+                    ORDER BY COUNT(tb_dep_condutor.id_grv) DESC");
+            #endregion
+
+            var infracoes = new List<Model.Dashboard.Infracao>();
+
+            try
+            {
+                var tbRes = ConsultaSQL(SQL.ToString());
+
+                if (tbRes.Rows.Count > 0)
+                {
+                    foreach (System.Data.DataRow linha in tbRes.Rows)
+                    {
+                        var itemInfracao = new Model.Dashboard.Infracao();
+                        itemInfracao.infracaoDescricao = linha["descr"].ToString();
+                        itemInfracao.infracaoCodigo = linha["cod"].ToString();
+                        itemInfracao.quantidade = int.Parse(linha["qtd"].ToString());
+                        infracoes.Add(itemInfracao);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return infracoes;
+        }
+
+        
+
+        public Model.Dashboard.ResumoPeriodico getResumoPeriodico()
+        {
+            #region CONSULTA
+            string SQL;
+            SQL = string.Format(@"
+
+            SELECT (SELECT COUNT(grv.id_grv) AS qtd
+                      FROM tb_dep_grv grv 
+                     WHERE id_cliente = 5 AND id_deposito = 3) APREENSOES, 
+	   
+	               (SELECT COUNT(grv.id_grv) AS qtd
+	                  FROM tb_dep_grv grv 
+		             WHERE id_cliente = 5 AND id_deposito = 3
+		               AND id_status_operacao = 'E') SAIDAS,
+       
+                   (SELECT COUNT(grv.id_grv) AS qtd
+                      FROM tb_dep_grv grv 
+                     WHERE id_cliente = 5 AND id_deposito = 3
+                       AND id_status_operacao IN ('1','2','B','G','L','M','P','T' ))ESTOQUE,
+       
+                   --APRENSOES
+                   (SELECT COUNT(grv.id_grv)
+                      FROM tb_dep_grv grv 
+                     WHERE id_cliente = 5 AND id_deposito = 3
+                       AND convert(date, grv.data_hora_guarda) = convert(date,GETDATE())) APREENSAO_HOJE,
+       
+                   (SELECT COUNT(grv.id_grv) AS qtd
+                      FROM tb_dep_grv grv 
+                     WHERE id_cliente = 5 AND id_deposito = 3
+                       AND convert(date, grv.data_hora_guarda) 
+                   BETWEEN convert(date,GETDATE()-7)
+                       AND convert(date, GETDATE()) )APREENSAO_SEMANA,
+        
+                    (SELECT COUNT(grv.id_grv)
+                       FROM tb_dep_grv grv 
+                      WHERE id_cliente = 5 AND id_deposito = 3
+                        AND MONTH(grv.data_hora_guarda) = MONTH(GETDATE())) APREENSAO_MES,
+            
+            
+                    --SAÍDAS
+                    
+                    (      SELECT ISNULL(COUNT(fat.valor_faturado), 0)
+							 FROM tb_dep_faturamento fat
+					   INNER JOIN tb_dep_atendimento atn ON fat.id_atendimento = atn.id_atendimento
+					   INNER JOIN tb_dep_grv grv ON atn.id_grv = grv.id_grv
+							WHERE 1 = 1
+							  AND fat.status = 'P'
+							  AND grv.id_cliente = 5 AND grv.id_deposito = 3
+							  AND grv.id_status_operacao = 'E'	  --ENTREGAS
+							  AND CONVERT(DATE, data_pagamento) = CONVERT(DATE,GETDATE())  ) SAIDAS_HOJE,
+							  
+					(      SELECT ISNULL(COUNT(fat.valor_faturado), 0)
+							 FROM tb_dep_faturamento fat
+					   INNER JOIN tb_dep_atendimento atn ON fat.id_atendimento = atn.id_atendimento
+					   INNER JOIN tb_dep_grv grv ON atn.id_grv = grv.id_grv
+							WHERE 1 = 1
+							  AND fat.status = 'P'
+							  AND grv.id_cliente = 5 AND grv.id_deposito = 3
+							  AND grv.id_status_operacao = 'E'	  --ENTREGAS
+							  AND CONVERT(DATE, data_pagamento) 
+						  BETWEEN CONVERT(DATE, GETDATE() - 7)
+							  AND CONVERT(DATE, GETDATE()) 	) SAIDAS_SEMANA,
+							  
+					(      SELECT ISNULL(COUNT(fat.valor_faturado), 0)
+							 FROM tb_dep_faturamento fat
+					   INNER JOIN tb_dep_atendimento atn ON fat.id_atendimento = atn.id_atendimento
+					   INNER JOIN tb_dep_grv grv ON atn.id_grv = grv.id_grv
+							WHERE 1 = 1
+							  AND fat.status = 'P'
+							  AND grv.id_cliente = 5 AND grv.id_deposito = 3
+							  AND grv.id_status_operacao = 'E'	  --ENTREGAS
+							  AND MONTH(grv.data_hora_guarda) = MONTH(GETDATE())  ) SAIDAS_MES,
+                    
+                    
+                    
+                   
+       
+                   
+            
+                    --ESTOQUE
+                   (SELECT COUNT(grv.id_grv)
+                      FROM tb_dep_grv grv 
+                     WHERE id_cliente = 5 AND id_deposito = 3
+                       AND id_status_operacao IN ('1','2','B','G','L','M','P','T' )
+                       AND convert(date, grv.data_hora_guarda) = convert(date,GETDATE())) ESTOQUE_HOJE,
+       
+                   (SELECT COUNT(grv.id_grv) AS qtd
+                      FROM tb_dep_grv grv 
+                     WHERE id_cliente = 5 AND id_deposito = 3
+                       AND id_status_operacao IN ('1','2','B','G','L','M','P','T' )
+                       AND convert(date, grv.data_hora_guarda) 
+                   BETWEEN convert(date,GETDATE()-7)
+                       AND convert(date, GETDATE()) )ESTOQUE_SEMANA,
+        
+                    (SELECT COUNT(grv.id_grv)
+                       FROM tb_dep_grv grv 
+                      WHERE id_cliente = 5 AND id_deposito = 3
+                        AND id_status_operacao IN ('1','2','B','G','L','M','P','T' )
+                        AND MONTH(grv.data_hora_guarda) = MONTH(GETDATE())) ESTOQUE_MES,
+            
+            
+                    ( select ISNULL(SUM(fat.valor_faturado), 0) as fat
+		              from tb_dep_faturamento fat
+		              inner join tb_dep_atendimento atn on fat.id_atendimento = atn.id_atendimento
+		              inner join tb_dep_grv grv on atn.id_grv = grv.id_grv
+		              where 1=1
+                        AND fat.status = 'P'
+			            and grv.id_cliente = 5 AND grv.id_deposito = 3
+			            and grv.id_status_operacao = 'E'--entregas
+			            AND convert(date, data_pagamento) = convert(date,GETDATE()) ) FAT_HOJE,
+			
+		            ( select ISNULL(SUM(fat.valor_faturado), 0) as fat
+		              from tb_dep_faturamento fat
+		              inner join tb_dep_atendimento atn on fat.id_atendimento = atn.id_atendimento
+		              inner join tb_dep_grv grv on atn.id_grv = grv.id_grv
+		              where 1=1
+                        AND fat.status = 'P'
+			            and grv.id_cliente = 5 AND grv.id_deposito = 3
+			            and grv.id_status_operacao = 'E'--entregas
+			            AND convert(date, data_pagamento) 
+			               BETWEEN convert(date,GETDATE()-7)
+				               AND convert(date, GETDATE()) ) FAT_SEMANA,
+		
+		            ( select ISNULL(SUM(fat.valor_faturado), 0) as fat
+		              from tb_dep_faturamento fat
+		              inner join tb_dep_atendimento atn on fat.id_atendimento = atn.id_atendimento
+		              inner join tb_dep_grv grv on atn.id_grv = grv.id_grv
+		              where 1=1
+                        AND fat.status = 'P'
+			            and grv.id_cliente = 5 AND grv.id_deposito = 3
+			            and grv.id_status_operacao = 'E'--entregas
+			            AND MONTH(data_pagamento) = MONTH(GETDATE()) ) FAT_MES
+              FROM DUAL
+
+            ");
+            #endregion
+
+            var resumo = new Model.Dashboard.ResumoPeriodico();
+
+            try
+            {
+                var tbRes = ConsultaSQL(SQL.ToString());
+
+                if (tbRes.Rows.Count > 0)
+                {
+                    resumo.apreensoesTotal = int.Parse(tbRes.Rows[0]["APREENSOES"].ToString());
+                    resumo.saidasTotal = int.Parse(tbRes.Rows[0]["SAIDAS"].ToString());
+                    resumo.estoqueTotal = int.Parse(tbRes.Rows[0]["ESTOQUE"].ToString());
+
+                    resumo.apreensoesHoje = int.Parse(tbRes.Rows[0]["APREENSAO_HOJE"].ToString());
+                    resumo.apreensoesSemana = int.Parse(tbRes.Rows[0]["APREENSAO_SEMANA"].ToString());
+                    resumo.apreensoesMes = int.Parse(tbRes.Rows[0]["APREENSAO_MES"].ToString());
+
+                    resumo.saidasHoje = int.Parse(tbRes.Rows[0]["SAIDAS_HOJE"].ToString());
+                    resumo.saidasSemana = int.Parse(tbRes.Rows[0]["SAIDAS_SEMANA"].ToString());
+                    resumo.saidasMes = int.Parse(tbRes.Rows[0]["SAIDAS_MES"].ToString());
+
+                    resumo.estoqueHoje = int.Parse(tbRes.Rows[0]["ESTOQUE_HOJE"].ToString());
+                    resumo.estoqueSemana = int.Parse(tbRes.Rows[0]["ESTOQUE_SEMANA"].ToString());
+                    resumo.estoqueMes = int.Parse(tbRes.Rows[0]["ESTOQUE_MES"].ToString());
+
+                    resumo.FaturamentoHoje = string.Format("{0:C}", Double.Parse(tbRes.Rows[0]["FAT_HOJE"].ToString()));
+                    resumo.FaturamentoSemana = string.Format("{0:C}", Double.Parse(tbRes.Rows[0]["FAT_SEMANA"].ToString()));
+                    resumo.FaturamentoMes = string.Format("{0:C}", Double.Parse(tbRes.Rows[0]["FAT_MES"].ToString()));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return resumo;
+        }
+
+        public Model.Dashboard.TicketMedio getTicketMedio()
+        {
+            #region CONSULTA
+            string SQL;
+            SQL = string.Format(@"
+                --Exemplo de ticket médio: faturamento: 5000,00 , qte de veículos liberados: 10, ticket médio = 5000 / 10 = R$ 500,00
+                SELECT FATURAMENTO / APREENSOES AS TICKET_MEDIO
+                  FROM (SELECT ISNULL(SUM(fat.valor_faturado), 0) AS FATURAMENTO, COUNT(grv.id_grv) AS APREENSOES
+	                      FROM tb_dep_faturamento fat
+                    INNER JOIN tb_dep_atendimento atn on fat.id_atendimento = atn.id_atendimento
+	                INNER JOIN tb_dep_grv grv on atn.id_grv = grv.id_grv
+	                     WHERE 1 = 1 
+		                   AND fat.status = 'P'
+		                   AND grv.id_cliente = 5 AND grv.id_deposito = 3
+		                   AND grv.id_status_operacao = 'E'--entregas
+		                   AND MONTH(data_pagamento) = MONTH(GETDATE())) AS TB
+
+            ");
+            #endregion
+
+            var tm = new Model.Dashboard.TicketMedio();
+
+            try
+            {
+                var tbRes = ConsultaSQL(SQL.ToString());
+
+                if (tbRes.Rows.Count > 0)
+                {
+                    tm.ticketMedio = string.Format("{0:C}", Double.Parse(tbRes.Rows[0]["TICKET_MEDIO"].ToString()));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return tm;
+        }
+
+        public Model.Dashboard.TaxaLiberacao getTaxaLiberacao()
+        {
+            #region CONSULTA
+            string SQL;
+            SQL = string.Format(@"
+                SELECT (SELECT ISNULL(COUNT(fat.valor_faturado), 0)
+		                  FROM tb_dep_faturamento fat
+                    INNER JOIN tb_dep_atendimento atn ON fat.id_atendimento = atn.id_atendimento
+                    INNER JOIN tb_dep_grv grv ON atn.id_grv = grv.id_grv
+ 		                 WHERE 1 = 1 
+		                   AND fat.status = 'P'
+		                   AND grv.id_cliente = 5 AND grv.id_deposito = 3
+		                   AND grv.id_status_operacao = 'E'	  --ENTREGAS
+		                   AND MONTH(grv.data_hora_guarda) = MONTH(GETDATE()) ) AS ENT,
+                       (SELECT COUNT(grv.id_grv)
+	                      FROM tb_dep_grv grv 
+	                     WHERE id_cliente = 5 AND id_deposito = 3
+	                       AND MONTH(grv.data_hora_guarda) = MONTH(GETDATE())) AS APR FROM DUAL
+            ");
+            #endregion
+
+            var taxa = new Model.Dashboard.TaxaLiberacao();
+
+            try
+            {
+                var tbRes = ConsultaSQL(SQL.ToString());
+
+                if (tbRes.Rows.Count > 0)
+                {
+                    double entregas = 0;
+                    double apreensoes = 0;
+
+                    entregas = Double.Parse(tbRes.Rows[0]["ENT"].ToString());
+                    apreensoes = Double.Parse(tbRes.Rows[0]["APR"].ToString());
+
+                    taxa.taxaLiberacao = string.Format("{0:P2}", entregas / apreensoes);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return taxa;
+        }
+
+    }
+}

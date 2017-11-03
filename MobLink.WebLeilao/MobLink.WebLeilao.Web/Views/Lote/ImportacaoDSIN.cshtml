@@ -1,0 +1,111 @@
+﻿@model List<MobLink.WebLeilao.Dominio.REGISTRO>
+
+@{
+    ViewBag.Title = "Importação de lotes via serviço DSIN";
+
+    MobLink.WebLeilao.Dominio.Leilao Leilao = ViewBag.Leilao;
+}
+
+<h6>@Leilao.descricao - @ViewBag.Title</h6><hr />
+
+@using (Html.BeginForm("ImportacaoDSIN", "Lote", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-2">
+                QTDE.DIAS: <input type="number" id="QTDE_DIAS" name="QTDE_DIAS" class="form-control input-sm" value="@ViewBag.QTDE_DIAS">
+            </div>
+            <div class="col-md-2">
+                QTDE.LOTES: <input type="number" id="QTDE_LOTES" name="QTDE_LOTES" class="form-control input-sm" value="@ViewBag.QTDE_LOTES">
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-9">
+                @foreach (var item in Leilao.depositos)
+                {
+                    <div class="checkbox checkbox-inline">
+                        <label><input type="checkbox" checked="" name="DEPOSITOS" value="@item.Id_Deposito">
+                            @item.Descricao
+                        </label>
+                    </div>
+
+                    @*<input type="checkbox" checked="" name="DEPOSITOS" value="@item.Id_Sistema_Externo" />
+                    <span class="badge"></span>*@
+                }
+            </div>
+
+            <div class="col-md-3">
+                <input type="submit" id="btn_carregar" value="CONSULTAR" class="btn btn-primary btn-sm" onclick="Aguarde()" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <hr />
+    </div>
+
+
+    <table class="table table-striped small">
+        <tr>
+            <td><input type="checkbox" onclick="marcar_desmarcar_tudo(this.checked)" checked="checked" /></td>
+            <td>PROCESSO</td>
+            <td>MARCA</td>
+            <td>MODELO</td>
+            <td>PLACA</td>
+            <td>CHASSI</td>
+        </tr>
+
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td><input type="checkbox" name="CHECK" value="@item" checked="checked" /></td>
+                    <td>@item.PROCESSO</td>
+                    <td>@item.MARCA</td>
+                    <td>@item.MODELO</td>
+                    <td>@item.PLACA</td>
+                    <td>@item.CHASSI</td>
+                </tr>
+            }
+        }
+
+    </table>
+
+    if (Model != null && Model.Count > 0)
+    {
+        <input type="submit" id="btn_gravar" value="CARREGAR" class="btn btn-primary btn-sm" />
+    }
+}
+
+<script>
+    $("QTDE_LOTES").mask("0#")
+
+    function marcar_desmarcar_tudo(marcar) {
+        var itens = document.getElementsByName('CHECK');
+
+        var i = 0;
+        for (i = 0; i < itens.length; i++) {
+            itens[i].checked = marcar;
+        }
+
+        //habilitar_desabilitar_div_funcoes_grupo();
+
+        //if (marcar) {
+        //    habilitar_desabilitar_div_funcoes_grupo();
+        //}
+    }
+
+    function Aguarde() {
+        //$("#ag").append("Aguarde enquanto os lotes são carregados <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>");
+        $("#btn_carregar").val("AGUARDE");
+        $("#btn_carregar").addClass("disabled");
+        $(".table").empty();
+        //document.getElementById('btn_gravar').remove();
+    }
+</script>

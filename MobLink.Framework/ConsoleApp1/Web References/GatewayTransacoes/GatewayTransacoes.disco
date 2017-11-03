@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://www.linkpatios.com.br/GatewayTransacoes/GatewayTransacoes.asmx?wsdl" docRef="http://www.linkpatios.com.br/GatewayTransacoes/GatewayTransacoes.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://www.linkpatios.com.br/GatewayTransacoes/GatewayTransacoes.asmx" xmlns:q1="http://linkpatios/" binding="q1:GatewayTransacoesSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://www.linkpatios.com.br/GatewayTransacoes/GatewayTransacoes.asmx" xmlns:q2="http://linkpatios/" binding="q2:GatewayTransacoesSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

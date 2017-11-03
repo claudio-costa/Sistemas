@@ -1,0 +1,1367 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<MobLink.WebLeilao.Dominio.Lote>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Listagem dos Lotes - Leilão " + ViewBag.NomeLeilao;
+}
+
+<!--Formulário de cadastro de proprietários-->
+
+@using (Html.BeginForm())
+{
+    <div class="modal fade"
+         id="myModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="myModalLabel"
+         data-backdrop="static">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Dados do Proprietário</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#Proprietario">Proprietário</a></li>
+                        <li><a data-toggle="tab" href="#Arrendatario">Arrendatário</a></li>
+                        <li><a data-toggle="tab" href="#ComunicacaoVenda">Comunicação de Venda</a></li>
+                    </ul>
+
+                    <div class="tab-content form-horizontal">
+
+                        <div id="Proprietario" class="tab-pane fade in active">
+
+                            <br />
+
+                            <input class="form-control input-sm" focus="" id="Id_Lote" name="Id_Lote" type="hidden" />
+
+                            <fieldset>
+                                @*<legend>Dados Pessoais</legend>*@
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="txtNome">Nome</label>
+                                    <div class="col-md-8">
+                                        <input Id="txtNome" class="form-control input-sm" focus="" name="Nome" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtNome" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="txtIdentidade">Identidade</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtIdentidade" class="form-control input-sm" focus="" name="Identidade" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtIdentidade" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-3" for="txtOrgaoExpedidor">Orgão Exped.</label>
+                                    <div class="col-md-2">
+                                        <input Id="txtOrgaoExpedidor" class="form-control input-sm" focus="" name="Orgao_Expedidor" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtOrgaoExpedidor" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="txtCpf">CPF</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtCpf" class="form-control input-sm" focus="" name="Cpf" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtCpf" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-2" for="txtCnpj">CNPJ</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtCnpj" class="form-control input-sm" focus="" name="Cnpj" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtCnpj" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                            </fieldset>
+
+                            <fieldset>
+                                @*<legend>Endereço</legend>*@
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="txtCep">CEP</label>
+                                    <div class="col-md-4">
+                                        <input Id="txtCep" class="form-control input-sm" focus="" name="Cep" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtCep" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="control-label col-md-2" for="txtEndereco">Endereco</label>
+                                    <div class="col-md-6">
+                                        <input Id="txtEndereco" class="form-control input-sm" focus="" name="Endereco" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtEndereco" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-1" for="txtNumero">Nº</label>
+                                    <div class="col-md-2">
+                                        <input Id="txtNumero" class="form-control input-sm" focus="" name="Numero" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtNumero" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="txtComplemento">Complemento</label>
+                                    <div class="col-md-2">
+                                        <input Id="txtComplemento" class="form-control input-sm" focus="" name="Complemento" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtComplemento" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-1" for="txtBairro">Bairro</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtBairro" class="form-control input-sm" focus="" name="Bairro" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtBairro" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-1" for="cbUF">UF</label>
+                                    <div class="col-md-2">
+                                        <select class="form-control input-sm" id="cbUF" data-val="true" data-val-number="The field Comitente must be a number." data-val-required="O campo UF é obrigatório." name="UF">
+                                            <option value="">--</option>
+                                            @*<option value="RJ">RJ</option>
+                                                <option value="SP">SP</option>
+                                                <option value="RS">RS</option>*@
+
+                                            <option value="AC">AC-Acre</option>
+                                            <option value="AL">AL-Alagoas</option>
+                                            <option value="AP">AP-Amapá</option>
+                                            <option value="AM">AM-Amazonas</option>
+                                            <option value="BA">BA-Bahia</option>
+                                            <option value="CE">CE-Ceará</option>
+                                            <option value="DF">DF-Distrito Federal</option>
+                                            <option value="ES">ES-Espírito Santo</option>
+                                            <option value="GO">GO-Goiás</option>
+                                            <option value="MA">MA-Maranhão</option>
+                                            <option value="MT">MT-Mato Grosso</option>
+                                            <option value="MS">MS-Mato Grosso do Sul</option>
+                                            <option value="MG">MG-Minas Gerais</option>
+                                            <option value="PA">PA-Pará</option>
+                                            <option value="PB">PB-Paraíba</option>
+                                            <option value="PR">PR-Paraná</option>
+                                            <option value="PE">PE-Pernambuco</option>
+                                            <option value="PI">PI-Piauí</option>
+                                            <option value="RJ">RJ-Rio de Janeiro</option>
+                                            <option value="RN">RN-Rio Grande do Norte</option>
+                                            <option value="RS">RS-Rio Grande do Sul</option>
+                                            <option value="RO">RO-Rondônia</option>
+                                            <option value="RR">RR-Roraima</option>
+                                            <option value="SC">SC-Santa Catarina</option>
+                                            <option value="SP">SP-São Paulo</option>
+                                            <option value="SE">SE-Sergipe</option>
+                                            <option value="TO">TO-Tocantins</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="field-validation-valid" data-valmsg-for="cbUF" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="txtMunicipio">Município</label>
+                                    <div class="col-md-4">
+                                        <input Id="txtMunicipio" class="form-control input-sm" focus="" name="Municipio" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtMunicipio" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+
+
+                            </fieldset>
+
+                            <div class="form-group">
+
+
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div id="Arrendatario" class="tab-pane fade in">
+
+                            <br />
+
+                            <input class="form-control input-sm" focus="" id="Id_Lote" name="Id_Lote" type="hidden" />
+
+                            <fieldset>
+                                @*<legend>Dados Pessoais</legend>*@
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="txtNomeArrendatario">Nome</label>
+                                    <div class="col-md-8">
+                                        <input Id="txtNomeArrendatario" class="form-control input-sm" focus="" name="Nome_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtNomeArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="txtIdentidade_Arrendatario">Identidade</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtIdentidade_Arrendatario" class="form-control input-sm" focus="" name="Identidade_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtIdentidade_Arrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-3" for="txtOrgaoExpedidorArrendatario">Orgão Exped.</label>
+                                    <div class="col-md-2">
+                                        <input Id="txtOrgaoExpedidorArrendatario" class="form-control input-sm" focus="" name="Orgao_Expedidor_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtOrgaoExpedidorArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="txtCpfArrendatario">CPF</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtCpfArrendatario" class="form-control input-sm" focus="" name="Cpf_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtCpfArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-2" for="txtCnpjArrendatario">CNPJ</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtCnpjArrendatario" class="form-control input-sm" focus="" name="Cnpj_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtCnpjArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                            </fieldset>
+
+                            <fieldset>
+                                @*<legend>Endereço</legend>*@
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="txtCepArrendatario">CEP</label>
+                                    <div class="col-md-4">
+                                        <input Id="txtCepArrendatario" class="form-control input-sm" focus="" name="Cep_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtCepArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="control-label col-md-2" for="txtEnderecoArrendatario">Endereco</label>
+                                    <div class="col-md-6">
+                                        <input Id="txtEnderecoArrendatario" class="form-control input-sm" focus="" name="Endereco_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtEnderecoArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-1" for="txtNumeroArrendatario">Nº</label>
+                                    <div class="col-md-2">
+                                        <input Id="txtNumeroArrendatario" class="form-control input-sm" focus="" name="Numero_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtNumeroArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="txtComplementoArrendatario">Complemento</label>
+                                    <div class="col-md-2">
+                                        <input Id="txtComplementoArrendatario" class="form-control input-sm" focus="" name="Complemento_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtComplementoArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-1" for="txtBairroArrendatario">Bairro</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtBairroArrendatario" class="form-control input-sm" focus="" name="Bairro_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtBairroArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-1" for="cbUFArrendatario">UF</label>
+                                    <div class="col-md-2">
+                                        <select class="form-control input-sm" id="cbUFArrendatario" data-val="true" data-val-number="The field Comitente must be a number." data-val-required="O campo UF é obrigatório." name="UF_Arrendatario">
+                                            <option value="">--</option>
+                                            <option value="AC">AC-Acre</option>
+                                            <option value="AL">AL-Alagoas</option>
+                                            <option value="AP">AP-Amapá</option>
+                                            <option value="AM">AM-Amazonas</option>
+                                            <option value="BA">BA-Bahia</option>
+                                            <option value="CE">CE-Ceará</option>
+                                            <option value="DF">DF-Distrito Federal</option>
+                                            <option value="ES">ES-Espírito Santo</option>
+                                            <option value="GO">GO-Goiás</option>
+                                            <option value="MA">MA-Maranhão</option>
+                                            <option value="MT">MT-Mato Grosso</option>
+                                            <option value="MS">MS-Mato Grosso do Sul</option>
+                                            <option value="MG">MG-Minas Gerais</option>
+                                            <option value="PA">PA-Pará</option>
+                                            <option value="PB">PB-Paraíba</option>
+                                            <option value="PR">PR-Paraná</option>
+                                            <option value="PE">PE-Pernambuco</option>
+                                            <option value="PI">PI-Piauí</option>
+                                            <option value="RJ">RJ-Rio de Janeiro</option>
+                                            <option value="RN">RN-Rio Grande do Norte</option>
+                                            <option value="RS">RS-Rio Grande do Sul</option>
+                                            <option value="RO">RO-Rondônia</option>
+                                            <option value="RR">RR-Roraima</option>
+                                            <option value="SC">SC-Santa Catarina</option>
+                                            <option value="SP">SP-São Paulo</option>
+                                            <option value="SE">SE-Sergipe</option>
+                                            <option value="TO">TO-Tocantins</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="field-validation-valid" data-valmsg-for="cbUFArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="txtMunicipioArrendatario">Município</label>
+                                    <div class="col-md-4">
+                                        <input Id="txtMunicipioArrendatario" class="form-control input-sm" focus="" name="Municipio_Arrendatario" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtMunicipioArrendatario" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+
+
+                            </fieldset>
+
+                            <div class="form-group">
+
+
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div id="ComunicacaoVenda" class="tab-pane fade in">
+
+                            <br />
+
+                            <input class="form-control input-sm" focus="" id="Id_Lote" name="Id_Lote" type="hidden" />
+
+                            <fieldset>
+                                @*<legend>Dados Pessoais</legend>*@
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="txtNomeComunicacaoVenda">Nome</label>
+                                    <div class="col-md-8">
+                                        <input Id="txtNomeComunicacaoVenda" class="form-control input-sm" focus="" name="Nome_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtNomeComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="txtDocumentoComunicacaoVenda">Identidade</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtDocumentoComunicacaoVenda" class="form-control input-sm" focus="" name="Identidade_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtDocumentoComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-3" for="txtOrgaoExpedidorComunicacaoVenda">Orgão Exped.</label>
+                                    <div class="col-md-2">
+                                        <input Id="txtOrgaoExpedidorComunicacaoVenda" class="form-control input-sm" focus="" name="Orgao_Expedidor_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtOrgaoExpedidorComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="txtCpfComunicacaoVenda">CPF</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtCpfComunicacaoVenda" class="form-control input-sm" focus="" name="Cpf_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtCpfComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-2" for="txtCnpjComunicacaoVenda">CNPJ</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtCnpjComunicacaoVenda" class="form-control input-sm" focus="" name="Cnpj_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtCnpjComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                            </fieldset>
+
+                            <fieldset>
+                                @*<legend>Endereço</legend>*@
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="txtCepComunicacaoVenda">CEP</label>
+                                    <div class="col-md-4">
+                                        <input Id="txtCepComunicacaoVenda" class="form-control input-sm" focus="" name="Cep_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtCepComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="control-label col-md-2" for="txtEnderecoComunicacaoVenda">Endereco</label>
+                                    <div class="col-md-6">
+                                        <input Id="txtEnderecoComunicacaoVenda" class="form-control input-sm" focus="" name="Endereco_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtEnderecoComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-1" for="txtNumeroComunicacaoVenda">Nº</label>
+                                    <div class="col-md-2">
+                                        <input Id="txtNumeroComunicacaoVenda" class="form-control input-sm" focus="" name="Numero_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtNumeroComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="txtComplementoComunicacaoVenda">Complemento</label>
+                                    <div class="col-md-2">
+                                        <input Id="txtComplementoComunicacaoVenda" class="form-control input-sm" focus="" name="Complemento_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtComplementoComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-1" for="txtBairroComunicacaoVenda">Bairro</label>
+                                    <div class="col-md-3">
+                                        <input Id="txtBairroComunicacaoVenda" class="form-control input-sm" focus="" name="Bairro_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtBairroComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <label class="control-label col-md-1" for="cbUFComunicacaoVenda">UF</label>
+                                    <div class="col-md-2">
+                                        <select class="form-control input-sm" id="cbUFComunicacaoVenda" data-val="true" data-val-number="The field Comitente must be a number." data-val-required="O campo UF é obrigatório." name="UF_ComunicacaoVenda">
+                                            <option value="">--</option>
+                                            <option value="AC">AC-Acre</option>
+                                            <option value="AL">AL-Alagoas</option>
+                                            <option value="AP">AP-Amapá</option>
+                                            <option value="AM">AM-Amazonas</option>
+                                            <option value="BA">BA-Bahia</option>
+                                            <option value="CE">CE-Ceará</option>
+                                            <option value="DF">DF-Distrito Federal</option>
+                                            <option value="ES">ES-Espírito Santo</option>
+                                            <option value="GO">GO-Goiás</option>
+                                            <option value="MA">MA-Maranhão</option>
+                                            <option value="MT">MT-Mato Grosso</option>
+                                            <option value="MS">MS-Mato Grosso do Sul</option>
+                                            <option value="MG">MG-Minas Gerais</option>
+                                            <option value="PA">PA-Pará</option>
+                                            <option value="PB">PB-Paraíba</option>
+                                            <option value="PR">PR-Paraná</option>
+                                            <option value="PE">PE-Pernambuco</option>
+                                            <option value="PI">PI-Piauí</option>
+                                            <option value="RJ">RJ-Rio de Janeiro</option>
+                                            <option value="RN">RN-Rio Grande do Norte</option>
+                                            <option value="RS">RS-Rio Grande do Sul</option>
+                                            <option value="RO">RO-Rondônia</option>
+                                            <option value="RR">RR-Roraima</option>
+                                            <option value="SC">SC-Santa Catarina</option>
+                                            <option value="SP">SP-São Paulo</option>
+                                            <option value="SE">SE-Sergipe</option>
+                                            <option value="TO">TO-Tocantins</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="field-validation-valid" data-valmsg-for="cbUFComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="txtMunicipioComunicacaoVenda">Município</label>
+                                    <div class="col-md-4">
+                                        <input Id="txtMunicipioComunicacaoVenda" class="form-control input-sm" focus="" name="Municipio_ComunicacaoVenda" type="text" />
+                                        <span class="field-validation-valid" data-valmsg-for="txtMunicipioComunicacaoVenda" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" class="btn btn-primary" value="Gravar" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Formulário de restrições -->
+@Html.Partial("_Restricoes")
+
+<!-- Formulário de restrições -->
+@Html.Partial("_ListaDespesas")
+
+<!-- Formulário de Fotos -->
+<div class="container">
+    <div class="row">
+        <div class="modal" id="ModalFotos">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Fotos do Recolhimento</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div id="resultado">
+
+                                <div class="col-md-3 text-center">
+                                    <img src="../../Images/dentro21.jpg" height="120" width="120" class="thumbnail" alt="">
+                                    <small><b>NOME DA FOTO</b></small>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <img src="../../Images/dentro21.jpg" height="120" width="120" class="thumbnail" alt="">
+                                    <b>NOME DA FOTO</b>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <img src="../../Images/dentro21.jpg" height="120" width="120" class="thumbnail" alt="">
+                                    <b>NOME DA FOTO</b>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>*@
+                        <div class="row text-center">
+                            @*<span id="status_foto" class="text-center"></span>*@
+                            <button id="status_foto" type="button" class="btn btn-default" data-dismiss="modal"></button>
+                        </div>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>
+
+<!-- Formulário de Despesas -->
+@using (Html.BeginForm("GravarDespesas", "Lote"))
+{
+    @*<input type="hidden" id="id_leilao" name="id_leilao" value="@Model.FirstOrDefault().id_leilao" />*@
+    <input type="hidden" id="id_leilao" name="id_leilao" value="@ViewBag.id_leilao" />
+    <input type="hidden" id="id_lote" name="id_lote" value="1" />
+    <input type="hidden" id="valores" name="valores" />
+    <input type="hidden" id="selecionados" name="selecionados" />
+    @Html.Partial("_Despesas")
+
+}
+
+@*<button type="button" class="btn btn-primary btn-xs"
+        onclick='window.location = "@Url.Action("Index", "Lote",
+                                       new
+                                       {
+                                           page = Model.PageNumber,
+
+                                           //FILTROS
+                                           placa = ViewBag.placa,
+                                           chassi = ViewBag.chassi,
+                                           marcamodelo = ViewBag.marcamodelo,
+                                           EstadoLotes = ViewBag.EstadoLotes,
+                                           ExportarExcel = true,
+                                           LocalizadosFisicamente = ViewBag.LocalizadosFisicamente
+                                       })"'>
+
+    <i class="glyphicon glyphicon-list"></i>
+    Exportar lista para Excel
+</button>*@
+
+&nbsp;
+
+@*<button type="button" class="btn btn-primary btn-xs"
+    onclick='window.location = "@Url.Action("AtribuirNumeroLote", "Lote",
+                                       new
+                                       {
+                                           id=Model.FirstOrDefault().id_leilao
+                                       })"'>
+
+    <i class="glyphicon glyphicon-sort-by-order"></i>
+    Gerar sequencial para nº de lote
+</button>
+
+<br /><br />*@
+
+@*Filtros*@
+@using (Html.BeginForm("Index", "Lote", FormMethod.Get))
+{
+    <div class="row">
+
+        <div class="col-md-1">
+            Placa: <input type="text" class="form-control input-sm" placeholder="Digite placa" name="placa" autofocus="" value="@ViewBag.placa" />
+        </div>
+
+        <div class="col-md-2">
+            Chassi: <input type="text" class="form-control input-sm" placeholder="Digite chassi" name="chassi" value="@ViewBag.chassi" />
+        </div>
+
+        <div class="col-md-2">
+            Marca / Modelo: <input type="text" class="form-control input-sm" placeholder="Digite marca/modelo" name="marcamodelo" value="@ViewBag.marcamodelo" />
+        </div>
+
+        <div class="col-md-2">
+            Situação Conferência:
+            <select class="form-control input-sm" name="EstadoLotes">
+
+                @if (ViewBag.EstadoLotes == "X")
+                {
+                    <option value="X" selected="selected">Todos</option>
+                }
+                else
+                {
+                    <option value="X">Todos</option>
+                }
+
+                @if (ViewBag.EstadoLotes == "C")
+                {
+                    <option value="C" selected="selected">Sem Divergência Detran</option>
+                }
+                else
+                {
+                    <option value="C">Sem Divergência Detran</option>
+                }
+
+                @if (ViewBag.EstadoLotes == "D")
+                {
+                    <option value="D" selected="selected">Divergentes Detran</option>
+                }
+                else
+                {
+                    <option value="D">Divergentes Detran</option>
+                }
+                
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            Processo: <input type="text" class="form-control input-sm" placeholder="Digite nº numero_formulario_grv" name="numero_formulario_grv" value="@ViewBag.numero_formulario_grv" />
+        </div>
+
+        <div class="col-md-2">
+            <br />
+            @if (@ViewBag.LocalizadosFisicamente == true)
+                {
+                <input type="checkbox" name="LocalizadosFisicamente" checked="checked" value="true" /><span>&nbsp;Lote Localizado</span>
+            }
+            else
+            {
+                <input type="checkbox" name="LocalizadosFisicamente" value="true" /><span>&nbsp;Lote Localizado</span>
+            }
+        </div>
+
+        
+
+        <br /><input type="submit" class="btn btn-primary btn-sm" value="Consultar" />
+
+    </div>
+}
+
+<br />
+
+<div id="funcoesgrupo" style="display: none; padding-left: 0; padding-right: 0; margin-bottom: 20px">
+
+    <button type="submit" class="btn btn-toolbar btn-xs" data-toggle="modal" data-target="#ModalDespesas">
+        <i class="glyphicon glyphicon-usd"></i>
+        Atribuir Despesas
+    </button>
+
+    &nbsp;&nbsp;&nbsp;
+    <label class="small" id="lbqtdlotes"></label>
+
+</div>
+
+@if (@Model.PageCount > 0)
+{
+
+    <table class="table table-striped small">
+
+
+        <tr>
+            <th>
+                <div class="checkbox-inline">
+                    <input type="checkbox" value="" name="lotes" id="lotes" onclick="marcar_desmarcar_tudo(this.checked)">
+                </div>
+            </th>
+
+            <th>
+                Nº do lote
+
+                <a href='@Url.Action("Index", "Lote", new { page=Model.PageNumber,Ordenacao="NumeroLote", Id = Model.FirstOrDefault().id_leilao })'>
+                    <span class="glyphicon glyphicon-sort text-primary"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Divergências encontradas no lote"></span>
+                </a>
+            </th>
+
+            <th>
+                Processo
+                <a href='@Url.Action("Index", "Lote", new { page=Model.PageNumber,Ordenacao="Processo", Id = Model.FirstOrDefault().id_leilao })'>
+                    <span class="glyphicon glyphicon-sort text-primary"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Divergências encontradas no lote"></span>
+                </a>
+            </th>
+
+            <th>
+                Placa
+                <a href='@Url.Action("Index", "Lote", new { page=Model.PageNumber,Ordenacao="Placa", Id = Model.FirstOrDefault().id_leilao })'>
+                    <span class="glyphicon glyphicon-sort text-primary"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Divergências encontradas no lote"></span>
+                </a>
+            </th>
+
+            <th>
+                Chassi
+                <a href='@Url.Action("Index", "Lote", new { page=Model.PageNumber, Ordenacao="Chassi", Id = Model.FirstOrDefault().id_leilao })'>
+                    <span class="glyphicon glyphicon-sort text-primary"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Divergências encontradas no lote"></span>
+                </a>
+            </th>
+
+            <th>
+                Marca / Modelo
+                <a href='@Url.Action("Index", "Lote", new { page=Model.PageNumber,Ordenacao="MarcaModelo", Id = Model.FirstOrDefault().id_leilao })'>
+                    <span class="glyphicon glyphicon-sort text-primary"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Divergências encontradas no lote"></span>
+                </a>
+            </th>
+
+            <th>
+                Cor
+                <a href='@Url.Action("Index", "Lote", new { page=Model.PageNumber,Ordenacao="Cor", Id = Model.FirstOrDefault().id_leilao })'>
+                    <span class="glyphicon glyphicon-sort text-primary"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Divergências encontradas no lote"></span>
+                </a>
+            </th>
+
+            <th>
+                Tipo
+                <a href='@Url.Action("Index", "Lote", new { page=Model.PageNumber,Ordenacao="TipoVeiculo", Id = Model.FirstOrDefault().id_leilao })'>
+                    <span class="glyphicon glyphicon-sort text-primary"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Divergências encontradas no lote"></span>
+                </a>
+            </th>
+            <th>Lote localizado?</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.HiddenFor(modelItem => item.id_leilao)
+
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value="@item.id" name="lotes" id="lotes" onclick="habilitar_desabilitar_div_funcoes_grupo()">
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numero_lote)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numero_formulario_grv)
+                </td>
+
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(item.placa))
+                    {
+                        if ((item.placa != (string.IsNullOrWhiteSpace(item._placa) ? item.placa : item._placa)))
+                        {
+
+                            <span class="alert-danger" data-toggle="tooltip" data-placement="top" title="@item._placa">@Html.DisplayFor(modelItem => item.placa)</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.placa)
+                        }
+                    }
+                </td>
+
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(item.chassi))
+                    {
+                        if ((item.chassi != (string.IsNullOrWhiteSpace(item._chassi) ? item.chassi : item._chassi)))
+                        {
+                            <span class="alert-danger" data-toggle="tooltip" data-placement="top" title="@item._chassi">@Html.DisplayFor(modelItem => item.chassi)</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.chassi)
+                        }
+                    }
+                </td>
+
+                <td>
+                    @if ((item.marca_modelo != (string.IsNullOrWhiteSpace(item._marca_modelo) ? item.marca_modelo : item._marca_modelo)))
+                    {
+                        <span class="alert-danger" data-toggle="tooltip" data-placement="top" title="@item._marca_modelo">@Html.DisplayFor(modelItem => item.marca_modelo)</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.marca_modelo)
+                    }
+                </td>
+
+                <td>
+                    @if ((item.cor != (string.IsNullOrWhiteSpace(item._cor) ? item.cor : item._cor)))
+                    {
+                        <span class="alert-danger" data-toggle="tooltip" data-placement="top" title="@item._cor">@Html.DisplayFor(modelItem => item.cor)</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.cor)
+                    }
+                </td>
+
+                <td>
+                    @if ((item.tipo_veiculo != (string.IsNullOrWhiteSpace(item._tipo_veiculo) ? item.tipo_veiculo : item._tipo_veiculo)))
+                    {
+
+                        <span class="alert-danger" data-toggle="tooltip" data-placement="top" title="@item._tipo_veiculo">@Html.DisplayFor(modelItem => item.tipo_veiculo)</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.tipo_veiculo)
+                    }
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.situacao_lote)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao_status)
+                </td>
+
+                <td>
+                    @if ((item.placa != (string.IsNullOrWhiteSpace(item._placa) ? item.placa : item._placa)) ||
+                (item.chassi != (string.IsNullOrWhiteSpace(item._chassi) ? item.chassi : item._chassi)) ||
+                (item.tipo_veiculo != (string.IsNullOrWhiteSpace(item._tipo_veiculo) ? item.tipo_veiculo : item._tipo_veiculo)) ||
+                (item.marca_modelo != (string.IsNullOrWhiteSpace(item._marca_modelo) ? item.marca_modelo : item._marca_modelo)) ||
+                (item.cor != (string.IsNullOrWhiteSpace(item._cor) ? item.cor : item._cor)))
+
+                    {
+                        <a href='@Url.Action("Edit", "Lote", new { id = item.id })'>
+                            <span class="glyphicon glyphicon-flag text-primary"
+                                  data-toggle="tooltip" data-placement="top"
+                                  title="Divergências encontradas no lote"></span>
+                        </a>
+
+                        if (string.IsNullOrWhiteSpace(item._placa) ||
+                        string.IsNullOrWhiteSpace(item._chassi) ||
+                        string.IsNullOrWhiteSpace(item._tipo_veiculo) ||
+                        string.IsNullOrWhiteSpace(item._marca_modelo) ||
+                        string.IsNullOrWhiteSpace(item._cor))
+                        {
+                            <a href='@Url.Action("", "", new { id = item.id })'>
+                                <span class="glyphicon glyphicon-ban-circle text-primary" data-toggle="tooltip" data-placement="top" title="consultar serviço externo para refinar as divergências"></span>
+                            </a>
+                        }
+
+                    }
+                    else
+                    {
+                        <a href='@Url.Action("Edit", "Lote", new { id = item.id })'>
+                            <span class="glyphicon glyphicon-flag text-success"></span>
+                        </a>
+                    }
+                </td>
+
+                @*PROPRIETARIOS*@
+                @*<td>
+                    @if (item.Dados_Proprietario == 0)
+                    {
+                        <span data-toggle="tooltip" data-placement="top" title="Dados do Proprietário ausentes ou incompletos">
+                            <span class="glyphicon glyphicon-user text-primary" data-toggle="modal" data-target="#myModal" style="cursor: pointer" data-bind="@item.id"></span>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-user text-success" data-toggle="modal" data-target="#myModal" style="cursor: pointer" data-bind="@item.id"></span>
+                    }
+                </td>*@
+
+                @*FOTOS*@
+                <td>
+                    @if (item.qtd_fotos <= 0)
+                    {
+                        <span data-toggle="tooltip" data-placement="top" title="Fotos do recolhimento">
+                            <span class="glyphicon glyphicon-picture text-danger"></span>
+                        </span>
+                    }
+                    else
+                    {
+                        <span data-toggle="tooltip" data-placement="top" title="Fotos do recolhimento">
+                            <span class="glyphicon glyphicon-picture text-success" data-toggle="modal" data-target="#ModalFotos" style="cursor: pointer" data-bind="@item.id"> (@item.qtd_fotos)</span>
+                        </span>
+                    }
+                </td>
+
+                @*RESTRIÇÕES*@
+                <td>
+                    @if (item.qtd_restricoes <= 0)
+                    {
+                        <span data-toggle="tooltip" data-placement="top" title="Restrições">
+                            <span class="glyphicon glyphicon-exclamation-sign text-danger"></span>
+                        </span>
+                    }
+                    else
+                    {
+                        <span data-toggle="tooltip" data-placement="top" title="Restrições">
+                            <span class="glyphicon glyphicon-exclamation-sign text-success" data-toggle="modal" data-target="#ModalRest" style="cursor: pointer" data-bind="@item.id"></span>
+                        </span>
+                    }
+                </td>
+
+                @*DESPESAS*@
+                <td>
+                    @if (item.qtd_despesas <= 0)
+                    {
+                        <span data-toggle="tooltip" data-placement="top" title="Despesas">
+                            <span class="glyphicon glyphicon-usd text-danger"></span>
+                        </span>
+                    }
+                    else
+                    {
+                        <span data-toggle="tooltip" data-placement="top" title="Despesas">
+                            <span class="glyphicon glyphicon-usd text-success" data-toggle="modal" data-target="#modal_lista_despesas" style="cursor: pointer" data-bind="@item.id"></span>
+                        </span>
+                    }
+                </td>
+
+                @*PRESTAÇÃO DE CONTAS*@
+                <td>
+                    <a href='@Url.Action("RelPCLote", "Lote", new { IdLote = item.id })'>
+                        <span class="glyphicon glyphicon-info-sign text-info"
+                              data-toggle="tooltip" data-placement="top"
+                              title="Prestação de Contas"></span>
+                    </a>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+}
+<br />
+
+@if (@Model.PageCount == 0)
+{
+    <label class="alert-danger">Nenhum resultado encontrado.</label>
+}
+else
+{
+    <p>Página @Model.PageNumber de @Model.PageCount &nbsp;&nbsp;||&nbsp;&nbsp; Quantidade de registros: @ViewBag.qtdregistros</p>
+}
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        id = Model.FirstOrDefault().id_leilao,
+        page = page,
+
+        //FILTROS
+        placa = ViewBag.placa,
+        chassi = ViewBag.chassi,
+        marcamodelo = ViewBag.marcamodelo,
+        EstadoLotes = ViewBag.EstadoLotes,
+        LocalizadosFisicamente = ViewBag.LocalizadosFisicamente
+    }))
+
+
+<script>
+    $('#myModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('bind') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        //modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+
+        PreencheProprietario(recipient)
+    });
+
+    $('#ModalRest').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('bind') // Extract info from data-* attributes
+        var modal = $(this)
+        //modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+
+        $(recipient).each(function () {
+            $("#Resultado").append("Nome: " + recipient["Descricao"] + " <br/>");
+
+        });
+
+        GetRestricoes(recipient)
+    });
+
+    $('#ModalFotos').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('bind') // Extract info from data-* attributes
+        var modal = $(this)
+        //modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+
+        $(recipient).each(function () {
+            $("#Resultado").append("Nome: " + recipient["Descricao"] + " <br/>");
+
+        });
+
+        GetFotos(recipient);
+    });
+
+    $('#ModalDespesas').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('bind') // Extract info from data-* attributes
+        var modal = $(this)
+
+        var selecionados = document.getElementsByName('lotes');
+
+        var tam = selecionados.length;
+
+        var outroteste = "";
+
+        var checkados = new Array();
+        var indice = 0;
+
+        for (k = 0; k < tam; k++) {
+
+            if (selecionados[k].value != "" & selecionados[k].checked) {
+                outroteste = outroteste + selecionados[k].value;
+
+                checkados[indice] = selecionados[k].value;
+                indice = indice + 1;
+            }
+
+            //if (k < tam - 1 & outroteste != "") {
+            //    outroteste = outroteste + ",";
+            //}
+        }
+
+        $("#selecionados").val(outroteste);
+        $("#selecionados").val(checkados);
+    });
+
+    $('#modal_lista_despesas').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('bind') // Extract info from data-* attributes
+        var modal = $(this)
+        //modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+
+        $(recipient).each(function () {
+            $("#lista_despesas").append("Nome: " + recipient["Descricao"] + " <br/>");
+
+        });
+
+        GetDespesas(recipient)
+    });
+
+    $("#txtCpf").mask("999.999.999-99");
+    $("#txtCnpj").mask("99.999.999/9999-99");
+    $("#txtCep").mask("99999-999");
+
+    $("#txtCpfArrendatario").mask("999.999.999-99");
+    $("#txtCnpjArrendatario").mask("99.999.999/9999-99");
+    $("#txtCep").mask("99999-999");
+
+    $("#txtCpfComunicacaoVenda").mask("999.999.999-99");
+    $("#txtCnpjComunicacaoVenda").mask("99.999.999/9999-99");
+    $("#txtCepComunicacaoVenda").mask("99999-999");
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
+    function PreencheProprietario(valor) {
+        $.ajax({
+            url: '@Url.Action("ConsultaProprietario")',
+            data: { IdLote: valor },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            type: "GET",
+            success: function (dados) {
+                $("#Id_Lote").val(valor);
+                //Proprietário
+                $("#txtNome").val(dados.PR.Nome);
+                $("#txtDocumento").val(dados.PR.Documento);
+                $("#txtOrgaoExpedidor").val(dados.PR.Orgao_Expedidor);
+                $("#txtCpf").val(dados.PR.CPF);
+                $("#txtCnpj").val(dados.PR.CNPJ);
+                $("#txtCep").val(dados.PR.CEP);
+                $("#txtEndereco").val(dados.PR.Endereco);
+                $("#txtNumero").val(dados.PR.Numero);
+                $("#txtComplemento").val(dados.PR.Complemento);
+                $("#txtBairro").val(dados.PR.Bairro);
+                $("#cbUF").val(dados.PR.UF);
+                $("#txtMunicipio").val(dados.PR.Municipio);
+                $("#txtIdentidade").val(dados.PR.Identidade);
+                //Arrendatário
+                $("#txtNomeArrendatario").val(dados.PR.Nome_Arrendatario);
+                $("#txtIdentidade_Arrendatario").val(dados.PR.Identidade_Arrendatario);
+                $("#txtOrgaoExpedidorArrendatario").val(dados.PR.Orgao_Expedidor_Arrendatario);
+                $("#txtCpfArrendatario").val(dados.PR.CPF_Arrendatario);
+                $("#txtCnpjArrendatario").val(dados.PR.CNPJ_Arrendatario);
+                $("#txtCepArrendatario").val(dados.PR.CEP_Arrendatario);
+                $("#txtEnderecoArrendatario").val(dados.PR.Endereco_Arrendatario);
+                $("#txtNumeroArrendatario").val(dados.PR.Numero_Arrendatario);
+                $("#txtComplementoArrendatario").val(dados.PR.Complemento_Arrendatario);
+                $("#txtBairroArrendatario").val(dados.PR.Bairro_Arrendatario);
+                $("#cbUFArrendatario").val(dados.PR.UF_Arrendatario);
+                $("#txtMunicipioArrendatario").val(dados.PR.Municipio_Arrendatario);
+                //Comunicação de Venda
+                $("#txtNomeComunicacaoVenda").val(dados.PR.Nome_ComunicacaoVenda);
+                $("#txtDocumentoComunicacaoVenda").val(dados.PR.Documento_ComunicacaoVenda);
+                $("#txtOrgaoExpedidorComunicacaoVenda").val(dados.PR.Orgao_Expedidor_ComunicacaoVenda);
+                $("#txtCpfComunicacaoVenda").val(dados.PR.CPF_ComunicacaoVenda);
+                $("#txtCnpjComunicacaoVenda").val(dados.PR.CNPJ_ComunicacaoVenda);
+                $("#txtCepComunicacaoVenda").val(dados.PR.CEP_ComunicacaoVenda);
+                $("#txtEnderecoComunicacaoVenda").val(dados.PR.Endereco_ComunicacaoVenda);
+                $("#txtNumeroComunicacaoVenda").val(dados.PR.Numero_ComunicacaoVenda);
+                $("#txtComplementoComunicacaoVenda").val(dados.PR.Complemento_ComunicacaoVenda);
+                $("#txtBairroComunicacaoVenda").val(dados.PR.Bairro_ComunicacaoVenda);
+                $("#cbUFComunicacaoVenda").val(dados.PR.UF_ComunicacaoVenda);
+                $("#txtMunicipioComunicacaoVenda").val(dados.PR.Municipio_ComunicacaoVenda);
+
+                $("#cbUFComunicacaoVenda").val(dados.PR.UF_ComunicacaoVenda);
+                $("#txtDocumentoComunicacaoVenda").val(dados.PR.Identidade_ComunicacaoVenda);
+            },
+            error: function () {
+                alert("Erro ao recuperar dados do proprietário!");
+            }
+        });
+    }
+
+
+</script>
+
+<script>
+    function GetFotos(p) {
+        $.ajax({
+            url: '@Url.Action("GetFotos")',
+            //data: { IdLote: $("#txtcep").val() },
+            data: { IdLote: p },
+            type: "post",
+            dataType: "json",
+            beforeSend: function (XMLHttpRequest) {
+                $("#resultado").empty();
+                $("#status_foto").empty();
+                $("#status_foto").append("CARREGANDO");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#status_foto").empty();
+                $("#status_foto").append("ERRO AO RECUPERAR FOTO(s)");
+            },
+            success: function (data, textStatus, XMLHttpRequest) {
+
+                //var item = '';
+                //item = item + '<div class="col-sm-6 col-md-3">';
+                //item = item + '<img src="' + data[0].LinkFoto +'" alt="">';
+                //item = item + '</div>';
+
+
+                //var item = '';
+                //item = item + '<div class="item active">';
+                //item = item + '<img src="' + data[0].LinkFoto + '" />';
+                //item = item + '<div class="carousel-caption">';
+                //item = item + '<h3>' + data[0].Nome_Foto + '</h3>';
+                //item = item + '<p>' + data[0].Observacao + '</p>';
+                //item = item + '</div>';
+                //item = item + '</div>';
+
+                //$("#resultado").append(item);
+
+                for (i = 0; i < data.length; i++) {
+
+
+                    //var item = '';
+                    //item = item + '<div class="item">';
+                    //item = item + '<img src="' + data[i].LinkFoto + '" />';
+                    //item = item + '<div class="carousel-caption">';
+                    //item = item + '<h3>' + data[i].Nome_Foto + '</h3>';
+                    //item = item + '<p>' + data[i].Observacao + '</p>';
+                    //item = item + '</div>';
+                    //item = item + '</div>';
+
+                    try {
+
+                        var item = '';
+                        item = item + '<div class="col-md-3 text-center">';
+                        item = item + '<img src="' + data[i].LinkFoto + '" height=120px width=120px class="thumbnail" alt="">';
+                        item = item + '<small><b>' + data[i].Nome_Foto + '</b></small>';
+                        item = item + '</div>';
+
+
+                        $("#resultado").append(item);
+                    }
+                    catch (err) {
+
+                    }
+
+                }
+
+            },
+            complete: function () {
+                $("#status_foto").empty();
+                $("#status_foto").append("CONCLUIDO");
+            }
+
+        });
+    }
+</script>
+
+<script>
+    function GetRestricoes(p) {
+        $.ajax({
+            url: '@Url.Action("GetRestricoes")',
+            data: { IdLote: p },
+            type: "post",
+            dataType: "json",
+            beforeSend: function (XMLHttpRequest) {
+                $("#msg_processamento").empty();
+                $("#msg_processamento").append("AGUARDE!");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //$("#status_foto").empty();
+                //$("#status_foto").append(" - ERRO AO RECUPERAR FOTO(s)");
+            },
+            success: function (data, textStatus, XMLHttpRequest) {
+
+                $("#res_restricao").empty();
+
+                for (i = 0; i < data.length; i++) {
+
+                    $("#res_restricao").append(data[i].restricao + ", ORIGEM: " + data[i].origem);
+                    $("#res_restricao").append('<br />');
+                }
+
+                
+            },
+            complete: function () {
+                $("#msg_processamento").empty();
+            }
+
+        });
+    }
+</script>
+
+<script>
+    function GetDespesas(p) {
+        $.ajax({
+            url: '@Url.Action("GetDespesas")',
+            data: { IdLote: p },
+            type: "post",
+            dataType: "json",
+            beforeSend: function (XMLHttpRequest) {
+                //$("#resultado").empty();
+                //$("#status_foto").empty();
+                //$("#status_foto").append(" - AGUARDE");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //$("#status_foto").empty();
+                //$("#status_foto").append(" - ERRO AO RECUPERAR FOTO(s)");
+            },
+            success: function (data, textStatus, XMLHttpRequest) {
+
+                $("#lista_despesas").empty();
+
+                for (i = 0; i < data.length; i++) {
+
+                    $("#lista_despesas").append(data[i].DescricaoDespesa);
+                    $("#lista_despesas").append("         ");
+                    $("#lista_despesas").append(numberParaReal(data[i].Valor));
+                    $("#lista_despesas").append('<br />');
+                }
+
+            },
+            complete: function () {
+                //$("#status_foto").empty();
+                //$("#status_foto").append(" - CONCLUIDO");
+            }
+
+        });
+    }
+
+    function numberParaReal(numero) {
+        var numero = numero.toFixed(2).split('.');
+        numero[0] = "R$ " + numero[0].split(/(?=(?:...)*$)/).join('.');
+        return numero.join(',');
+    }
+</script>
+
+@*habilitar_desabilitar_div_funcoes_grupo*@
+<script>
+    function habilitar_desabilitar_div_funcoes_grupo() {
+
+        //verifico se existe algum item marcado
+        var itens = document.getElementsByName('lotes');
+
+        var marcado = false;
+        var counter = 0;
+
+
+        var i = 0;
+        for (i = 0; i < itens.length; i++) {
+
+            if (itens[i].checked & itens[i].value != "") {
+                marcado = true;
+
+                counter++;
+            }
+        }
+
+        document.getElementById("lbqtdlotes").innerText = counter + " lote(s) marcado(s).";
+
+        if (marcado) {
+            document.getElementById("funcoesgrupo").style.display = "block";
+        }
+        else {
+            document.getElementById("funcoesgrupo").style.display = "none";
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function marcar_desmarcar_tudo(marcar) {
+        var itens = document.getElementsByName('lotes');
+
+        var i = 0;
+        for (i = 0; i < itens.length; i++) {
+            itens[i].checked = marcar;
+        }
+
+        habilitar_desabilitar_div_funcoes_grupo();
+
+        if (marcar) {
+            habilitar_desabilitar_div_funcoes_grupo();
+        }
+
+    }
+</script>

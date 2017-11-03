@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="BoletoBradesco">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="boleto" type="tns:BoletoBradesco" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BoletoBradesco">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="vencimento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="valor_boleto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_nossoNumeroBoleto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_codigo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_cpfCnpj" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_agencia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_conta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_digitoConta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_cpfCnpj" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_endereco" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_bairro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_cidade" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_cep" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_uf" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="carteira" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BoletoBradescoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BoletoBradescoResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BoletoBancos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="boleto" type="tns:BoletoTodos" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BoletoTodos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id_lote" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="vencimento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="valor_boleto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_nossoNumeroBoleto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_codigo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_cpfCnpj" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_agencia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_conta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_digitoConta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_cpfCnpj" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_endereco" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_bairro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_cidade" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_cep" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_uf" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="carteira" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="banco" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="convenio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="instrucoes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lotes" type="tns:LeilaoLotes" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LeilaoLotes">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="leilao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lotes" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BoletoBancosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BoletoBancosResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BoletoBancosRetornoLinha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="boleto" type="tns:BoletoTodos" />
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isdev" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BoletoBancosRetornoLinhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BoletoBancosRetornoLinhaResult" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="linha" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="linha_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FaturaConcessionaria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="boleto" type="tns:BoletoConcessionaria" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BoletoConcessionaria">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="identificacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="segmento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="moeda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="valor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="empresa_orgao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nosso_numero" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="desc_servico" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dados" type="tns:BoletoTodos" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FaturaConcessionariaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FaturaConcessionariaResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BoletoBancosRemessa">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="boleto" type="tns:BoletoTodos" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BoletoBancosRemessaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BoletoBancosRemessaResult" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="remessa_retorno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BoletoCaixa">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="boleto" type="tns:BoletoCaixa" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BoletoCaixa">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="vencimento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="valor_boleto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_nossoNumeroBoleto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_codigo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_cpfCnpj" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_agencia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_conta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedente_digitoConta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_cpfCnpj" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_endereco" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_bairro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_cidade" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_cep" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sacado_uf" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BoletoCaixaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BoletoCaixaResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="BoletoBradescoSoapIn">
+    <wsdl:part name="parameters" element="tns:BoletoBradesco" />
+  </wsdl:message>
+  <wsdl:message name="BoletoBradescoSoapOut">
+    <wsdl:part name="parameters" element="tns:BoletoBradescoResponse" />
+  </wsdl:message>
+  <wsdl:message name="BoletoBancosSoapIn">
+    <wsdl:part name="parameters" element="tns:BoletoBancos" />
+  </wsdl:message>
+  <wsdl:message name="BoletoBancosSoapOut">
+    <wsdl:part name="parameters" element="tns:BoletoBancosResponse" />
+  </wsdl:message>
+  <wsdl:message name="BoletoBancosRetornoLinhaSoapIn">
+    <wsdl:part name="parameters" element="tns:BoletoBancosRetornoLinha" />
+  </wsdl:message>
+  <wsdl:message name="BoletoBancosRetornoLinhaSoapOut">
+    <wsdl:part name="parameters" element="tns:BoletoBancosRetornoLinhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="FaturaConcessionariaSoapIn">
+    <wsdl:part name="parameters" element="tns:FaturaConcessionaria" />
+  </wsdl:message>
+  <wsdl:message name="FaturaConcessionariaSoapOut">
+    <wsdl:part name="parameters" element="tns:FaturaConcessionariaResponse" />
+  </wsdl:message>
+  <wsdl:message name="BoletoBancosRemessaSoapIn">
+    <wsdl:part name="parameters" element="tns:BoletoBancosRemessa" />
+  </wsdl:message>
+  <wsdl:message name="BoletoBancosRemessaSoapOut">
+    <wsdl:part name="parameters" element="tns:BoletoBancosRemessaResponse" />
+  </wsdl:message>
+  <wsdl:message name="BoletoCaixaSoapIn">
+    <wsdl:part name="parameters" element="tns:BoletoCaixa" />
+  </wsdl:message>
+  <wsdl:message name="BoletoCaixaSoapOut">
+    <wsdl:part name="parameters" element="tns:BoletoCaixaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WsBoletoSoap">
+    <wsdl:operation name="BoletoBradesco">
+      <wsdl:input message="tns:BoletoBradescoSoapIn" />
+      <wsdl:output message="tns:BoletoBradescoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BoletoBancos">
+      <wsdl:input message="tns:BoletoBancosSoapIn" />
+      <wsdl:output message="tns:BoletoBancosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BoletoBancosRetornoLinha">
+      <wsdl:input message="tns:BoletoBancosRetornoLinhaSoapIn" />
+      <wsdl:output message="tns:BoletoBancosRetornoLinhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FaturaConcessionaria">
+      <wsdl:input message="tns:FaturaConcessionariaSoapIn" />
+      <wsdl:output message="tns:FaturaConcessionariaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BoletoBancosRemessa">
+      <wsdl:input message="tns:BoletoBancosRemessaSoapIn" />
+      <wsdl:output message="tns:BoletoBancosRemessaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BoletoCaixa">
+      <wsdl:input message="tns:BoletoCaixaSoapIn" />
+      <wsdl:output message="tns:BoletoCaixaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WsBoletoSoap" type="tns:WsBoletoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BoletoBradesco">
+      <soap:operation soapAction="http://tempuri.org/BoletoBradesco" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BoletoBancos">
+      <soap:operation soapAction="http://tempuri.org/BoletoBancos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BoletoBancosRetornoLinha">
+      <soap:operation soapAction="http://tempuri.org/BoletoBancosRetornoLinha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FaturaConcessionaria">
+      <soap:operation soapAction="http://tempuri.org/FaturaConcessionaria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BoletoBancosRemessa">
+      <soap:operation soapAction="http://tempuri.org/BoletoBancosRemessa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BoletoCaixa">
+      <soap:operation soapAction="http://tempuri.org/BoletoCaixa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WsBoletoSoap12" type="tns:WsBoletoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BoletoBradesco">
+      <soap12:operation soapAction="http://tempuri.org/BoletoBradesco" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BoletoBancos">
+      <soap12:operation soapAction="http://tempuri.org/BoletoBancos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BoletoBancosRetornoLinha">
+      <soap12:operation soapAction="http://tempuri.org/BoletoBancosRetornoLinha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FaturaConcessionaria">
+      <soap12:operation soapAction="http://tempuri.org/FaturaConcessionaria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BoletoBancosRemessa">
+      <soap12:operation soapAction="http://tempuri.org/BoletoBancosRemessa" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BoletoCaixa">
+      <soap12:operation soapAction="http://tempuri.org/BoletoCaixa" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WsBoleto">
+    <wsdl:port name="WsBoletoSoap" binding="tns:WsBoletoSoap">
+      <soap:address location="http://179.107.47.90:8088/wsboleto.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WsBoletoSoap12" binding="tns:WsBoletoSoap12">
+      <soap12:address location="http://179.107.47.90:8088/wsboleto.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

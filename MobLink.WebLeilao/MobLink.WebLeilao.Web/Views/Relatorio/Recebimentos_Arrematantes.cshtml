@@ -1,0 +1,93 @@
+﻿@model List<MobLink.WebLeilao.Dominio.ArrematantePagamento>
+
+@{
+
+    List<SelectListItem> opcoes = new List<SelectListItem>();
+    opcoes.Add(new SelectListItem() { Text = "Hoje", Value = "0" });
+    opcoes.Add(new SelectListItem() { Text = "Últimos 7 dias", Value = "1" });
+    opcoes.Add(new SelectListItem() { Text = "Este mês", Value = "2" });
+    SelectList ListaOpcoes = new SelectList(opcoes, "Value", "Text");
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-4">
+            @Html.DropDownList("OPCAO", ListaOpcoes, "* SELECIONE A FAIXA DE PESQUISA *", new { @class = "form-control input-sm" })
+        </div>
+
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-primary btn-sm" value="Filtrar" />
+        </div>
+
+        @Model.Count Registro(s) Encontrado(s).
+
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-success btn-sm" name="excel" value="1">Exportar para Excel</button>
+            <button type="submit" class="btn btn-danger btn-sm" disabled="" name="pdf" value="1">Exportar para Pdf</button>
+        </div>
+
+    </div>
+
+
+    @*<div class="dropdown">
+            <a id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-xs">
+                <span class="glyphicon glyphicon-option-vertical text-primary"></span>
+                <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dLabel">
+                <li>@Html.ActionLink("Hoje", "Recebimentos_Arrematantes", "Relatorio", null, new { @class = "small" })</li>
+                <li>@Html.ActionLink("Últimos 7 dias", "Recebimentos_Arrematantes", "Relatorio", new { @class = "small" })</li>
+                <li>@Html.ActionLink("Este mês", "Recebimentos_Arrematantes", "Relatorio", new { @class = "small" })</li>
+
+
+                @*<li class="divider"></li>
+                    <li>@Html.ActionLink("Editar leilão", "Edit", new { id = 0 }, new { @class = "small" })</li>
+                    <li><input type="date" /></li>
+            </ul>
+        </div>*@
+
+    <br />
+
+    <table class="table table-striped small table-hover table-condensed">
+        <tr>
+            <th>#</th>
+            <th>Data emissão</th>
+            <th>Vencimento</th>
+            <th>Data pagamento</th>
+            <th>Lote</th>
+            <th>Avaliação</th>
+            <th>Arrematação</th>
+            <th>Taxa admin.</th>
+            <th>Comissão</th>
+            <th>Taxa bancária</th>
+            <th>valor pago</th>
+            <th>Arrematante</th>
+        </tr>
+
+        @foreach (var item in Model)
+                {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.id_boleto)</td>
+                <td>@Html.DisplayFor(modelItem => item.data_documento)</td>
+                <td>@Html.DisplayFor(modelItem => item.boleto_vencimento)</td>
+                <td>@Html.DisplayFor(modelItem => item.data_credito_boleto)</td>
+                <td>@Html.DisplayFor(modelItem => item.lote_leilao)</td>
+                <td>@string.Format("{0:C}", decimal.Parse(string.IsNullOrEmpty(item.valor_avaliacao) ? "0,00" : item.valor_avaliacao))</td>
+                <td>@string.Format("{0:C}", decimal.Parse(string.IsNullOrEmpty(item.valor_arrematacao) ? "0,00" : item.valor_arrematacao))</td>
+                <td>@string.Format("{0:C}", decimal.Parse(string.IsNullOrEmpty(item.taxa_administrativa) ? "0,00" : item.taxa_administrativa))</td>
+                <td>@string.Format("{0:C}", decimal.Parse(string.IsNullOrEmpty(item.comissao) ? "0,00" : item.comissao)) (@item.taxa_comissao_leiloeiro%)</td>
+                <td>@string.Format("{0:C}", decimal.Parse(string.IsNullOrEmpty(item.taxa_bancaria) ? "0,00" : item.taxa_bancaria))</td>
+                <td>@string.Format("{0:C}", decimal.Parse(string.IsNullOrEmpty(item.valor_pago) ? "0,00" : item.valor_pago))</td>
+                <td>@item.sacado_cpfcnpj - @item.sacado_nome)</td>
+
+
+
+
+            </tr>
+        }
+
+    </table>
+}

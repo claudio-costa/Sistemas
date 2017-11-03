@@ -1,0 +1,38 @@
+﻿<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">Informações do processo</h3>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                @*<h4>Informações do Veículo</h4><hr />*@
+
+                <div class="col-md-2 col-sm-2">
+                    <span>Formulário GRV:</span><br />
+                    <span>Placa:</span><br />
+                    @*<span>Renavam:</span><br />*@
+                    <span>Chassi:</span><br />
+                    <span>Marca/Modelo:</span><br />
+                    <span>Tipo de Veículo:</span><br />
+                    <span>Data/Hora Guarda:</span><br />
+                    <span>Pátio destino:</span>
+                </div>
+
+                <div class="col-md-10 col-sm-10">
+                    <code id="lblTipoVeiculo">@ViewBag.numero_formulario_grv</code><br />
+                    <code id="lblPlaca">@ViewBag.placa</code><br />
+                    @*<code id="lblRenavam">@ViewBag.renavam</code><br />*@
+                    <code id="lblChassi">@ViewBag.chassi</code><br />
+                    <code id="lblMarcaModelo">@ViewBag.marcaModeloDesc</code><br />
+                    <code id="lblTipoVeiculo">@ViewBag.tipoVeiculoDesc</code><br />
+                    <code id="lblTipoVeiculo">@ViewBag.data_hora_guarda</code><br />
+                    <code>@ViewBag.deposito</code><br />
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

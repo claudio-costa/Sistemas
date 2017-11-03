@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="InclusaoVeiculoPatio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="veiculo" type="tns:Veiculoinclusao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Veiculoinclusao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="chassi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="uf" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numerogrve" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="datarecolhimento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="horarecolhimento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="classificacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="usoreboque" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dataguarda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="horaguarda" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="codigopatio" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="operador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroSerie" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CodMulta" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreviaDescricaoVistoria" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InclusaoVeiculoPatioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InclusaoVeiculoPatioResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarVeiculosPatio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="veiculo" type="tns:VeiculoConsultaPatio" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VeiculoConsultaPatio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="operador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="chassi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="somenteMultasRenainf" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="somenteAptosLeilao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="somenteEstadoVeiculo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsultarVeiculosPatioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultarVeiculosPatioResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LiberarVeiculoPatio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="veiculo" type="tns:VeiculoLiberacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VeiculoLiberacao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="chassi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipodocumentoliberador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cpfcnpjliberador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dataliberacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="horaliberacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="motivoliberacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="operador" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LiberarVeiculoPatioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LiberarVeiculoPatioResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CadastrarVistoria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="veiculo" type="tns:VeiculoVistoria" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VeiculoVistoria">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="chassi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="estadoVeiculo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="operador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Observacao" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CadastrarVistoriaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CadastrarVistoriaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CadastrarExtratoLeilao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="veiculo" type="tns:VeiculoSaidaLeilao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VeiculoSaidaLeilao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="chassi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descricaoLeilao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dataLeilao" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="tipoDocumentoLeiloeiro" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="cpfCnpjLeiloeiro" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="tipoDocumentoArrematante" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="cpfCnpjArrematante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nomeArrematante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="enderecoArrematante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroEndArrematante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="bairroEndArrematante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ufEndArrematante" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="codigoMunicipioArrematante" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="cepEndArrematante" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="numeroNotaFiscal" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="dataNotaFiscal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="valorNotaFiscal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="renavam" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="diarioOficial" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dataDiarioOficial" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="operador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="observacao" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CadastrarExtratoLeilaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CadastrarExtratoLeilaoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarPendenciasLiberacaoVeiculo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="veiculo" type="tns:VeiculoPendenciaLiberacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VeiculoPendenciaLiberacao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="chassi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="operador" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="tipoDocLiberador" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="documentoLiberador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroGuiaRecolhimento" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsultarPendenciasLiberacaoVeiculoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultarPendenciasLiberacaoVeiculoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarVeiculoParaLeilao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="veiculo" type="tns:VeiculoLeilao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VeiculoLeilao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="chassi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="operador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="uf" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsultarVeiculoParaLeilaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultarVeiculoParaLeilaoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarCodigosMunicipios">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="veiculo" type="tns:Municipios" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Municipios">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Operador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Uf" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsultarCodigosMunicipiosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultarCodigosMunicipiosResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarVeiculo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operador" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarVeiculoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultarVeiculoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarVeiculoClasse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operador" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarVeiculoClasseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultarVeiculoClasseResult" type="tns:VeiculoConsultaRetorno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VeiculoConsultaRetorno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Retorno" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnoFabricacao" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnoModelo" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnoUltimaLicenca" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CapacidadeCarga" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CapacidadePassageiros" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ChassiRemarcado" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroRenavam" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Chassi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Classificacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoCategoria" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescricaoCategoria" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescricaoCor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescricaoMarca" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescricaoTipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InformacaoRoubo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PesoBrutoTotal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RestricaoEstelionato" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Uf" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RestricoesAdministrativas" type="tns:ArrayOfAnyType" />
+          <s:element minOccurs="0" maxOccurs="1" name="RestricoesJuridicas" type="tns:ArrayOfRestricoesJuridica" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAnyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRestricoesJuridica">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RestricoesJuridica" nillable="true" type="tns:RestricoesJuridica" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RestricoesJuridica">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Codigo" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Restricao" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InclusaoVeiculoPatioSoapIn">
+    <wsdl:part name="parameters" element="tns:InclusaoVeiculoPatio" />
+  </wsdl:message>
+  <wsdl:message name="InclusaoVeiculoPatioSoapOut">
+    <wsdl:part name="parameters" element="tns:InclusaoVeiculoPatioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarVeiculosPatioSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarVeiculosPatio" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarVeiculosPatioSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarVeiculosPatioResponse" />
+  </wsdl:message>
+  <wsdl:message name="LiberarVeiculoPatioSoapIn">
+    <wsdl:part name="parameters" element="tns:LiberarVeiculoPatio" />
+  </wsdl:message>
+  <wsdl:message name="LiberarVeiculoPatioSoapOut">
+    <wsdl:part name="parameters" element="tns:LiberarVeiculoPatioResponse" />
+  </wsdl:message>
+  <wsdl:message name="CadastrarVistoriaSoapIn">
+    <wsdl:part name="parameters" element="tns:CadastrarVistoria" />
+  </wsdl:message>
+  <wsdl:message name="CadastrarVistoriaSoapOut">
+    <wsdl:part name="parameters" element="tns:CadastrarVistoriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="CadastrarExtratoLeilaoSoapIn">
+    <wsdl:part name="parameters" element="tns:CadastrarExtratoLeilao" />
+  </wsdl:message>
+  <wsdl:message name="CadastrarExtratoLeilaoSoapOut">
+    <wsdl:part name="parameters" element="tns:CadastrarExtratoLeilaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarPendenciasLiberacaoVeiculoSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarPendenciasLiberacaoVeiculo" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarPendenciasLiberacaoVeiculoSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarPendenciasLiberacaoVeiculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarVeiculoParaLeilaoSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarVeiculoParaLeilao" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarVeiculoParaLeilaoSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarVeiculoParaLeilaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarCodigosMunicipiosSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarCodigosMunicipios" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarCodigosMunicipiosSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarCodigosMunicipiosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarVeiculoSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarVeiculo" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarVeiculoSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarVeiculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarVeiculoClasseSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarVeiculoClasse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarVeiculoClasseSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarVeiculoClasseResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WSPatioxDetranSoap">
+    <wsdl:operation name="InclusaoVeiculoPatio">
+      <wsdl:input message="tns:InclusaoVeiculoPatioSoapIn" />
+      <wsdl:output message="tns:InclusaoVeiculoPatioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculosPatio">
+      <wsdl:input message="tns:ConsultarVeiculosPatioSoapIn" />
+      <wsdl:output message="tns:ConsultarVeiculosPatioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LiberarVeiculoPatio">
+      <wsdl:input message="tns:LiberarVeiculoPatioSoapIn" />
+      <wsdl:output message="tns:LiberarVeiculoPatioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarVistoria">
+      <wsdl:input message="tns:CadastrarVistoriaSoapIn" />
+      <wsdl:output message="tns:CadastrarVistoriaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarExtratoLeilao">
+      <wsdl:input message="tns:CadastrarExtratoLeilaoSoapIn" />
+      <wsdl:output message="tns:CadastrarExtratoLeilaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarPendenciasLiberacaoVeiculo">
+      <wsdl:input message="tns:ConsultarPendenciasLiberacaoVeiculoSoapIn" />
+      <wsdl:output message="tns:ConsultarPendenciasLiberacaoVeiculoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculoParaLeilao">
+      <wsdl:input message="tns:ConsultarVeiculoParaLeilaoSoapIn" />
+      <wsdl:output message="tns:ConsultarVeiculoParaLeilaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarCodigosMunicipios">
+      <wsdl:input message="tns:ConsultarCodigosMunicipiosSoapIn" />
+      <wsdl:output message="tns:ConsultarCodigosMunicipiosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculo">
+      <wsdl:input message="tns:ConsultarVeiculoSoapIn" />
+      <wsdl:output message="tns:ConsultarVeiculoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculoClasse">
+      <wsdl:input message="tns:ConsultarVeiculoClasseSoapIn" />
+      <wsdl:output message="tns:ConsultarVeiculoClasseSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSPatioxDetranSoap" type="tns:WSPatioxDetranSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InclusaoVeiculoPatio">
+      <soap:operation soapAction="http://tempuri.org/InclusaoVeiculoPatio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculosPatio">
+      <soap:operation soapAction="http://tempuri.org/ConsultarVeiculosPatio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LiberarVeiculoPatio">
+      <soap:operation soapAction="http://tempuri.org/LiberarVeiculoPatio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarVistoria">
+      <soap:operation soapAction="http://tempuri.org/CadastrarVistoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarExtratoLeilao">
+      <soap:operation soapAction="http://tempuri.org/CadastrarExtratoLeilao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarPendenciasLiberacaoVeiculo">
+      <soap:operation soapAction="http://tempuri.org/ConsultarPendenciasLiberacaoVeiculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculoParaLeilao">
+      <soap:operation soapAction="http://tempuri.org/ConsultarVeiculoParaLeilao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarCodigosMunicipios">
+      <soap:operation soapAction="http://tempuri.org/ConsultarCodigosMunicipios" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculo">
+      <soap:operation soapAction="http://tempuri.org/ConsultarVeiculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculoClasse">
+      <soap:operation soapAction="http://tempuri.org/ConsultarVeiculoClasse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSPatioxDetranSoap12" type="tns:WSPatioxDetranSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InclusaoVeiculoPatio">
+      <soap12:operation soapAction="http://tempuri.org/InclusaoVeiculoPatio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculosPatio">
+      <soap12:operation soapAction="http://tempuri.org/ConsultarVeiculosPatio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LiberarVeiculoPatio">
+      <soap12:operation soapAction="http://tempuri.org/LiberarVeiculoPatio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarVistoria">
+      <soap12:operation soapAction="http://tempuri.org/CadastrarVistoria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarExtratoLeilao">
+      <soap12:operation soapAction="http://tempuri.org/CadastrarExtratoLeilao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarPendenciasLiberacaoVeiculo">
+      <soap12:operation soapAction="http://tempuri.org/ConsultarPendenciasLiberacaoVeiculo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculoParaLeilao">
+      <soap12:operation soapAction="http://tempuri.org/ConsultarVeiculoParaLeilao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarCodigosMunicipios">
+      <soap12:operation soapAction="http://tempuri.org/ConsultarCodigosMunicipios" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculo">
+      <soap12:operation soapAction="http://tempuri.org/ConsultarVeiculo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVeiculoClasse">
+      <soap12:operation soapAction="http://tempuri.org/ConsultarVeiculoClasse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSPatioxDetran">
+    <wsdl:port name="WSPatioxDetranSoap" binding="tns:WSPatioxDetranSoap">
+      <soap:address location="http://179.107.47.90:94/WSPatioxDetran.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSPatioxDetranSoap12" binding="tns:WSPatioxDetranSoap12">
+      <soap12:address location="http://179.107.47.90:94/WSPatioxDetran.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

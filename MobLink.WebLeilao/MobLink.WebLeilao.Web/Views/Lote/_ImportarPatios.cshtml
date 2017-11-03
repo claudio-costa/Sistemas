@@ -1,0 +1,145 @@
+﻿@model IEnumerable<MobLink.WebLeilao.Dominio.GRV>
+
+
+@*<div id="carregando" class="center">
+        <img src="http://goo.gl/prjII7" width="150" height="70" />
+    </div>*@
+
+<div id="conteudo">
+    @if (Model != null && Model.Count() > 0)
+    {
+        <table class="table table-striped small">
+            <tr>
+                <th style="text-align: center">
+                    <input id="idAll" type="checkbox" name="nameAll" />
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.numero_formulario_grv)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.placa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.chassi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.marca_modelo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tipo_veiculo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cor)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.status)
+                </th>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.data_hora_remocao)
+                </th>
+
+
+                <th></th>
+            </tr>
+
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align: center">
+                            <input type="checkbox" name="marcados" value="@item.id_grv" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numero_formulario_grv)
+                            @*@Html.HiddenFor(modelItem => item.numero_formulario_grv)*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.placa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.chassi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.marca_modelo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tipo_veiculo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cor)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.status)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.data_hora_remocao)
+                        </td>
+
+                        <td></td>
+
+                    </tr>
+                }
+            }
+
+
+
+        </table>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h6>@Model.Count() Registro(s) Encontrado(s).</h6>
+            </div>
+            <div class="col-md-6 text-right">
+                <input type="submit" value="Importar" class="btn btn-default" id="btImportar" />
+            </div>
+        </div>
+
+
+    }
+    else
+    {
+        <span>Nenhum lote encontrado</span>
+    }
+</div>
+
+<script>
+    $(function () {
+        $('#idAll').click(function () {
+            var val = this.checked;
+            $('input[name=marcados]').each(function () {
+                $(this).prop('checked', val);
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btImportar").click(function (event) {
+
+            $("#btImportar").attr("disabled", "disabled");
+
+            $.ajax({
+                url: '@Url.Action("ImportarPatios")',
+                //data: { "cliente": idCliente, "deposito": idDeposito, "numLotes": $("#txtNumLotes").val(), "numDias": $("#txtNumDias").val(), "cbl": $("#cbl").val() },
+                //data: { "cliente": $("#cliente").val(), "deposito": idDeposito, "numLotes": $("#txtNumLotes").val(), "numDias": $("#txtNumDias").val(), "cbl": $("#cbl").val(), "data": $("#data_execucao").text() },
+
+                success: function (data) {
+                    $("#divGridProdutos").html(data);
+
+                }
+            });
+
+            $("#btImportar").removeAttr("disabled");
+        });
+    });
+
+
+</script>
+

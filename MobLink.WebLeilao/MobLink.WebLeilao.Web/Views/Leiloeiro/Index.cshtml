@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MobLink.WebLeilao.Dominio.Leiloeiro>
+
+@{
+    ViewBag.Title = "Leiloeiros";
+}
+
+<p>
+    @Html.ActionLink("Novo", "Create")
+</p>
+<table class="table table-striped small table-hover table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Hora_Cadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comissao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Orgao_Vinculado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Usuario_Cadastro)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Hora_Cadastro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comissao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Orgao_Vinculado)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Id_Usuario_Cadastro)*@
+            @Html.DisplayFor(modelItem => item.NomeUsuarioCadastro)
+        </td>
+        <td>
+            @Html.ActionLink("EDITAR", "", new { id=item.Id })
+        </td>
+        <td>
+            @Html.ActionLink("EXCLUIR", "", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

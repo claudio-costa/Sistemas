@@ -1,0 +1,57 @@
+﻿@{
+    var Notificacoes = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Notificacao.SelecionarTudo();
+}
+
+
+<div class="modal fade" id="modal_inserir_notificacao" tabindex="-1" role="dialog" aria-labelledby="modal_inserir_notificacao">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Inserir Notificação</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <span class="input-group-addon">Notificação</span>
+                            <select name="notificacao" class="form-control">
+
+                                @foreach (var item in Notificacoes)
+                                {
+                                    <option value="@item.id">@item.descricao</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                @*<input type="hidden" id="id" name="id_leilao" />*@
+                <input type="hidden" id="id_leilao" name="id_leilao" />
+
+            </div>
+            <div class="modal-footer">
+                @Html.Partial("../_GravarCancelar") 
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#modal_inserir_notificacao').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        
+        //var modal = $(this)
+        
+        //modal.find('.modal-body input').val(recipient)
+
+        $('#notificacao').val(recipient);
+
+    })
+
+</script>

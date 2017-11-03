@@ -1,0 +1,115 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Services;
+using System.Web.Helpers;
+
+namespace WebPatios.Dashboard.Controllers
+{
+    public class usuario
+    {
+        public string nomeUsuario { get; set; }
+        public string senha { get; set; }
+    }
+
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            ViewBag.Title="Dashboard";
+            //var cliente = new Business.ClienteBLL().getDadosCliente();
+            //ViewBag.NomeCliente = cliente.nome + string.Concat(", DEPÓSITO ", (cliente).depositos.FirstOrDefault().nome);
+
+            var dash = new Business.DashboardBLL();
+
+            ViewBag.Infracoes = dash.getInfracoes();
+            ViewBag.ResumoPeriodico = dash.getResumoPeriodico();
+            ViewBag.TicketMedio = dash.getTicketMedio();
+            ViewBag.TaxaLiberacao = dash.getTaxaLiberacao();            
+
+            return View();
+        }
+
+        public ActionResult Analytics()
+        {
+            ViewBag.Title = "Dashboard - Pátio Público";
+
+            //var testes = new Business.DashboardBLL().getEntradasAnalitico("");
+
+            return View();
+        }
+
+        [WebMethod]
+        public string testes(usuario user)
+        {
+            return "OK";
+        }
+
+        public ActionResult getGraficoDB()
+        {
+            //var dados = new Business.DashboardBLL().getEntradasGrafico();
+
+            //var myChart = new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
+            // .AddTitle("Os 5 Produtos Vendidos")
+            // .DataBindTable(dataSource: dados, xField: "descricaoDivisao")
+            // .Write("png");
+
+            return null;
+        }
+
+        public ActionResult getGraficoEntradas()
+        {
+            //var dados = new Business.DashboardBLL().getEntradas("");
+
+            //var myChart = new Chart(width: 900, height: 400, theme: ChartTheme.Green)
+            // .AddTitle("Entradas")
+            // .DataBindTable(dataSource: dados, xField: "descricaoDivisao")
+            // .Write("png");
+
+            return null;
+        }
+
+        public ActionResult getGraficoDB2()
+        {
+            //var dados = new Business.DashboardBLL().getEntradasGrafico();
+
+            //var myChart = new Chart(width: 600, height: 400, theme: ChartTheme.Yellow)
+            // .AddTitle("Os 5 Produtos Vendidos")
+            // .DataBindTable(dataSource: dados, xField: "descricaoDivisao")
+            // .Write("png");
+
+            return null;
+        }
+
+        public ActionResult getGrafico()
+        {
+            #region orientações
+            //ar macChart = new Chart(width: 600, height: 400)
+            //A seguir, usamos os métodos da classe Chart:
+
+            //AddTitle – Adiciona um título à imagem do gráfico;
+            //AddSeries – Adicionar várias séries, ou seja, os dados que serão informados no gráfico, para serem impressos na imagem do Chart;
+            //name – Define o nome dado ao gráfico;
+            //xValue – Define os valores que serão apresentados no eixo X;
+            //yValues – Define os valores que serão apresentados no eixo Y;
+            //charType – Embora não tenha sido usado neste exemplo, este método define o 
+            //tipo de gráfico usado, que pode ser: bar, pie, column, stock, area e line.Ex: charType: “Line”;
+            //AddLegend – Também não foi usado no exemplo e adiciona uma legenda ao gráfico.
+            //Para exibir o gráfico no navegador nós usamos o método Write(): Ex: Write() ou Write(format : “gif”).
+            #endregion
+            var myChart = new Chart(width: 600, height: 400)
+           .AddTitle("Entradas no período")
+           .AddSeries(
+               name: "CampeonatoPaulista",
+               chartType: "pie",
+               legend: "Campeonato Paulista",
+               xValue: new[] { "São Paulo", "Corinthians", "Palmeiras", "Santos", "Mogi Mirim" },
+               yValues: new[] { "34", "34", "32", "30", "30" })
+           .Write("png");
+
+            return null;
+        }
+    }
+}

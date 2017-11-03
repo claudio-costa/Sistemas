@@ -1,0 +1,298 @@
+﻿@model MobLink.WebLeilao.Web.ViewModels.Lote.LoteViewModel
+
+@{
+    List<SelectListItem> itensLL = new List<SelectListItem>();
+    itensLL.Add(new SelectListItem() { Text = "Localizado", Value = "S", Selected = Model.Situacao_Lote == "S" });
+    itensLL.Add(new SelectListItem() { Text = "Não Localizado", Value = "N" });
+    SelectList LL = new SelectList(itensLL, "Value", "Text");
+
+    List<SelectListItem> itensSP = new List<SelectListItem>();
+    itensSP.Add(new SelectListItem() { Text = "Com Placa", Value = "S", Selected = Model.Situacao_Placa == "S" });
+    itensSP.Add(new SelectListItem() { Text = "Sem Placa", Value = "N" });
+    SelectList SP = new SelectList(itensSP, "Value", "Text");
+
+    List<SelectListItem> itensSC = new List<SelectListItem>();
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "Chassi sem problemas", Value = "OK" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "Cortado", Value = "C" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "Raspado", Value = "R" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "Oxidado", Value = "O" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "Inacessível", Value = "I" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "Não Encontrado", Value = "N" });
+    SelectList SC = new SelectList(itensSC, "Value", "Text");
+
+    List<SelectListItem> itensKG = new List<SelectListItem>();
+    itensKG.Add(new SelectListItem() { Selected = false, Text = "Possui GNV", Value = "S" });
+    itensKG.Add(new SelectListItem() { Selected = false, Text = "Não Possui GNV", Value = "N" });
+    itensKG.Add(new SelectListItem() { Selected = false, Text = "Inacessível", Value = "I" });
+    SelectList KG = new SelectList(itensKG, "Value", "Text");
+    
+    List<SelectListItem> itensEV = new List<SelectListItem>();
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "Excelente", Value = "E" });
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "Bom", Value = "B" });
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "Ruim", Value = "R" });
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "Péssimo", Value = "P" });
+    SelectList EV = new SelectList(itensEV, "Value", "Text");
+}
+
+@{
+    ViewBag.Title = "Conferência de Pátio";
+}
+
+<div class="row">
+    <h2>
+        <div class="col-md-8">
+            Conferência de Pátio
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(Model.Nome_Leilao))
+            {
+            <div class="col-md-4">
+                <h4>Leilão: @Model.Nome_Leilao &nbsp;&nbsp; Processo: @Model.processo </h4>
+            </div>
+        }
+    </h2>
+</div>
+
+
+
+
+
+@using (Html.BeginForm())
+{
+
+
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+
+        <div class="row">
+            <div class="col-md-2">
+                Placa: <input type="text" class="form-control input-sm" placeholder="Digite placa" name="pPlaca" autofocus="" value="@ViewBag.pPlaca" />
+            </div>
+
+            <div class="col-md-2">
+                Chassi: <input type="text" class="form-control input-sm" placeholder="Digite chassi" name="pChassi" value="@ViewBag.pChassi" />
+            </div>
+
+            <div class="col-md-2">
+                Processo: <input type="text" class="form-control input-sm" placeholder="Nº do processo" name="pProcesso" value="@ViewBag.pProcesso" />
+            </div>
+
+            <div class="col-md-2">
+                &nbsp;<input type="submit" class="form-control btn-primary input-sm" value="Consultar" />
+            </div>
+
+            <div class="col-md-2">
+                &nbsp;<button class="form-control btn-default input-sm" value="true" name="SalvarDados">Salvar</button>
+            </div>
+
+        </div>
+
+        <hr />
+
+        @Html.ValidationSummary(true)
+
+
+    </div>
+
+
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.cor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.cor, new { @class = "form-control input-sm", disabled = "", id = "txtCor" })
+                @Html.ValidationMessageFor(model => model.cor)
+            </div>
+
+            @if (Model.cor == Model._cor)
+            {
+                <span class="glyphicon glyphicon-ok" style="color: green"></span>
+            }
+            else if (Model.cor != Model._cor && Model._cor.Trim() != "")
+            {
+                <code id="diverg_cor" style="cursor:pointer">@Model._cor</code>
+            }
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.marca_modelo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.marca_modelo, new { @class = "form-control input-sm", id = "txtMarcaModelo", disabled = "" })
+                @Html.ValidationMessageFor(model => model.marca_modelo)
+            </div>
+
+            @if (Model.marca_modelo == Model._marca_modelo)
+            {
+                <span class="glyphicon glyphicon-ok" style="color: green"></span>
+            }
+            else if (Model.marca_modelo != Model._marca_modelo && Model._marca_modelo.Trim() != "")
+            {
+                <code id="diverg_MarcaModelo" style="cursor:pointer">@Model._marca_modelo</code>
+            }
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.placa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.placa, new { @class = "form-control input-sm", disabled = "" })
+                @*@Html.ValidationMessageFor(model => model.placa)*@
+            </div>
+
+            @if (Model.placa == Model._placa)
+            {
+                <span class="glyphicon glyphicon-ok" style="color: green"></span>
+            }
+            else if (Model.placa != Model._placa && Model._placa.Trim() != "")
+            {
+                <code id="codeMarcaModelo" style="cursor:pointer">@Model._placa</code>
+            }
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.chassi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.chassi, new { @class = "form-control input-sm", disabled = "", id = "txtChassi" })
+            </div>
+
+            @if (Model.chassi == Model._chassi)
+            {
+                <span class="glyphicon glyphicon-ok" style="color: green"></span>
+            }
+            else if (Model.chassi != Model._chassi && Model._chassi.Trim() != "")
+            {
+                <code id="diverg_Chassi" style="cursor:pointer">@Model._chassi</code>
+            }
+
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tipo_veiculo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.tipo_veiculo, new { @class = "form-control input-sm", disabled = "", id = "txtTipoVeiculo" })
+                @*@Html.ValidationMessageFor(model => model.tipo_veiculo)*@
+            </div>
+
+            @if (Model.tipo_veiculo == Model._tipo_veiculo)
+            {
+                <span class="glyphicon glyphicon-ok" style="color: green"></span>
+            }
+            else if (Model.tipo_veiculo != Model._tipo_veiculo && Model._tipo_veiculo.Trim() != "")
+            {
+                <code id="diverg_TipoVeiculo" style="cursor:pointer">@Model._tipo_veiculo</code>
+            }
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Situacao_Lote, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @*@Html.DropDownListFor(model => model.Situacao_Lote, LL, "Selecione uma opção", new { @class = "form-control input-sm", @name = "Situacao_Lote" })*@
+                @Html.DropDownListFor(model => model.Situacao_Lote,itensLL.ToList(), "Selecione uma opção", new { @class = "form-control input-sm", @name = "Situacao_Lote" })
+                @Html.ValidationMessageFor(model => model.Situacao_Lote)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Situacao_Placa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Situacao_Placa, SP, "Selecione uma opção", new { @class = "form-control input-sm", @name = "Situacao_Placa" })
+                @Html.ValidationMessageFor(model => model.Situacao_Placa)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Situacao_Chassi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Situacao_Chassi, SC, "Selecione uma opção", new { @class = "form-control input-sm", @name = "Situacao_Chassi" })
+                @Html.ValidationMessageFor(model => model.Situacao_Chassi)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Situacao_GNV, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Situacao_GNV, KG, "Selecione uma opção", new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(model => model.Situacao_GNV)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Situacao_Veiculo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Situacao_Veiculo, EV, "Selecione uma opção", new { @class = "form-control input-sm", @name = "Situacao_Veiculo" })
+                @Html.ValidationMessageFor(model => model.Situacao_Veiculo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="hidden" name="id" value="@Model.id">
+        </div>
+
+
+    </div>
+
+}
+
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#diverg_cor").click(function () {
+            var texto = $("#diverg_cor").html();
+            $("#txtCor").val(texto);
+
+            var node = document.getElementById("diverg_cor");
+            if (node.parentNode) {
+                node.parentNode.removeChild(node);
+            }
+        });
+
+        $("#diverg_MarcaModelo").click(function () {
+            var texto = $("#diverg_MarcaModelo").html();
+            $("#txtMarcaModelo").val(texto);
+
+            var node = document.getElementById("diverg_MarcaModelo");
+            if (node.parentNode) {
+                node.parentNode.removeChild(node);
+            }
+
+        });
+
+        $("#diverg_Chassi").click(function () {
+            var texto = $("#diverg_Chassi").html();
+            $("#txtChassi").val(texto);
+
+            var node = document.getElementById("diverg_Chassi");
+            if (node.parentNode) {
+                node.parentNode.removeChild(node);
+            }
+
+        });
+
+        $("#diverg_TipoVeiculo").click(function () {
+            var texto = $("#diverg_TipoVeiculo").html();
+            $("#txtTipoVeiculo").val(texto);
+
+            var node = document.getElementById("diverg_TipoVeiculo");
+            if (node.parentNode) {
+                node.parentNode.removeChild(node);
+            }
+
+        });
+
+    });
+
+</script>
+

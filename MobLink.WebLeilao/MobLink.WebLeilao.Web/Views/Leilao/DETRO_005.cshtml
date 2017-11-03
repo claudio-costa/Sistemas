@@ -1,0 +1,53 @@
+﻿@model MobLink.WebLeilao.Dominio.Lote
+@{ SelectList Leiloes = ViewBag.Leiloes; }
+
+
+@{
+    ViewBag.Title = "TransacoesDETRO";
+}
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script type="text/javascript">
+    function onBegin() {
+        $("#Lotes").html("");
+        $("#divLoading").html('<br /><br /><br /><br /> <image src="../Content/aguarde.gif" alt="Loading, please wait" />');
+    }
+    function onComplete() {
+        $("#divLoading").html("");
+    }
+</script>
+
+<h2>Dados Veículo para leilão (005)</h2><hr />
+
+<div class="row">
+
+    @using (Ajax.BeginForm("CarregarLotesDETRO", "Leilao", new AjaxOptions { UpdateTargetId = "Lotes", OnBegin = "onBegin", OnComplete = "onComplete" }))
+    {
+        <div class="col-md-6">
+            @Html.DropDownList("IDLEILAO", Leiloes, "Selecione um leilão", new { @class = "form-control input-sm" })
+        </div>
+
+        <div class="col-md-1">
+            <input type="submit" value="Carregar Lotes" class="btn-primary btn-sm" />
+        </div>
+        
+    }
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <div id="divLoading">
+            @*<image src="../Content/loader.gif" alt="Loading, please wait" />*@
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="Lotes" name="Lotes"></div>
+    </div>
+</div>

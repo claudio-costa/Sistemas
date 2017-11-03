@@ -1,0 +1,28 @@
+﻿@{ List<WebPatios.Model.Dashboard.Saida> saidas = ViewBag.Saidas; }
+
+
+<div class="col-md-3">
+    <div class="list-group">
+        <div class="list-group-item list-group-item-danger">
+            <b>SAÍDAS</b>
+        </div>
+
+        @{ int counter2 = 0; }
+        @foreach (var item in saidas)
+        {
+            <div class="list-group-item text-left">
+                <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span>
+                @Html.DisplayFor(modelItem => item.descricaoDivisao)
+            </div>
+            counter2 += item.quantidade;
+        }
+
+        <div class="list-group-item text-left list-group-item-danger" X>
+            @*style="background-color: gold">*@
+            <span class="badge"> @counter2.ToString() </span>
+            <b>TOTAL</b>
+            <div class="glyphicon glyphicon-hand-right"></div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<MobLink.WebLeilao.Dominio.Leilao>
+
+@{
+    ViewBag.Title = "PÓS-LEILÃO";
+}
+
+<h2>Leilões Realizados</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+
+<table class="table table-striped small table-hover table-condensed">
+    <tr>
+        <th>
+            DESCRIÇÃO
+        </th>
+        <th>
+            LOCAL
+        </th>
+        <th>
+            STATUS
+        </th>
+        <th>
+            COMITENTE
+        </th>
+        <th></th>
+        <th>
+            @*OPÇÕES*@
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.quantidade_lotes <= 0)
+                {
+                    <span class="glyphicon glyphicon-star"></span>
+                }
+
+                @Html.DisplayFor(modelItem => item.descricao)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.nome_local)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.status.descricao)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.nome_comitente)
+            </td>
+
+            <td>
+                @Html.ActionLink("DESPESAS DO LEILÃO (" + item.qtd_despesas + ")", "Despesas", "Leilao", new { id = item.id }, new { @class = "small" })
+            </td>
+
+            <td>
+                @Html.ActionLink("ARREMATANTES (" + item.qtd_arrematantes + ")", "Index", "Arrematante", new { id = item.id }, new { @class = "small" })
+            </td>
+
+            <td>
+                @*@Html.ActionLink("TAXAS DE COMITENTE", "", "", new { id = item.id }, new { @class = "small" })*@
+            </td>
+
+            <td>
+                <div class="dropdown">
+                    <a id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-xs">
+                        <span class="glyphicon glyphicon-option-vertical text-primary"></span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
+                        <li>@Html.ActionLink("Gerar prestação de contas", "Download", "Leilao", new { id = 1 }, new { @class = "small" })</li>
+                        <li>@Html.ActionLink("Recebimentos", "Recebimentos_Arrematantes", "Relatorio", new { id = item.id }, new { @class = "small" })</li>
+                        @*<li>@Html.ActionLink("Despesas", "Index", "Despesa", new { id = item.id }, new { @class = "small" })</li>*@
+                        @*<li class="divider"></li>*@
+                    </ul>
+                </div>
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+@using (Html.BeginForm("AlterarStatus", "Leilao", new { id = Model.FirstOrDefault().id }, FormMethod.Post))
+{
+    @Html.Partial("_AlterarStatus")
+}
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

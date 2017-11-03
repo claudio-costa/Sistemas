@@ -1,0 +1,572 @@
+﻿@using Model.GRV
+@model GRV
+
+@{ List<Model.Faturamento.Servicos.ViewFaturamentoServicosGRV> ItensFaturamento = ViewBag.modelo; }
+@{ Model.Atendimento.Atendimento Atendimento = ViewBag.atendimento; }
+@{ Model.Report.ViewBoleto Boleto = ViewBag.boleto; }
+
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">Serviços prestados</h3>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+
+            @if (ItensFaturamento != null)
+            {
+                <div class="col-md-12">
+
+                    <span class="text-center">
+                        *Os valores exibidos abaixo, são válidos somente para esta data - @DateTime.Now.ToShortDateString()
+                    </span>
+
+                    <table class="table table-condensed table-condensed table-sm">
+                        <tr style="background-color: #efeded">
+                            <th>
+                                Tipo
+                            </th>
+                            <th>
+                                Valor
+                            </th>
+                            <th>
+                                Quantidade
+                            </th>
+                            <th>
+                                Subtotal
+                            </th>
+                        </tr>
+
+                        @{ decimal total = 0; string servico_descricao = string.Empty; }
+
+                        @foreach (var item in ItensFaturamento)
+                        {
+                            if (servico_descricao == item.servico_descricao ||
+                                item.flag_realizar_cobranca == 'N' ||
+                                item.flag_rebocada == 'S' && Model.flag_comboio == 'S') { continue; }
+
+                            servico_descricao = item.servico_descricao;
+
+                        <tr>
+
+                            @if (item.tipo_cobranca == 'D')
+                            {
+                                <td>@Html.DisplayFor(modelItem => item.servico_descricao)</td>
+                                <td>R$&nbsp;@Html.DisplayFor(modelItem => item.preco_padrao)</td>
+
+                                    int diarias = ViewBag.diarias;
+
+                                    <td>@Html.DisplayFor(modelItem => diarias)</td>
+
+                                    decimal subtotal = item.preco_padrao * diarias;
+
+                                    <td>R$&nbsp;@Html.DisplayFor(modelItem => subtotal)</td>
+
+                                    total += item.preco_padrao * diarias;
+                            }
+                            else if (item.tipo_cobranca == 'Q')
+                            {
+                                if (item.flag_rebocada == 'S')
+                                {
+                                    item.valor = 1;
+                                }
+
+                                if (item.valor == 0)
+                                {
+                                    continue;
+                                }
+
+                                <td>@Html.DisplayFor(modelItem => item.servico_descricao)</td>
+                                <td>R$&nbsp;@Html.DisplayFor(modelItem => item.preco_padrao)</td>
+
+                                decimal valor = item.valor;
+
+                                if (item.valor == 0 && item.flag_servico_obrigatorio == 'S')
+                                { valor = 1; }
+
+                                <td>@Html.DisplayFor(modelItem => valor)</td>
+
+                                decimal subtotal = item.preco_padrao * valor;
+
+                                <td>R$&nbsp;@Html.DisplayFor(modelItem => subtotal)</td>
+
+                                total += item.preco_padrao * valor;
+                            }
+                            else if (item.tipo_cobranca == 'H')
+                            {
+                                if (item.tempo_trabalhado == "")
+                                {
+                                    continue;
+                                }
+
+                                <td>@Html.DisplayFor(modelItem => item.servico_descricao)</td>
+                                <td>R$&nbsp;@Html.DisplayFor(modelItem => item.preco_padrao)</td>
+
+                                var preco_padrao = item.preco_padrao;
+
+                                decimal tempo_trabalhado = Convert.ToDecimal(TimeSpan.Parse(item.tempo_trabalhado).TotalHours);
+
+                                <td>@Html.DisplayFor(modelItem => item.tempo_trabalhado)</td>
+
+                                var valor = tempo_trabalhado * preco_padrao;
+
+                                <td>R$&nbsp;@Html.DisplayFor(modelItem => valor)</td>
+
+                                total += valor;
+
+                                
+
+                            }
+
+                        </tr>
+                        }
+
+                        <tfoot class="bg-primary">
+                            <tr>
+                                <th>Total</th>
+                                <th></th>
+                                <th></th>
+                                <th>R$ @Html.DisplayFor(modelItem => total)</th>
+                                @{ ViewBag.nota = total.ToString("c"); }
+                            </tr>
+                        </tfoot>
+
+                    </table>
+
+                    @{
+                        if (Atendimento != null)
+                        {
+                            if (Convert.ToDateTime(Boleto.vencimento).Date < DateTime.Now.Date)
+                            {
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <strong>
+                                    BOLETO VENCIDO - CLIQUE NO BOTÃO ABAIXO PARA REGERAR O BOLETO<br /><br />
+                                    @Boleto.sacado_nome.ToUpper()
+                                </strong>
+                            </h3>
+                            <h6>
+                                @Boleto.cedente_banco_nome.ToUpper() &nbsp;&nbsp;
+                                VENCIMENTO: @Boleto.vencimento &nbsp;&nbsp;
+                                VALOR: R$ @Boleto.valor_boleto
+                            </h6>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @using (Html.BeginForm())
+                                                {
+                                    <input type="hidden" name="GRV" value="@Model.id_grv" />
+                                    <button type="submit" class="btn btn-danger" value="true" name="ATUALIZA_BOLETO">
+                                        <span class="glyphicon glyphicon-barcode"></span>&nbsp;REGERAR BOLETO
+                                    </button>
+                                                }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                            }
+                            else if (Convert.ToDateTime(Boleto.vencimento).Date >= DateTime.Now.Date)
+                            {
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+
+                                <strong>@Boleto.sacado_nome.ToUpper()</strong><br />
+                            </h3>
+                            <h6>
+                                @Boleto.cedente_banco_nome.ToUpper() &nbsp;&nbsp;
+                                VENCIMENTO: @Boleto.vencimento &nbsp;&nbsp;
+                                VALOR: R$ @Boleto.valor_boleto
+                            </h6>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @{
+                                                    using (Html.BeginForm())
+                                                    {
+                                    <input type="hidden" name="GRV" value="@Model.id_grv" />
+                                    <button type="submit" class="btn btn-info" value="true" name="ENVIA_EMAIL">
+                                        <span class="glyphicon glyphicon-barcode"></span>&nbsp;ENVIAR NOVAMENTE POR E-MAIL
+                                    </button>
+                                                    }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                        <span class="glyphicon glyphicon-barcode"></span> Pagamento
+                    </button>
+                                                    }
+
+                    }
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@*JANELA MODAL*@
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    <strong><u>DADOS PARA NOTA FISCAL</u></strong><br />
+                    Valor Total da nota: <span style="color: green"><strong>@ViewBag.nota</strong></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm())
+                {
+                    if (Model != null)
+                    {
+                        <input type="hidden" value="@Model.id_grv" name="GRV" />
+                    }
+
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>Documento</strong>
+                                        &nbsp;&nbsp;CPF&nbsp;&nbsp;<input type="radio" name="TIPO_DOC" id="radioCPF" value="0" checked>
+                                        &nbsp;&nbsp;CNPJ&nbsp;&nbsp;<input type="radio" name="TIPO_DOC" id="radioCNPJ" value="1">
+                                    </span>
+                                    <input type="text" required="" class="form-control" name="DOC" id="txtdoc" value="@ViewBag.pPlaca" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" id="btnpesquisadoc" type="button" onclick="BuscaDOC()">Pesquisar</button>
+                                    </span>
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>Nome</strong>
+                                    </span>
+                                    <input type="text" required="" class="form-control" placeholder="Digite o nome" name="NOME" autofocus="" id="txtnome" value="@ViewBag.pPlaca" />
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-addon2">
+                                        <strong>CEP</strong>
+                                    </span>
+                                    <input @*onblur="buscaAjax()"*@ type="text" id="txtcep" required="" class="form-control" placeholder="Digite CEP" name="CEP" autofocus="" value="@ViewBag.pPlaca" />
+                                    <span class="input-group-btn">
+                                        <button onclick="BuscaCEP()" type="button" id="btnpesquisacep" data-loading-text="Loading..." class="btn btn-success" autocomplete="off">
+                                            Pesquisar
+                                        </button>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>Endereço</strong>
+                                    </span>
+                                    <input type="text" required="" class="form-control" placeholder="Digite endereço" id="txtendereco" name="ENDERECO" autofocus="" value="@ViewBag.pPlaca" />
+
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>Nº</strong>
+                                    </span>
+                                    <input type="text" id="txtnumero" required="" class="form-control" placeholder="Nº" name="NUMERO" autofocus="" value="@ViewBag.pPlaca" />
+                                </div><!-- /input-group -->
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>Complemento</strong>
+                                    </span>
+                                    <input type="text" class="form-control" id="txtcomplemento" placeholder="Digite complemento" name="COMPLEMENTO" autofocus="" value="@ViewBag.pPlaca" />
+                                </div><!-- /input-group -->
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>Bairro:</strong>
+                                    </span>
+                                    <input type="text" required="" class="form-control" placeholder="Digite bairro" name="BAIRRO" id="txtbairro" autofocus="" value="@ViewBag.pPlaca" />
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>Município</strong>
+                                    </span>
+                                    <input type="text" required="" class="form-control" placeholder="Digite município" name="MUNICIPIO" id="txtmunicipio" autofocus="" value="@ViewBag.pPlaca" />
+                                </div><!-- /input-group -->
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>UF</strong>
+                                    </span>
+                                    <input type="text" id="txtuf" required="" class="form-control" placeholder="UF" name="UF"  autofocus="" value="@ViewBag.pPlaca" />
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>DDD</strong>
+                                    </span>
+                                    <input type="text" id="txtddd" required="" class="form-control" placeholder="Digite DDD" name="DDD" autofocus="" value="@ViewBag.pPlaca" />
+                                </div><!-- /input-group -->
+                            </div>
+
+                            <div class="col-md-7">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>Telefone</strong>
+                                    </span>
+                                    <input type="text" required="" id="txttelefone" class="form-control" placeholder="Digite telefone" name="TELEFONE" autofocus="" value="@ViewBag.pPlaca" />
+                                </div><!-- /input-group-->
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group ">
+                                    <span class="input-group-addon ">
+                                        <strong>Email</strong>
+                                    </span>
+                                    <input type="text" id="txtemail" required="" class="form-control" placeholder="Digite Email" name="EMAIL" autofocus="" value="@ViewBag.pPlaca" />
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+
+                    </div>  @*FormGroup*@
+
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <p id="resultado"></p>
+                            <h4>
+                                <strong>
+                                    ATENÇÃO!!!<br />A emissão deste faturamento será somente para o proprietário do veículo e os valores são validos somente para  a data atual, deseja prosseguir?
+                                </strong>
+                            </h4>
+                        </div>
+
+                        <hr />
+
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">N Ã O</button>
+                        <button type="submit" class="btn btn-success" data-dismiss="" value="true" name="EMITE_BOLETO">&nbsp;&nbsp;S I M&nbsp;&nbsp;</button>
+                    </div>
+                }
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script src="~/js/jquery-3.2.0.min.js"></script>
+<script src="~/js/jquery.maskedinput.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        
+    });
+    
+    //$("#doc").mask("999.999.999-99", { selectOnFocus: true });
+    $("#txtcep").mask("99999-999", { selectOnFocus: true });
+    $("#txtddd").mask("(99)", { selectOnFocus: true });
+    $("#txttelefone").mask("99999-9999", { selectOnFocus: true });
+    $("#txtuf").mask("aa", { selectOnFocus: true });
+</script>
+
+<script>
+    $('#btnpesquisacep').on('click', function () {
+        var $btn = $(this).button('loading')
+        // business logic...
+
+        BuscaCEP();
+
+        $btn.button('reset')
+    })
+</script>
+
+<script type="text/javascript">
+
+    function BuscaCEP() {
+        $.ajax({
+            //url: "/GRV/BuscaCEP/",
+            url: '@Url.Action("BuscaCEP")',
+            data: { cep: $("#txtcep").val() },
+            type: "post",
+            dataType: "json",
+            beforeSend: function (XMLHttpRequest) {
+                $("#resultado").empty();
+                $("#resultado").append("PESQUISANDO");
+                $('#btnpesquisacep').text("AGUARDE");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#resultado").empty();
+                $("#resultado").append("CEP NÃO ENCONTRADO " + "textStatus: " + textStatus + " - errorThrown: " + errorThrown + " - XMLHttpRequest: " + XMLHttpRequest.text);
+            },
+            success: function (data, textStatus, XMLHttpRequest) {
+                $("#resultado").empty();
+                //$("#resultado").append(data["cep"]);
+                $("#txtendereco").val(data["end"]);
+                $("#txtmunicipio").val(data["cidade"]);
+                $("#txtuf").val(data["uf"]);
+                $("#txtbairro").val(data["bairro"]);
+                $("#txtnumero").focus();
+
+                //$(data).each(function () {
+                //    $("#resultado").append("Nome: " + this.Nome + " Sobrenome:"
+                //        + this.Sobrenome + " <br/>");
+
+                //});
+            },
+            complete: function () {
+                $('#btnpesquisacep').text("Pesquisar");
+                //$("#resultado").text("CONSULTA REALIZADA");
+            }
+
+        });
+    }
+</script>
+
+<script type="text/javascript">
+
+    function BuscaDOC() {
+        var textoURL = '@Url.Action("BuscaDOC")';
+        var textoDATA = $("#txtdoc").val();
+
+        $.ajax({
+            url: '@Url.Action("BuscaDOC")',
+            data: { DOC: $("#txtdoc").val() },
+            type: "post",
+            dataType: "json",
+            beforeSend: function (XMLHttpRequest) {
+                $("#resultado").empty();
+                $("#resultado").append("PESQUISANDO");
+                $('#btnpesquisadoc').text("AGUARDE");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#resultado").empty();
+                $("#resultado").append("DOCUMENTO NÃO ENCONTRADO");
+            },
+            success: function (data, textStatus, XMLHttpRequest) {
+                $("#resultado").empty();
+
+                $("#txtnome").val(data["nome"]);
+                $("#txtdoc").val(data["documento"]);
+                $("#txtendereco").val(data["endereco"]);
+                $("#txtnumero").val(data["numero"]);
+                $("#txtcomplemento").val(data["complemento"]);
+
+                $("#txtbairro").val(data["bairro"]);
+                $("#txtmunicipio").val(data["municipio"]);
+                $("#txtuf").val(data["uf"]);
+                $("#txtcep").val(data["cep"]);
+                $("#txtddd").val(data["ddd"]);
+
+                $("#txtddd").val(data["ddd"]);
+                $("#txttelefone").val(data["telefone"]);
+                $("#txtemail").val(data["email"]);
+                
+                //$(data).each(function () {
+                //    $("#resultado").append("Nome: " + this.Nome + " Sobrenome:"
+                //        + this.Sobrenome + " <br/>");
+
+                //});
+            },
+            complete: function () {
+                $('#btnpesquisadoc').text("Pesquisar");
+                //$("#resultado").text("CONSULTA REALIZADA");
+            }
+
+        });
+    }
+</script>
+
+<script>
+    $("#radioCPF").click(function () {
+        //$("#doc").mask("999.999.999-99");
+        $("#txtdoc").focus();
+    });
+
+    $("#radioCNPJ").click(function () {
+        //$("#doc").mask("99.999.999/9999-99");
+        $("#txtdoc").focus();
+    });
+
+    $("#doc").focus(function () {
+        $("#txtdoc").unmask();
+        $("#txtdoc").html("");
+    });
+
+    $("#doc").blur(function () {
+
+        var valor = $("#txtdoc").val();
+        var numsStr = valor.replace(/[^0-9]/g, '');
+
+        $("#txtdoc").unmask();
+
+        //var tamanho = $("#doc").val().length;
+        var tamanho = numsStr.length;
+
+        if (tamanho <= 11) {
+            $("#txtdoc").mask("999.999.999-99");
+        } else if (tamanho > 11) {
+            $("#txtdoc").mask("99.999.999/9999-99");
+        }
+
+        //$("#doc").val(numsStr);
+    });
+</script>
+

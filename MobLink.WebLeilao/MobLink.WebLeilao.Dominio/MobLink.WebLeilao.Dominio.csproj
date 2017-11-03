@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{46834F07-64AB-489A-ABC4-7149312EB1DB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MobLink.WebLeilao.Dominio</RootNamespace>
+    <AssemblyName>MobLink.WebLeilao.Dominio</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Arquivo.cs" />
+    <Compile Include="Arrematante\Arrematante.cs" />
+    <Compile Include="Arrematante\ArrematantePagamento.cs" />
+    <Compile Include="Cliente.cs" />
+    <Compile Include="Comitente.cs" />
+    <Compile Include="Cor.cs" />
+    <Compile Include="Deposito.cs" />
+    <Compile Include="Despesa.cs" />
+    <Compile Include="Despesa_Leilao.cs" />
+    <Compile Include="Despesa_Lote.cs" />
+    <Compile Include="Edital.cs" />
+    <Compile Include="Empresa.cs" />
+    <Compile Include="Endereco.cs" />
+    <Compile Include="Expositor.cs" />
+    <Compile Include="Financeira.cs" />
+    <Compile Include="FotoRecolhimento.cs" />
+    <Compile Include="GRV.cs" />
+    <Compile Include="Leilao.cs" />
+    <Compile Include="Leiloeiro.cs" />
+    <Compile Include="Lote.cs" />
+    <Compile Include="LoteDETRO.cs" />
+    <Compile Include="LoteDSIN.cs" />
+    <Compile Include="MarcaModelo.cs" />
+    <Compile Include="Notificacao.cs" />
+    <Compile Include="NotificacaoLeilao.cs" />
+    <Compile Include="Pericia.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proprietario.cs" />
+    <Compile Include="ProprietarioSPE.cs" />
+    <Compile Include="Proprietario____.cs" />
+    <Compile Include="DadosRecolhimento.cs" />
+    <Compile Include="RegraPrestacaoConta.cs" />
+    <Compile Include="Rel_PC_Lote.cs" />
+    <Compile Include="Restricao.cs" />
+    <Compile Include="StatusLeilao.cs" />
+    <Compile Include="StatusLote.cs" />
+    <Compile Include="StatusPericia.cs" />
+    <Compile Include="StatusVeiculoPericia.cs" />
+    <Compile Include="TabelaGenerica.cs" />
+    <Compile Include="TipoDocumento.cs" />
+    <Compile Include="TipoProprietario.cs" />
+    <Compile Include="TipoVeiculo.cs" />
+    <Compile Include="Transacao.cs" />
+    <Compile Include="Transacao001.cs" />
+    <Compile Include="Transacao002.cs" />
+    <Compile Include="Transacao005.cs" />
+    <Compile Include="Transacao006.cs" />
+    <Compile Include="Usuario.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

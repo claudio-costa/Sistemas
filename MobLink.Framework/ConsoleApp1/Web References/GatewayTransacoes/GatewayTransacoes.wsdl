@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://linkpatios/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://linkpatios/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://linkpatios/">
+      <s:element name="ConsultaVeiculo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_grv" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaVeiculoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaVeiculoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistraApreensao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_grv" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistraApreensaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegistraApreensaoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaLiberacao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_grv" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaLiberacaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaLiberacaoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaApreensao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_grv" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaApreensaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaApreensaoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistraSaidaPatio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_grv" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistraSaidaPatioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegistraSaidaPatioResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultaVeiculoSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaVeiculo" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaVeiculoSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaVeiculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistraApreensaoSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistraApreensao" />
+  </wsdl:message>
+  <wsdl:message name="RegistraApreensaoSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistraApreensaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaLiberacaoSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaLiberacao" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaLiberacaoSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaLiberacaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaApreensaoSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaApreensao" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaApreensaoSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaApreensaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistraSaidaPatioSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistraSaidaPatio" />
+  </wsdl:message>
+  <wsdl:message name="RegistraSaidaPatioSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistraSaidaPatioResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GatewayTransacoesSoap">
+    <wsdl:operation name="ConsultaVeiculo">
+      <wsdl:input message="tns:ConsultaVeiculoSoapIn" />
+      <wsdl:output message="tns:ConsultaVeiculoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistraApreensao">
+      <wsdl:input message="tns:RegistraApreensaoSoapIn" />
+      <wsdl:output message="tns:RegistraApreensaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaLiberacao">
+      <wsdl:input message="tns:ConsultaLiberacaoSoapIn" />
+      <wsdl:output message="tns:ConsultaLiberacaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaApreensao">
+      <wsdl:input message="tns:ConsultaApreensaoSoapIn" />
+      <wsdl:output message="tns:ConsultaApreensaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistraSaidaPatio">
+      <wsdl:input message="tns:RegistraSaidaPatioSoapIn" />
+      <wsdl:output message="tns:RegistraSaidaPatioSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GatewayTransacoesSoap" type="tns:GatewayTransacoesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultaVeiculo">
+      <soap:operation soapAction="http://linkpatios/ConsultaVeiculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistraApreensao">
+      <soap:operation soapAction="http://linkpatios/RegistraApreensao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaLiberacao">
+      <soap:operation soapAction="http://linkpatios/ConsultaLiberacao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaApreensao">
+      <soap:operation soapAction="http://linkpatios/ConsultaApreensao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistraSaidaPatio">
+      <soap:operation soapAction="http://linkpatios/RegistraSaidaPatio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GatewayTransacoesSoap12" type="tns:GatewayTransacoesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultaVeiculo">
+      <soap12:operation soapAction="http://linkpatios/ConsultaVeiculo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistraApreensao">
+      <soap12:operation soapAction="http://linkpatios/RegistraApreensao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaLiberacao">
+      <soap12:operation soapAction="http://linkpatios/ConsultaLiberacao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaApreensao">
+      <soap12:operation soapAction="http://linkpatios/ConsultaApreensao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistraSaidaPatio">
+      <soap12:operation soapAction="http://linkpatios/RegistraSaidaPatio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GatewayTransacoes">
+    <wsdl:port name="GatewayTransacoesSoap" binding="tns:GatewayTransacoesSoap">
+      <soap:address location="http://www.linkpatios.com.br/GatewayTransacoes/GatewayTransacoes.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GatewayTransacoesSoap12" binding="tns:GatewayTransacoesSoap12">
+      <soap12:address location="http://www.linkpatios.com.br/GatewayTransacoes/GatewayTransacoes.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

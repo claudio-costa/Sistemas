@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MobLink.ConsultaGRV.Web.Models.Relatorio>
+
+@{
+    ViewBag.Title = "Relatorio";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            GRV
+        </th>
+        <th>
+            PLACA
+        </th>
+        <th>
+            CHASSI
+        </th>
+        <th>
+            MARCA/MODELO
+        </th>
+        <th>
+            TIPO VEÍCULO
+        </th>
+        <th>
+            COR
+        </th>
+        <th>
+            DATA REMOÇÃO
+        </th>
+        <th>
+            DATA GUARDA
+        </th>
+        <th>
+            VALOR HOJE
+        </th>
+    </tr>
+
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numero_formulario_grv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.placa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.chassi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.marca_modelo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipo_veiculo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data_hora_remocao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data_hora_guarda)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorTotalAteHoje)
+                </td>
+            </tr>
+            
+        }
+    }
+
+
+
+
+</table>
+<hr />
+<div class="text-center">
+    <b>TOTAL: @ViewBag.TOTAL</b>
+</div>
+<br /><br /><br />
+
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="wspatiosap" targetNamespace="http://patiodemo.dsin.com.br/webService/webserviceSAP.php" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://patiodemo.dsin.com.br/webService/webserviceSAP.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <portType name="wspatiosapPort">
+    <operation name="atualizaTransacao">
+      <input message="tns:atualizaTransacaoRequest"/>
+      <output message="tns:atualizaTransacaoResponse"/>
+    </operation>
+  </portType>
+  <binding name="wspatiosapBinding" type="tns:wspatiosapPort">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="atualizaTransacao">
+      <soap:operation soapAction="http://patiodemo.dsin.com.br/webService/webserviceSAP.php#atualizaTransacao"/>
+      <input>
+        <soap:body use="literal" namespace="http://patiodemo.dsin.com.br/webService/webserviceSAP.php"/>
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://patiodemo.dsin.com.br/webService/webserviceSAP.php"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="wspatiosapService">
+    <port name="wspatiosapPort" binding="tns:wspatiosapBinding">
+      <soap:address location="http://patiodemo.dsin.com.br/webService/webserviceSAP.php"/>
+    </port>
+  </service>
+  <message name="atualizaTransacaoRequest">
+    <part name="IDTRANSACAO" type="xsd:int"/>
+    <part name="RETDOCID" type="xsd:string"/>
+    <part name="RETMENSAGENS" type="xsd:string"/>
+  </message>
+  <message name="atualizaTransacaoResponse">
+    <part name="return" type="xsd:string"/>
+  </message>
+</definitions>

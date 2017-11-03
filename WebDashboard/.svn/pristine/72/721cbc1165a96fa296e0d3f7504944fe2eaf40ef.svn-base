@@ -1,0 +1,263 @@
+﻿@{ List<WebPatios.Model.Dashboard.Infracao> Infracoes = ViewBag.Infracoes; }
+@{ WebPatios.Model.Dashboard.ResumoPeriodico ResumoPeriodico = ViewBag.ResumoPeriodico; }
+@{ WebPatios.Model.Dashboard.TicketMedio TicketMedio = ViewBag.TicketMedio; }
+@{ WebPatios.Model.Dashboard.TaxaLiberacao TaxaLiberacao = ViewBag.TaxaLiberacao; }
+@{ WebPatios.Model.Cliente Cliente = ViewBag.Cliente; }
+@{ WebPatios.Model.Usuario Usuario = ViewBag.Usuario; }
+@{ WebPatios.Model.Deposito Deposito = ViewBag.DepositoFiltrado; }
+
+@*a linha abaixo indenta a direita o corpo para entrar o menu*@
+@*<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">*@
+@*<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-0 main">*@
+
+@*Total de apreensões*@
+<div class="col-md-3">
+
+    <div class="panel" style="background-color: gold">
+        <div class="panel-heading">
+            @*<B>A P R E E N S Õ E S</B>*@
+            <B>Total de apreensões</B>
+        </div>
+
+        <div class="table-responsive small">
+            <table class="table table-striped">
+                <tbody>
+
+                    <tr style="font-size: 16px">
+                        <td class="text-center" style="background-color: gold">
+                            Hoje:<br />
+                            <b><span class="text-success" style="font-size: 24px">@Html.DisplayFor(x => ResumoPeriodico.apreensoesHoje)</span></b>
+                        </td>
+                        <td class="text-left">
+                            <br />
+                            <span class="glyphicon glyphicon-calendar"></span>  Esta semana: <br />
+                            <span class="glyphicon glyphicon-calendar"></span>  Este mês: <br />
+                        </td>
+                        <td class="text-danger text-right">
+                            <br />
+                            @Html.DisplayFor(x => ResumoPeriodico.apreensoesSemana)  <span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                            @Html.DisplayFor(x => ResumoPeriodico.apreensoesMes)  <span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                            <br />
+                        </td>
+                    </tr>
+                    @*<tr>
+                            <td>
+                                <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                            </td>
+                        </tr>*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*Total de liberações*@
+<div class="col-md-3">
+
+    <div class="panel" style="background-color: lightcoral">
+        <div class="panel-heading">
+            @*<b>L I B E R A Ç Õ E S</b>*@
+            <b>Total de liberações</b>
+        </div>
+
+        <div class="table-responsive small">
+            <table class="table table-striped">
+                <tbody>
+
+                    <tr style="font-size: 16px">
+                        <td class="text-center" style="background-color: lightcoral">
+                            Hoje:<br />
+                            <b><span class="text-danger" style="font-size: 24px">@Html.DisplayFor(x => ResumoPeriodico.saidasHoje)</span></b>
+                        </td>
+                        <td class="text-left">
+                            <br />
+                            <span class="glyphicon glyphicon-calendar"></span>  Esta semana: <br />
+                            <span class="glyphicon glyphicon-calendar"></span>  Este mês: <br />
+                        </td>
+                        <td class="text-danger text-right">
+                            <br />
+                            @Html.DisplayFor(x => ResumoPeriodico.saidasSemana) <span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                            @Html.DisplayFor(x => ResumoPeriodico.saidasMes)  <span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                            <br />
+                        </td>
+                    </tr>
+                    @*<tr>
+                            <td>
+                                <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                            </td>
+                        </tr>*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*Total de faturamento*@
+<div class="col-md-6">
+
+    <div class="panel" style="background-color: darkseagreen">
+        <div class="panel-heading">
+            @*<B>F A T U R A M E N T O</B>*@
+            <b>Total de faturamento</b>
+        </div>
+
+        <div class="table-responsive small">
+            <table class="table table-striped">
+                <tbody>
+
+                    <tr style="font-size: 16px">
+                        <td class="text-center" style="background-color: darkseagreen">
+                            Hoje:<br />
+                            <b><span class="text-success" style="font-size: 32px">@Html.DisplayFor(x => ResumoPeriodico.FaturamentoHoje)</span></b>
+                        </td>
+                        <td class="text-left">
+                            <br />
+                            <span class="glyphicon glyphicon-calendar"></span>  Esta semana: <br />
+                            <span class="glyphicon glyphicon-calendar"></span>  Este mês: <br />
+                        </td>
+                        <td class="text-danger text-right">
+                            <br />
+                            <b>@Html.DisplayFor(x => ResumoPeriodico.FaturamentoSemana)</b><br />
+                            <b>@Html.DisplayFor(x => ResumoPeriodico.FaturamentoMes)</b><br /><br />
+                        </td>
+                    </tr>
+                    @*<tr>
+                            <td>
+                                <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                            </td>
+                        </tr>*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*Taxa de liberação*@
+<div class="col-md-6">
+    <div class="panel" style="background-color: dodgerblue">
+        <div class="panel-heading">
+            <b>Taxa de liberação</b>
+        </div>
+
+        <div class="table-responsive small">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td class="text-center">
+                            <br />
+                            <div style="font-size: 36px; color: black">
+                                @TaxaLiberacao.taxaLiberacao
+                            </div>
+                            <br />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*Ticket Médio - Indicador Mensal*@
+<div class="col-md-6">
+    <div class="panel" style="background-color: lightsalmon">
+        <div class="panel-heading">
+            <b>Ticket Médio - Indicador Mensal</b>
+        </div>
+
+        <div class="table-responsive small">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td class="text-center">
+                            <br />
+                            <div style="font-size: 36px; color: black">
+                                @TicketMedio.ticketMedio
+                            </div>
+                            <br />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*Top 10 Infrações*@
+<div class="col-md-12">
+
+    <div class="panel" style="background-color: plum">
+        <div class="panel-heading">
+            <b>Top 10 Infrações</b>
+        </div>
+
+        <div class="table-responsive small bg-success">
+            <table class="table table-bordered">
+                <tr>
+                    @foreach (var item in Infracoes)
+                    {
+                    <td>
+                        Cód.<br /><span class="badge"><b>@Html.DisplayFor(modelItem => item.infracaoCodigo)</b></span>
+                    </td>
+                    }
+                </tr>
+
+                <tr>
+                    @foreach (var item in Infracoes)
+                    {
+                    <td>
+                        <span class="glyphicon glyphicon-warning-sign"></span><br />
+                        @Html.DisplayFor(modelItem => item.infracaoDescricao)
+                    </td>
+                    }
+                </tr>
+
+                <tr>
+                    @foreach (var item in Infracoes)
+                    {
+                    <td>
+                        <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span><br />
+
+                        @if (item.quantidade > 1)
+                            {
+                        @*@Html.Label("Infrações");*@
+                        @Html.Name("Infrações");
+                            }
+                            else
+                            {
+                        @Html.Name("Infração");
+                            }
+
+
+                    </td>
+                    }
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@*Taxa de apreensão*@
+<div class="col-md-3">
+
+    @*<div class="panel" style="background-color: burlywood">
+            <div class="panel-heading">
+                <b>Taxa de Apreensão</b>
+            </div>
+
+            <div class="table-responsive small">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <div style="font-size: 36px; color: black">
+                                    @TaxaLiberacao.taxaApreensao
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
+
+</div>

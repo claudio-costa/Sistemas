@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="FinanceiroFechamento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Edital" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinanceiroFechamentoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FinanceiroFechamentoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinanceiroDetalhamento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Edital" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinanceiroDetalhamentoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FinanceiroDetalhamentoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FinanceiroFechamentoSoapIn">
+    <wsdl:part name="parameters" element="tns:FinanceiroFechamento" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroFechamentoSoapOut">
+    <wsdl:part name="parameters" element="tns:FinanceiroFechamentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroDetalhamentoSoapIn">
+    <wsdl:part name="parameters" element="tns:FinanceiroDetalhamento" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroDetalhamentoSoapOut">
+    <wsdl:part name="parameters" element="tns:FinanceiroDetalhamentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroFechamentoHttpGetIn">
+    <wsdl:part name="usuario" type="s:string" />
+    <wsdl:part name="senha" type="s:string" />
+    <wsdl:part name="Edital" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroFechamentoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroDetalhamentoHttpGetIn">
+    <wsdl:part name="usuario" type="s:string" />
+    <wsdl:part name="senha" type="s:string" />
+    <wsdl:part name="Edital" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroDetalhamentoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroFechamentoHttpPostIn">
+    <wsdl:part name="usuario" type="s:string" />
+    <wsdl:part name="senha" type="s:string" />
+    <wsdl:part name="Edital" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroFechamentoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroDetalhamentoHttpPostIn">
+    <wsdl:part name="usuario" type="s:string" />
+    <wsdl:part name="senha" type="s:string" />
+    <wsdl:part name="Edital" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinanceiroDetalhamentoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="RodandoLegalSoap">
+    <wsdl:operation name="FinanceiroFechamento">
+      <wsdl:input message="tns:FinanceiroFechamentoSoapIn" />
+      <wsdl:output message="tns:FinanceiroFechamentoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinanceiroDetalhamento">
+      <wsdl:input message="tns:FinanceiroDetalhamentoSoapIn" />
+      <wsdl:output message="tns:FinanceiroDetalhamentoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RodandoLegalHttpGet">
+    <wsdl:operation name="FinanceiroFechamento">
+      <wsdl:input message="tns:FinanceiroFechamentoHttpGetIn" />
+      <wsdl:output message="tns:FinanceiroFechamentoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinanceiroDetalhamento">
+      <wsdl:input message="tns:FinanceiroDetalhamentoHttpGetIn" />
+      <wsdl:output message="tns:FinanceiroDetalhamentoHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RodandoLegalHttpPost">
+    <wsdl:operation name="FinanceiroFechamento">
+      <wsdl:input message="tns:FinanceiroFechamentoHttpPostIn" />
+      <wsdl:output message="tns:FinanceiroFechamentoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinanceiroDetalhamento">
+      <wsdl:input message="tns:FinanceiroDetalhamentoHttpPostIn" />
+      <wsdl:output message="tns:FinanceiroDetalhamentoHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RodandoLegalSoap" type="tns:RodandoLegalSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FinanceiroFechamento">
+      <soap:operation soapAction="http://tempuri.org/FinanceiroFechamento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinanceiroDetalhamento">
+      <soap:operation soapAction="http://tempuri.org/FinanceiroDetalhamento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RodandoLegalSoap12" type="tns:RodandoLegalSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FinanceiroFechamento">
+      <soap12:operation soapAction="http://tempuri.org/FinanceiroFechamento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinanceiroDetalhamento">
+      <soap12:operation soapAction="http://tempuri.org/FinanceiroDetalhamento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RodandoLegalHttpGet" type="tns:RodandoLegalHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="FinanceiroFechamento">
+      <http:operation location="/FinanceiroFechamento" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinanceiroDetalhamento">
+      <http:operation location="/FinanceiroDetalhamento" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RodandoLegalHttpPost" type="tns:RodandoLegalHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="FinanceiroFechamento">
+      <http:operation location="/FinanceiroFechamento" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinanceiroDetalhamento">
+      <http:operation location="/FinanceiroDetalhamento" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RodandoLegal">
+    <wsdl:port name="RodandoLegalSoap" binding="tns:RodandoLegalSoap">
+      <soap:address location="http://ws-parceiros.vipleiloes.com/rodandolegal.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RodandoLegalSoap12" binding="tns:RodandoLegalSoap12">
+      <soap12:address location="http://ws-parceiros.vipleiloes.com/rodandolegal.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RodandoLegalHttpGet" binding="tns:RodandoLegalHttpGet">
+      <http:address location="http://ws-parceiros.vipleiloes.com/rodandolegal.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RodandoLegalHttpPost" binding="tns:RodandoLegalHttpPost">
+      <http:address location="http://ws-parceiros.vipleiloes.com/rodandolegal.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

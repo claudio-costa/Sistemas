@@ -1,0 +1,212 @@
+﻿<div class="modal fade" id="modal_procedimentos_liberacao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title text-center text-danger" id="myModalLabel">
+                    <strong><u>ATENÇÃO!</u></strong>
+                </h3>
+                <h5 class="text-center">LEIA OS PROCEDIMENTOS DE LIBERAÇÃO ANTES DE CONTINUAR</h5>
+            </div>
+            <div class="modal-body">
+                <div style="width:100%; height: 450px; border-width: 2px; border-style: solid">
+                    @*<object type="text/html" height="100%" width="100%" data="@MobLink.ConsultaGRV.Web.Comum.ProcedimentoLiberacaoUrlHtml(ViewBag.id_cliente)"></object>*@
+
+                    @{ 
+                        string html = string.Empty;
+
+                        if(ViewBag.id_cliente != null)
+                        {
+                            html = MobLink.ConsultaGRV.Web.Comum.ProcedimentoLiberacaoUrlHtml((Int32)ViewBag.id_cliente);
+                        }
+
+                    }
+
+                    <object type="text/html" height="100%" width="100%" data="@html"></object>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="text-center">
+                    <div class="text-center text-success">
+                        @using (Html.BeginForm())
+                        {
+                            <h5>
+                                <b>
+                                    @*@Html.ActionLink(@"ESTOU CIENTE DOS PROCEDIMENTOS DE LIBERAÇÃO 
+                                                       E QUERO PROSSEGUIR COM O PAGAMENTO", 
+                                                       "Cadastro", "GRV", null, new { @class = "btn btn-success btn-sm" })*@
+
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_cadastro">
+                                        ESTOU CIENTE DOS PROCEDIMENTOS DE LIBERAÇÃO E QUERO PROSSEGUIR COM O PAGAMENTO
+                                        &nbsp;&nbsp; <span class="glyphicon glyphicon-thumbs-up"></span> 
+                                    </button>
+                                </b>
+                            </h5>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/jquery-3.2.0.min.js"></script>
+<script src="~/js/jquery.maskedinput.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+    });
+
+    //$("#doc").mask("999.999.999-99", { selectOnFocus: true });
+    $("#txtcep").mask("99999-999", { selectOnFocus: true });
+    $("#txtddd").mask("(99)", { selectOnFocus: true });
+    $("#txttelefone").mask("99999-9999", { selectOnFocus: true });
+    $("#txtuf").mask("aa", { selectOnFocus: true });
+</script>
+
+<script>
+    $('#btnpesquisacep').on('click', function () {
+        var $btn = $(this).button('loading')
+        // business logic...
+
+        BuscaCEP();
+
+        $btn.button('reset')
+    })
+</script>
+
+<script type="text/javascript">
+
+    function BuscaCEP() {
+        $.ajax({
+            url: '@Url.Action("../GRV/BuscaCEP")',
+            data: { cep: $("#txtcep").val() },
+            type: "post",
+            dataType: "json",
+            beforeSend: function (XMLHttpRequest) {
+                $("#resultado").empty();
+                $("#resultado").append("PESQUISANDO");
+                $('#btnpesquisacep').text("AGUARDE");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#resultado").empty();
+                $("#resultado").append("CEP NÃO ENCONTRADO " + "textStatus: " + textStatus + " - errorThrown: " + errorThrown + " - XMLHttpRequest: " + XMLHttpRequest.text);
+            },
+            success: function (data, textStatus, XMLHttpRequest) {
+                $("#resultado").empty();
+                //$("#resultado").append(data["cep"]);
+                $("#txtendereco").val(data["end"]);
+                $("#txtmunicipio").val(data["cidade"]);
+                $("#txtuf").val(data["uf"]);
+                $("#txtbairro").val(data["bairro"]);
+                $("#txtnumero").focus();
+
+                //$(data).each(function () {
+                //    $("#resultado").append("Nome: " + this.Nome + " Sobrenome:"
+                //        + this.Sobrenome + " <br/>");
+
+                //});
+            },
+            complete: function () {
+                $('#btnpesquisacep').text("Pesquisar");
+                //$("#resultado").text("CONSULTA REALIZADA");
+            }
+
+        });
+    }
+</script>
+
+<script type="text/javascript">
+
+    function BuscaDOC() {
+        var textoURL = '@Url.Action("BuscaDOC")';
+        var textoDATA = $("#txtdoc").val();
+
+        $.ajax({
+            url: '@Url.Action("../GRV/BuscaDOC")',
+            data: { DOC: $("#txtdoc").val() },
+            type: "post",
+            dataType: "json",
+            beforeSend: function (XMLHttpRequest) {
+                $("#resultado").empty();
+                $("#resultado").append("PESQUISANDO");
+                $('#btnpesquisadoc').text("AGUARDE");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#resultado").empty();
+                $("#resultado").append("DOCUMENTO NÃO ENCONTRADO");
+            },
+            success: function (data, textStatus, XMLHttpRequest) {
+                $("#resultado").empty();
+
+                $("#txtnome").val(data["nome"]);
+                $("#txtdoc").val(data["documento"]);
+                $("#txtendereco").val(data["endereco"]);
+                $("#txtnumero").val(data["numero"]);
+                $("#txtcomplemento").val(data["complemento"]);
+
+                $("#txtbairro").val(data["bairro"]);
+                $("#txtmunicipio").val(data["municipio"]);
+                $("#txtuf").val(data["uf"]);
+                $("#txtcep").val(data["cep"]);
+                $("#txtddd").val(data["ddd"]);
+
+                $("#txtddd").val(data["ddd"]);
+                $("#txttelefone").val(data["telefone"]);
+                $("#txtemail").val(data["email"]);
+
+                //$(data).each(function () {
+                //    $("#resultado").append("Nome: " + this.Nome + " Sobrenome:"
+                //        + this.Sobrenome + " <br/>");
+
+                //});
+            },
+            complete: function () {
+                $('#btnpesquisadoc').text("Pesquisar");
+                //$("#resultado").text("CONSULTA REALIZADA");
+            }
+
+        });
+    }
+</script>
+
+<script>
+    $("#radioCPF").click(function () {
+        //$("#doc").mask("999.999.999-99");
+        $("#txtdoc").focus();
+    });
+
+    $("#radioCNPJ").click(function () {
+        //$("#doc").mask("99.999.999/9999-99");
+        $("#txtdoc").focus();
+    });
+
+    $("#doc").focus(function () {
+        $("#txtdoc").unmask();
+        $("#txtdoc").html("");
+    });
+
+    $("#doc").blur(function () {
+
+        var valor = $("#txtdoc").val();
+        var numsStr = valor.replace(/[^0-9]/g, '');
+
+        $("#txtdoc").unmask();
+
+        //var tamanho = $("#doc").val().length;
+        var tamanho = numsStr.length;
+
+        if (tamanho <= 11) {
+            $("#txtdoc").mask("999.999.999-99");
+        } else if (tamanho > 11) {
+            $("#txtdoc").mask("99.999.999/9999-99");
+        }
+
+        //$("#doc").val(numsStr);
+    });
+</script>
+
+

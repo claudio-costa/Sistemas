@@ -1,0 +1,61 @@
+﻿@{
+    var Status = MobLink.WebLeilao.Repositorio.RepositorioGlobal.StatusLeilao.SelecionarTudo();
+}
+
+
+<div class="modal fade" id="modal_alterar_status" tabindex="-1" role="dialog" aria-labelledby="modal_alterar_status">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4><span id="nome_leilao"></span></h4>
+                <h6 class="modal-title"></h6>
+            </div>
+            <div class="modal-body">
+
+                <select name="id_status" class="form-control" id="status">
+
+
+                    @foreach (var item in Status)
+                    {
+                        <option value="@item.id">@item.descricao</option>
+                    }
+
+                </select>
+
+
+                <input type="hidden" id="leilao" name="id" />
+
+            </div>
+            <div class="modal-footer">
+                @Html.Partial("../_GravarCancelar")
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#modal_alterar_status').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget) // Button that triggered the modal
+
+        // Extract info from data-* attributes
+        var id_leilao = button.data('whatever') 
+        var status_atual = button.data('parent')
+        var nome_leilao = button.data('bind')
+
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('SELECIONE NOVO STATUS')
+        //modal.find('.modal-title span').text(nome_leilao)
+
+
+        $('#status').val(status_atual);
+        $('#leilao').val(id_leilao);
+        $('#nome_leilao').text(nome_leilao);
+
+    })
+
+</script>

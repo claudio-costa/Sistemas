@@ -1,0 +1,169 @@
+﻿@model List<MobLink.WebLeilao.Dominio.Notificacao>
+
+@{ SelectList Leiloes = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Leilao.SelecionarTudo()); }
+@{ SelectList Clientes = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Cliente.SelecionarTudo(), "id", "nome"); }
+@{ SelectList Depositos = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Deposito.SelecionarTudo(), "id_deposito", "descricao"); }
+@{ SelectList Notificacoes = new SelectList(MobLink.WebLeilao.Repositorio.RepositorioGlobal.Notificacao.SelecionarTiposNotificacao(), "id", "descricao"); }
+
+@Html.Partial("../_SelecionarLeilao");
+
+@{
+    ViewBag.Title = "Notificações";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+
+                <div class="form-horizontal">
+
+                    @*<div class="col-md-4">
+                        Cliente:
+                        @Html.DropDownList("ID_CLIENTE", Clientes, "Selecione um Cliente", new { @class = "form-control input-sm" })
+                    </div>
+
+                    <div class="col-md-4">
+                        Depósito:
+                        @Html.DropDownList("ID_DEPOSITO", Depositos, "Selecione um depósito", new { @class = "form-control input-sm" })
+                    </div>*@
+
+                    <div class="col-md-4">
+                        Tipo da notificação:
+                        @Html.DropDownList("TIPO_NOTIFICACAO", Notificacoes, "Selecione um tipo de notificação", new { @class = "form-control input-sm" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <br />
+                        <input type="submit" value="Gerar Notificação" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_selecionar_leilao" />
+                    </div>
+                    
+                </div>
+
+                
+            </div>
+        </div>
+
+
+
+
+        @*<div class="col-md-3">
+            Selecione o leilão:<br />
+            @Html.DropDownList("IDLEILAO", Leiloes, "Selecione um leilão", new { @class = "form-control input-sm" })
+        </div>
+
+        @*<div class="col-md-3">
+            Selecione o tipo de notificação:<br />
+            @Html.DropDownList("IDTIPONOTIFICACAO", TiposNotificacao, "Selecione um tipo de notificação", new { @class = "form-control input-sm" })
+        </div>
+
+        <br />
+        <input type="submit" class="btn-default input-sm" value="Filtrar" name="btnFiltrar" />
+        <button class="btn-primary input-sm" value="true" name="GERAR" id="btnGerar">Gerar Notificação</button>*@
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <br />
+            <h1> <span class="badge badge-primary">267</span></h1>
+            <span class="label label-primary"><span class="badge"></span> Primary Label</span>
+
+
+            <br />
+            <table class="table table-striped small table-hover table-condensed">
+                <tr>
+                    <th>
+                        MARCA/MODELO
+                    </th>
+                    <th>
+                        PLACA
+                    </th>
+                    <th>
+                        CHASSI
+                    </th>
+
+                </tr>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.id_usuario)<br />
+                                @*@Html.DisplayFor(modelItem => item.nome_proprietario)<br />
+                                    @Html.DisplayFor(modelItem => item.nome_comunicado_venda)<br />
+                                    @Html.DisplayFor(modelItem => item.nome_financiamento_efet)*@
+                            </td>
+                        </tr>
+
+
+                        @*<tr>
+                                <td>
+                                    <h6>
+                                        <b>
+                                            <a href="javascript:abrir('@Url.Action("Edit", "Lote", new { Id = item.id_lote })');">Clique Aqui</a>
+                                            <a href='@Url.Action("Edit", "Lote", new { Id = item.id_lote })' target="_blank">
+                                            @Html.DisplayFor(modelItem => item.descricao_marca)
+                                            </a>
+                                            (Processo Nº @item.Processo)
+                                        </b>
+                                    </h6>
+
+                                    <span class="label label-primary">@item.descricao_marca (Processo Nº @item.Processo)</span>
+
+                                    <span>PROPRIETÁRIO: <span>@item.nome_proprietario - @item.endereco_proprietario @item.numero_endereco_proprietario <span style="color: red" class="glyphicon glyphicon-alert"></span> </span></span><br />
+                                    <span>FINANCEIRA: <i>@item.nome_financiamento_efet - @item.endereco_financiamento_efet @item.numero_financiamento_efet</i></span><br />
+                                    <span>COMUNICADO <i>VENDA: @item.nome_comunicado_venda - @item.endereco_comunicado_venda @item.numero_comunicado_venda</i></span>
+
+                                </td>
+                                <td>
+                                    <h6><b>@Html.DisplayFor(modelItem => item.placa)</b></h6>
+                                </td>
+                                <td>
+                                    teste
+                                </td>
+
+
+                            </tr>*@
+                    }
+                }
+
+                
+
+            </table>
+
+        </div>
+    </div>
+}
+
+<script>
+    function seleciona_leilao(URL) {
+        var width = 150;
+        var height = 250;
+
+
+        var left = 99;
+        var top = 99;
+
+
+        window.open(URL, 'janela', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left + ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no, url=no');
+    }
+
+
+    function abrir(URL) {
+        var width = 150;
+        var height = 250;
+
+
+        var left = 99;
+        var top = 99;
+
+
+        window.open(URL, 'janela', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left + ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no, url=no');
+    }
+</script>

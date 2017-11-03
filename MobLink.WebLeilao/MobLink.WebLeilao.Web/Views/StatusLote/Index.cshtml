@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MobLink.WebLeilao.Dominio.StatusLote>
+
+@{
+    ViewBag.Title = "Status de lotes";
+}
+
+<p>
+    @Html.ActionLink("Novo", "Create")
+</p>
+
+<table class="table table-striped small table-hover table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valida_lote)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valida_lote)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

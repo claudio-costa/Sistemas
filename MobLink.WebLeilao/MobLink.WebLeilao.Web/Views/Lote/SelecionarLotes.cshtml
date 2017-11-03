@@ -1,0 +1,90 @@
+﻿@model System.Data.DataTable
+@using System.Data;
+
+@{ MobLink.WebLeilao.Dominio.Leilao Leilao = ViewBag.Leilao; }
+
+@{
+    ViewBag.Title = "Resultado";
+}
+
+@{
+    using (Html.BeginForm())
+    {
+        TempData["arq"] = Model;
+
+        <input type="submit" name="executar" class="btn-primary" value="Importar Lotes para @Leilao.Descricao" />
+
+        if (Model != null && Model.Rows.Count > 0)
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Processo</th>
+                        <th>Placa</th>
+                        <th>Chassi</th>
+                        <th>Marca/Modelo</th>
+                        <th>Cor</th>
+                        <th>Tipo do Veículo</th>
+                        <th>
+                            <input id="idAll" type="checkbox" name="nameAll" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow row in Model.Rows)
+                    {
+                        <tr>
+                            <td>
+                                @row["Processo"]
+                            </td>
+                            <td>
+                                @row["Placa"]
+                            </td>
+                            <td>
+                                @row["Chassi"]
+                            </td>
+                            <td>
+                                @row["Marca / Modelo"]
+                            </td>
+                            <td>
+                                @row["Cor"]
+                            </td>
+                            <td>
+                                @row["Tipo Veículo"]
+                            </td>
+                            <td>
+                                <input type="checkbox" name="marcados" value="@row["Processo"]" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+}
+
+<script>
+
+    $(function () {
+        $('#idAll').click(function () {
+            var val = this.checked;
+            $('input[name=marcados]').each(function () {
+                $(this).prop('checked', val);
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("body").prepend('<div id="overlay" class="ui-widget-overlay" style="z-index: 1001; display: none;"></div>');
+        $("body").prepend("<div id='aguarde' style='display: none;'><img src='~/favicon.ico'/></div>");
+    });
+
+    $('#formulario').submit(function () {
+        $("#overlay, #aguarde").show();
+
+        return true;
+    });
+
+</script>
+
+

@@ -1,0 +1,1092 @@
+﻿@model MobLink.WebLeilao.Dominio.Lote
+
+@{ MobLink.WebLeilao.Dominio.Transacao005 prop = ViewBag.prop; }
+@{ MobLink.WebLeilao.Dominio.Pericia Pericia = ViewBag.pericia; }
+@{ MobLink.WebLeilao.Dominio.Leilao Leilao = ViewBag.Leilao; }
+
+@{ List<MobLink.WebLeilao.Dominio.Restricao> Restricoes = ViewBag.Restricoes; }
+@{ List<MobLink.WebLeilao.Dominio.ArquivoPericia> ArquivosPericia = ViewBag.ArquivosPericia; }
+
+@{ SelectList Cor = ViewBag.Cor; }
+@{ SelectList StatusLote = ViewBag.StatusLote; }
+
+
+@{
+    #region Dados das combos
+    List<SelectListItem> SituacaoVeiculoPericia = new List<SelectListItem>();
+    SituacaoVeiculoPericia.Add(new SelectListItem() { Text = "IRRECUPERAVEL IDENTIFICADO", Value = "0" });
+    SituacaoVeiculoPericia.Add(new SelectListItem() { Text = "IRRECUPERAVEL NÃO IDENTIFICADO", Value = "1" });
+    SituacaoVeiculoPericia.Add(new SelectListItem() { Text = "RECUPERAVEL", Value = "2" });
+    SelectList ListaSituacaoVeiculoPericia = new SelectList(SituacaoVeiculoPericia, "Value", "Text");
+
+    List<SelectListItem> itensResultadoPericia = new List<SelectListItem>();
+    itensResultadoPericia.Add(new SelectListItem() { Text = "APROVADO", Value = "A" });
+    itensResultadoPericia.Add(new SelectListItem() { Text = "REPROVADO", Value = "R" });
+    itensResultadoPericia.Add(new SelectListItem() { Text = "EM ANÁLISE", Value = "E" });
+    SelectList ResultadoPericia = new SelectList(itensResultadoPericia, "Value", "Text");
+
+    List<SelectListItem> SimNao = new List<SelectListItem>();
+    SimNao.Add(new SelectListItem() { Text = "SIM", Value = "S" });
+    SimNao.Add(new SelectListItem() { Text = "NÃO", Value = "N" });
+    SelectList ListaSimNao = new SelectList(SimNao, "Value", "Text");
+
+    List<SelectListItem> UF = new List<SelectListItem>();
+    UF.Add(new SelectListItem() { Text = "AC", Value = "AC" });
+    UF.Add(new SelectListItem() { Text = "AL", Value = "AL" });
+    UF.Add(new SelectListItem() { Text = "AP", Value = "AP" });
+    UF.Add(new SelectListItem() { Text = "AM", Value = "AM" });
+    UF.Add(new SelectListItem() { Text = "BA", Value = "BA" });
+    UF.Add(new SelectListItem() { Text = "CE", Value = "CE" });
+    UF.Add(new SelectListItem() { Text = "DF", Value = "DF" });
+    UF.Add(new SelectListItem() { Text = "ES", Value = "ES" });
+    UF.Add(new SelectListItem() { Text = "GO", Value = "GO" });
+    UF.Add(new SelectListItem() { Text = "MA", Value = "MA" });
+    UF.Add(new SelectListItem() { Text = "MT", Value = "MT" });
+    UF.Add(new SelectListItem() { Text = "MS", Value = "MS" });
+    UF.Add(new SelectListItem() { Text = "MG", Value = "MG" });
+    UF.Add(new SelectListItem() { Text = "PA", Value = "PA" });
+    UF.Add(new SelectListItem() { Text = "PB", Value = "PB" });
+    UF.Add(new SelectListItem() { Text = "PR", Value = "PR" });
+    UF.Add(new SelectListItem() { Text = "PE", Value = "PE" });
+    UF.Add(new SelectListItem() { Text = "PI", Value = "PI" });
+    UF.Add(new SelectListItem() { Text = "RJ", Value = "RJ" });
+    UF.Add(new SelectListItem() { Text = "RN", Value = "RN" });
+    UF.Add(new SelectListItem() { Text = "RS", Value = "RS" });
+    UF.Add(new SelectListItem() { Text = "RO", Value = "RO" });
+    UF.Add(new SelectListItem() { Text = "RR", Value = "RR" });
+    UF.Add(new SelectListItem() { Text = "SC", Value = "SC" });
+    UF.Add(new SelectListItem() { Text = "SP", Value = "SP" });
+    UF.Add(new SelectListItem() { Text = "SE", Value = "SE" });
+    UF.Add(new SelectListItem() { Text = "TO", Value = "TO" });
+    SelectList ListaUF = new SelectList(UF, "Value", "Text");
+
+    List<SelectListItem> itensLL = new List<SelectListItem>();
+    itensLL.Add(new SelectListItem() { Text = "LOCALIZADO", Value = "S" });
+    itensLL.Add(new SelectListItem() { Text = "NÃO LOCALIZADO", Value = "N" });
+    SelectList LL = new SelectList(itensLL, "Value", "Text");
+
+    List<SelectListItem> itensSP = new List<SelectListItem>();
+    itensSP.Add(new SelectListItem() { Selected = Model.Situacao_Placa == "S", Text = "COM PLACA", Value = "S" });
+    itensSP.Add(new SelectListItem() { Selected = Model.Situacao_Placa == "N", Text = "SEM PLACA", Value = "N" });
+    SelectList SP = new SelectList(itensSP, "Value", "Text");
+
+    List<SelectListItem> itensSC = new List<SelectListItem>();
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "CHASSI SEM PROBLEMAS", Value = "OK" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "CORTADO", Value = "C" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "RASPADO", Value = "R" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "OXIDADO", Value = "O" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "INACESSÍVEL", Value = "I" });
+    itensSC.Add(new SelectListItem() { Selected = false, Text = "NÃO ENCONTRADO", Value = "N" });
+    SelectList SC = new SelectList(itensSC, "Value", "Text");
+
+    List<SelectListItem> itensKG = new List<SelectListItem>();
+    itensKG.Add(new SelectListItem() { Selected = false, Text = "POSSUI GNV", Value = "S" });
+    itensKG.Add(new SelectListItem() { Selected = false, Text = "NÃO POSSUI GNV", Value = "N" });
+    itensKG.Add(new SelectListItem() { Selected = false, Text = "INACESSÍVEL", Value = "I" });
+    SelectList KG = new SelectList(itensKG, "Value", "Text");
+
+    List<SelectListItem> itensEV = new List<SelectListItem>();
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "EXCELENTE", Value = "E" });
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "BOM", Value = "B" });
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "RUIM", Value = "R" });
+    itensEV.Add(new SelectListItem() { Selected = false, Text = "PÉSSIMO", Value = "P" });
+    SelectList EV = new SelectList(itensEV, "Value", "Text");
+
+    List<SelectListItem> procedencia = new List<SelectListItem>();
+    procedencia.Add(new SelectListItem() { Text = "REGISTRO DE APREENSÃO", Value = "REGISTRO DE APREENSÃO" });
+    procedencia.Add(new SelectListItem() { Text = "OUTROS", Value = "OUTROS" });
+    SelectList ListaProcedencia = new SelectList(procedencia, "Value", "Text");
+
+    List<SelectListItem> direcao = new List<SelectListItem>();
+    direcao.Add(new SelectListItem() { Text = "NORMAL", Value = "NORMAL" });
+    direcao.Add(new SelectListItem() { Text = "HIDRÁULICA", Value = "HIDRÁULICA" });
+    direcao.Add(new SelectListItem() { Text = "ELETROHIDRAULICA", Value = "ELETROHIDRAULICA" });
+    SelectList ListaDirecao = new SelectList(direcao, "Value", "Text");
+
+    List<SelectListItem> cambio = new List<SelectListItem>();
+    cambio.Add(new SelectListItem() { Text = "MANUAL", Value = "MANUAL" });
+    cambio.Add(new SelectListItem() { Text = "AUTOMÁTICO", Value = "AUTOMÁTICO" });
+    cambio.Add(new SelectListItem() { Text = "AUTOMATIZADO", Value = "AUTOMATIZADO" });
+    cambio.Add(new SelectListItem() { Text = "CVT", Value = "CVT" });
+    SelectList ListaCambio = new SelectList(cambio, "Value", "Text");
+
+    #endregion
+}
+
+@{
+    ViewBag.Title = "Conferência Leilão";
+}
+
+Leilão: @Model.Nome_Leilao &nbsp;&nbsp; Processo: @Model.numero_formulario_grv
+
+<hr />
+
+@using (Html.BeginForm("ConferenciaLeilao", "Lote", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="row">
+            <div class="col-md-2">
+                Placa: <input type="text" class="form-control input-sm" placeholder="Digite placa" name="pPlaca" autofocus="" value="@ViewBag.pPlaca" />
+            </div>
+
+            <div class="col-md-2">
+                Chassi: <input type="text" class="form-control input-sm" placeholder="Digite chassi" name="pChassi" value="@ViewBag.pChassi" />
+            </div>
+
+            <div class="col-md-2">
+                Processo: <input type="text" class="form-control input-sm" placeholder="Nº do numero_formulario_grv" name="pProcesso" value="@ViewBag.pProcesso" />
+            </div>
+
+            <div class="col-md-2">
+                &nbsp;<input type="submit" class="form-control btn-primary input-sm" value="Consultar" />
+            </div>
+
+        </div>
+
+        <hr />
+
+    </div>
+
+}
+
+
+@using (Html.BeginForm("teste", "Lote"))
+{
+    <!-- Modal Inserção Restrição-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Nova Restrição</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.HiddenFor(model => model.id)
+                    @Html.HiddenFor(model => model.placa)
+                    <textarea name="restricao" class="form-control"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Gravar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.id_leilao)
+    //@Html.HiddenFor(model => model.numero_lote)
+
+    <div class="form-horizontal">
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#Veiculo">Veículo</a></li>
+            <li><a data-toggle="tab" href="#Outras">Outras características</a></li>
+            <li><a data-toggle="tab" href="#Lote">Lote</a></li>
+            <li><a data-toggle="tab" href="#Proprietario">Proprietário</a></li>
+            <li><a data-toggle="tab" href="#Arrendatario">Arrendatário</a></li>
+            <li><a data-toggle="tab" href="#Comunicacao">Comunicação de Venda</a></li>
+            <li><a data-toggle="tab" href="#Pericia">Perícia</a></li>
+            <li><a data-toggle="tab" href="#Notificacao">Notificação</a></li>
+            <li><a data-toggle="tab" href="#Restricoes">Restrições</a></li>
+        </ul>
+
+        <div class="tab-content">
+
+            <div id="Veiculo" class="tab-pane fade in active">
+
+                <br />
+
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.placa, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.placa, new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.renavan, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.renavan, new { @class = "form-control input-sm", @id = "txtrenavam", @name = "txtrenavam" })
+                    </div>
+
+                    @Html.LabelFor(model => model.chassi, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.chassi, new { @class = "form-control input-sm" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.numero_motor, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.numero_motor, new { @class = "form-control input-sm" })
+                    </div>
+
+
+
+                    @Html.LabelFor(model => model.Uf_Veiculos, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Uf_Veiculos, ListaUF, "--", new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.municipio, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.municipio, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.marca_modelo, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.marca_modelo, new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.tipo_veiculo, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.tipo_veiculo, new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.ano, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.ano, new { @class = "form-control input-sm", @id = "txtano" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cor, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.cor, new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.tipo_combustivel, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.tipo_combustivel, new { @class = "form-control input-sm" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.observacoes, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-8">
+                        @*@Html.TextBoxFor(model => model.observacoes, new { @class = "form-control input-sm" })*@
+
+                        @*@Html.EditorFor(model => model.observacoes, new { @class = "form-control input-sm" })*@
+
+                        @*@Html.TextAreaFor(model => model.observacoes, new { @class = "form-control input-sm" })*@
+
+                        @*<textarea id="observacoes" name="observacoes"  >
+
+                            </textarea>*@
+
+                        @*<textarea class="form-control custom-control" id="observacoes" name="observacoes"  rows="3" style="resize:none">@Model.observacoes</textarea>*@
+                        <textarea class="form-control input-sm" id="observacoes" name="observacoes" rows="3" style="resize:none">@Model.observacoes</textarea>
+                        @*<span class="input-group-addon btn btn-primary">Send</span>*@
+
+
+                    </div>
+                </div>
+
+                <hr />
+
+            </div>
+
+            <div id="Outras" class="tab-pane fade in">
+                <br />
+
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.procedencia_veiculo, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @*@Html.TextBoxFor(model => model.procedencia_veiculo, new { @class = "form-control input-sm" })*@
+                        @Html.DropDownListFor(model => model.procedencia_veiculo, ListaProcedencia, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.chave, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.chave, ListaSimNao, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.valor_avaliacao, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.valor_avaliacao, new { @class = "form-control input-sm", @id = "txtvaloravaliacao" })
+                    </div>
+
+                    @Html.LabelFor(model => model.lance_minimo, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.lance_minimo, new { @class = "form-control input-sm", @id = "txtlanceminimo" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.quilometragem, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.quilometragem, new { @class = "form-control input-sm", @id="txtquilometragem" })
+                    </div>
+
+                    @Html.LabelFor(model => model.cambio, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @*@Html.TextBoxFor(model => model.cambio, new { @class = "form-control input-sm" })*@
+                        @Html.DropDownListFor(model => model.cambio, ListaCambio, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.ar_condicionado, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @*@Html.TextBoxFor(model => model.ar_condicionado, new { @class = "form-control input-sm" })*@
+                        @Html.DropDownListFor(model => model.ar_condicionado, ListaSimNao, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.direcao, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @*@Html.TextBoxFor(model => model.direcao, new { @class = "form-control input-sm" })*@
+                        @Html.DropDownListFor(model => model.direcao, ListaDirecao, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.vidroEletrico, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @*@Html.TextBoxFor(model => model.vidroEletrico, new { @class = "form-control input-sm" })*@
+                        @Html.DropDownListFor(model => model.vidroEletrico, ListaSimNao, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.travaEletrica, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-2">
+                        @*@Html.TextBoxFor(model => model.travaEletrica, new { @class = "form-control input-sm" })*@
+                        @Html.DropDownListFor(model => model.travaEletrica, ListaSimNao, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="Lote" class="tab-pane fade in">
+
+                <br />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.numero_lote, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.numero_lote, new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.id_status_lote, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.id_status_lote, StatusLote, "* SELECIONE *", new { @class = "form-control input-sm", @style = "background-color: yellow" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.localizacao, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.localizacao, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.reboque, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.reboque, ListaSimNao, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.responsavel_remocao, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.responsavel_remocao, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Situacao_Lote, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Situacao_Lote, LL, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Situacao_Chassi, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Situacao_Chassi, SC, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Situacao_GNV, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Situacao_GNV, KG, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Situacao_Placa, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Situacao_Placa, SP, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Situacao_Veiculo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Situacao_Veiculo, EV, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="Pericia" class="tab-pane fade in">
+
+                <br />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.situacao_veiculo_pericia, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.situacao_veiculo_pericia, ListaSituacaoVeiculoPericia, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.observacoes, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.observacoes, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nº do laudo</label>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(p => Pericia.NumeroLaudo, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Data da Perícia</label>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(p => Pericia.DataPericia, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.status_pericia, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.status_pericia, ResultadoPericia, "* SELECIONE *", new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+
+                <hr />
+
+                <table class="table" id="tabela">
+                    <tr>
+                        <td><b>Nome do arquivo</b></td>
+                        <td><b>Tamanho</b></td>
+                        <td><b>Tipo</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    @foreach (var item in ArquivosPericia)
+                    {
+                        <tr>
+                            <td>@item.Nome</td>
+                            <td>@item.Tamanho</td>
+                            <td>@item.Tipo</td>
+                            <td>
+                                <input class="form-control input-sm" id="id_arquivo" name="id_arquivo" type="hidden" value="@item.Id" />
+                            </td>
+
+                            <td>
+                                @*<a href=""><span class="glyphicon glyphicon-remove"></span></a>*@
+                                
+                                <a href='@Url.Action("ExcluiArquivo", "Lote", new { Id = item.Id })'>
+                                    <span class="glyphicon glyphicon-remove"
+                                          data-toggle="tooltip" data-placement="top"
+                                          title="EXCLUIR"></span>
+                                </a>
+                            </td>
+
+                            <td>
+                                @*<a href=""><span class="glyphicon glyphicon-download text-success"></span></a>*@
+
+
+                                <a href='@Url.Action("Index", "Lote", new { Id = item.Id })'>
+                                    <span class="glyphicon glyphicon-download text-success"
+                                          data-toggle="tooltip" data-placement="top"
+                                          title="DOWNLOAD"></span>
+                                </a>
+
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Adicionar arquivo&nbsp;</span>
+                    <input id="fileupload" type="file" name="files[]" onclick="carregar(@Model.id);">
+                </span>
+
+                @*<div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% completo</span>
+                        </div>
+                    </div>*@
+
+                @*<br />
+                    <div class="file_name"></div>
+                    <br />
+                    <div class="file_type"></div>
+                    <br />
+                    <div class="file_size"></div>*@
+
+            </div>
+
+            <div id="Proprietario" class="tab-pane fade in">
+
+                <br />
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtNome">Nome</label>
+                    <div class="col-md-8">
+                        <input Id="txtNome" class="form-control input-sm" focus="" name="Nome" type="text" value="@prop.NomeProprietario" />
+                        <span class="field-validation-valid" data-valmsg-for="txtNome" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtIdentidade">Identidade</label>
+                    <div class="col-md-2">
+                        <input Id="txtIdentidade" class="form-control input-sm" focus="" name="Identidade" type="text" value="@prop.NumeroCpfCnpj" />
+                        <span class="field-validation-valid" data-valmsg-for="txtIdentidade" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-4" for="txtOrgaoExpedidor">Orgão Exped.</label>
+                    <div class="col-md-2">
+                        <input Id="txtOrgaoExpedidor" class="form-control input-sm" focus="" name="Orgao_Expedidor" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="txtOrgaoExpedidor" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtCpf">CPF</label>
+                    <div class="col-md-2">
+                        <input Id="txtCpf" class="form-control input-sm" focus="" name="Cpf" type="text" value="@prop.NumeroCpfCnpj" />
+                        <span class="field-validation-valid" data-valmsg-for="txtCpf" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-4" for="txtCnpj">CNPJ</label>
+                    <div class="col-md-2">
+                        <input Id="txtCnpj" class="form-control input-sm" focus="" name="Cnpj" type="text" value="@prop.NumeroCpfCnpj" />
+                        <span class="field-validation-valid" data-valmsg-for="txtCnpj" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtCep">CEP</label>
+                    <div class="col-md-2">
+                        <input Id="txtCep" class="form-control input-sm" focus="" name="Cep" type="text" value="@prop.CepEnderecoProprietario" />
+                        <span class="field-validation-valid" data-valmsg-for="txtCep" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <button type="button" class="input-sm" id="btnConsultaCep" name="btnConsultaCep">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="control-label col-md-1" for="txtEndereco">Endereco</label>
+                    <div class="col-md-5">
+                        <input Id="txtEndereco" class="form-control input-sm" focus="" readonly="readonly" name="Endereco" type="text" value="@prop.EnderecoProprietario" />
+                        <span class="field-validation-valid" data-valmsg-for="txtEndereco" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtNumero">Nº</label>
+                    <div class="col-md-2">
+                        <input Id="txtNumero" class="form-control input-sm" focus="" name="Numero" type="text" value="@prop.NumeroEnderecoProprietario" onkeyup="somenteNumeros(this);" />
+                        <span class="field-validation-valid" data-valmsg-for="txtNumero" data-valmsg-replace="true"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtComplemento">Compl.</label>
+                    <div class="col-md-2">
+                        <input Id="txtComplemento" class="form-control input-sm" focus="" name="Complemento" type="text" value="@prop.ComplementoEnderecoProprietario" />
+                        <span class="field-validation-valid" data-valmsg-for="txtComplemento" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtBairro">Bairro</label>
+                    <div class="col-md-2">
+                        <input Id="txtBairro" class="form-control input-sm" focus="" readonly="readonly" name="Bairro" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="txtBairro" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtMunicipio">Município</label>
+                    <div class="col-md-2">
+                        <input Id="txtMunicipio" class="form-control input-sm" focus="" readonly="readonly" name="Municipio" type="text" value="@prop.DescricaoMunicipioEndereco" />
+                        <span class="field-validation-valid" data-valmsg-for="txtMunicipio" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtUF">UF</label>
+                    <div class="col-md-1">
+                        <input Id="txtUF" class="form-control input-sm" focus="" readonly="readonly" name="UF" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="txtUF" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="Arrendatario" class="tab-pane fade in">
+
+                <br />
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtNomeArrendatario">Nome</label>
+                    <div class="col-md-8">
+                        <input Id="txtNomeArrendatario" class="form-control input-sm" focus="" name="Nome_Arrendatario" type="text" value="@prop.NomeFinanciamentoEfet" />
+                        <span class="field-validation-valid" data-valmsg-for="txtNomeArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtIdentidade_Arrendatario">Identidade</label>
+                    <div class="col-md-2">
+                        <input Id="txtIdentidade_Arrendatario" class="form-control input-sm" focus="" name="Identidade_Arrendatario" type="text" value="@prop.CpfCnpjFinanciamentoEfet" />
+                        <span class="field-validation-valid" data-valmsg-for="txtIdentidade_Arrendatario" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-4" for="txtOrgaoExpedidorArrendatario">Orgão Exped.</label>
+                    <div class="col-md-2">
+
+                        <input Id="txtOrgaoExpedidorArrendatario" class="form-control input-sm" focus="" name="Orgao_Expedidor_Arrendatario" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="txtOrgaoExpedidorArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtCpfArrendatario">CPF</label>
+                    <div class="col-md-2">
+                        <input Id="txtCpfArrendatario" class="form-control input-sm" focus="" name="Cpf_Arrendatario" type="text" value="@prop.CpfCnpjFinanciamentoEfet" />
+                        <span class="field-validation-valid" data-valmsg-for="txtCpfArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-4" for="txtCnpjArrendatario">CNPJ</label>
+                    <div class="col-md-2">
+                        <input Id="txtCnpjArrendatario" class="form-control input-sm" focus="" name="Cnpj_Arrendatario" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="txtCnpjArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtCepArrendatario">CEP</label>
+                    <div class="col-md-2">
+                        <input Id="txtCepArrendatario" class="form-control input-sm" focus="" name="Cep_Arrendatario" type="text" value="@prop.CepFinanciamentoEfet" />
+                        <span class="field-validation-valid" data-valmsg-for="txtCepArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+                    <button type="button" class="input-sm" id="btnConsultaCepArrend" name="btnConsultaCepArrend">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="control-label col-md-1" for="txtEnderecoArrendatario">Endereco</label>
+                    <div class="col-md-5">
+                        <input Id="txtEnderecoArrendatario" class="form-control input-sm" focus="" readonly="readonly" name="Endereco_Arrendatario" type="text" value="@prop.EnderecoFinanciamentoEfet" />
+                        <span class="field-validation-valid" data-valmsg-for="txtEnderecoArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtNumeroArrendatario">Nº</label>
+                    <div class="col-md-2">
+                        <input Id="txtNumeroArrendatario" class="form-control input-sm" focus="" name="Numero_Arrendatario" type="text" value="@prop.NumeroFinanciamentoEfet" onkeyup="somenteNumeros(this);" />
+                        <span class="field-validation-valid" data-valmsg-for="txtNumeroArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtComplementoArrendatario">Complemento</label>
+                    <div class="col-md-2">
+                        <input Id="txtComplementoArrendatario" class="form-control input-sm" focus="" name="Complemento_Arrendatario" type="text" value="@prop.ComplementoFinanciamentoEfet" />
+                        <span class="field-validation-valid" data-valmsg-for="txtComplementoArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtBairroArrendatario">Bairro</label>
+                    <div class="col-md-2">
+                        <input Id="txtBairroArrendatario" class="form-control input-sm" focus="" readonly="readonly" name="Bairro_Arrendatario" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="txtBairroArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtMunicipioArrendatario">Município</label>
+                    <div class="col-md-2">
+                        <input Id="txtMunicipioArrendatario" class="form-control input-sm" focus="" readonly="readonly" name="Municipio_Arrendatario" type="text" value="@prop.MunicipioFinanciamentoEfet" />
+                        <span class="field-validation-valid" data-valmsg-for="txtMunicipioArrendatario" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtUFArrend">UF</label>
+                    <div class="col-md-1">
+                        <input Id="txtUFArrend" class="form-control input-sm" focus="" readonly="readonly" name="UF_Arrendatario" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="txtUFArrend" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Comunicacao" class="tab-pane fade in">
+
+                <br />
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtNomeComunicacaoVenda">Nome</label>
+                    <div class="col-md-8">
+                        <input Id="txtNomeComunicacaoVenda" class="form-control input-sm" focus="" name="Nome_ComunicacaoVenda" type="text" value="@prop.NomeComunicacaoVenda" />
+                        <span class="field-validation-valid" data-valmsg-for="txtNomeComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtDocumentoComunicacaoVenda">Identidade</label>
+                    <div class="col-md-2">
+                        <input Id="txtDocumentoComunicacaoVenda" class="form-control input-sm" focus="" name="Identidade_ComunicacaoVenda" type="text" value="@prop.CpfCnpjComunicadoVenda" />
+                        <span class="field-validation-valid" data-valmsg-for="txtDocumentoComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-4" for="txtOrgaoExpedidorComunicacaoVenda">Orgão Exped.</label>
+                    <div class="col-md-2">
+                        <input Id="txtOrgaoExpedidorComunicacaoVenda" class="form-control input-sm" focus="" name="Orgao_Expedidor_ComunicacaoVenda" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="txtOrgaoExpedidorComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtCpfComunicacaoVenda">CPF</label>
+                    <div class="col-md-2">
+                        <input Id="txtCpfComunicacaoVenda" class="form-control input-sm" focus="" name="Cpf_ComunicacaoVenda" type="text" value="@prop.CpfCnpjComunicadoVenda" />
+                        <span class="field-validation-valid" data-valmsg-for="txtCpfComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-4" for="txtCnpjComunicacaoVenda">CNPJ</label>
+                    <div class="col-md-2">
+                        <input Id="txtCnpjComunicacaoVenda" class="form-control input-sm" focus="" name="Cnpj_ComunicacaoVenda" type="text" value="" />
+                        <span class="field-validation-valid" data-valmsg-for="txtCnpjComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtCepComunicacaoVenda">CEP</label>
+                    <div class="col-md-2">
+                        <input Id="txtCepComunicacaoVenda" class="form-control input-sm" focus="" name="Cep_ComunicacaoVenda" type="text" value="@prop.CepComunicadoVenda" />
+                        <span class="field-validation-valid" data-valmsg-for="txtCepComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <button type="button" class="input-sm" id="btnConsultaCepCom" name="btnConsultaCepCom">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="control-label col-md-1" for="txtEnderecoComunicacaoVenda">Endereco</label>
+                    <div class="col-md-5">
+                        <input Id="txtEnderecoComunicacaoVenda" class="form-control input-sm" focus="" readonly="readonly" name="Endereco_ComunicacaoVenda" type="text" value="@prop.EnderecoComunicadoVenda" />
+                        <span class="field-validation-valid" data-valmsg-for="txtEnderecoComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtNumeroComunicacaoVenda">Nº</label>
+                    <div class="col-md-2">
+                        <input Id="txtNumeroComunicacaoVenda" class="form-control input-sm" focus="" name="Numero_ComunicacaoVenda" type="text" value="@prop.NumeroComunicadoVenda" onkeyup="somenteNumeros(this);" />
+                        <span class="field-validation-valid" data-valmsg-for="txtNumeroComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="txtComplementoComunicacaoVenda">Complemento</label>
+                    <div class="col-md-2">
+                        <input Id="txtComplementoComunicacaoVenda" class="form-control input-sm" focus="" name="Complemento_ComunicacaoVenda" type="text" value="@prop.ComplementoComunicadoVenda" />
+                        <span class="field-validation-valid" data-valmsg-for="txtComplementoComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtBairroComunicacaoVenda">Bairro</label>
+                    <div class="col-md-2">
+                        <input Id="txtBairroComunicacaoVenda" class="form-control input-sm" focus="" readonly="readonly" name="Bairro_ComunicacaoVenda" type="text" value="@prop.BairroComunicadoVenda" />
+                        <span class="field-validation-valid" data-valmsg-for="txtBairroComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtMunicipioComunicacaoVenda">Município</label>
+                    <div class="col-md-2">
+                        <input Id="txtMunicipioComunicacaoVenda" class="form-control input-sm" focus="" readonly="readonly" name="Municipio_ComunicacaoVenda" type="text" value="@prop.MunicipioComunicadoVenda" />
+                        <span class="field-validation-valid" data-valmsg-for="txtMunicipioComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <label class="control-label col-md-1" for="txtUFComunicacaoVenda">UF</label>
+                    <div class="col-md-1">
+                        <input Id="txtUFComunicacaoVenda" class="form-control input-sm" focus="" readonly="readonly" name="UF_ComunicacaoVenda" type="text" value="@prop.UfComunicadoVenda" />
+                        <span class="field-validation-valid" data-valmsg-for="txtUFComunicacaoVenda" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="Notificacao" class="tab-pane fade in">
+
+                <br />
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.data_hora_notificacao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.data_hora_notificacao, new { @class = "form-control input-sm", @disabled = "disabled" })
+                    </div>
+                </div>*@
+
+                <hr />
+
+            </div>
+
+            <div id="Restricoes" class="tab-pane fade in">
+
+
+                @*<input class="form-control input-sm" focus="" id="Id_Lote" name="Id_Lote" type="hidden" />*@
+
+                <br />
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>RESTRIÇÃO</th>
+
+                        @if (Leilao != null)
+                        {
+                            //if (Leilao.Comitente.Detro != "S")
+                            {
+                        <th>
+                            <a href='#' data-toggle="modal" data-target="#myModal">
+                                <span class="glyphicon glyphicon-plus-sign text-primary"
+                                      data-toggle="tooltip" data-placement="top"
+                                      title="Divergências encontradas no lote"></span>  Inserir
+                            </a>
+                        </th>
+                            }
+                        }
+
+
+
+
+
+                    </tr>
+
+                    @if (Restricoes != null)
+                    {
+                        foreach (var item in Restricoes)
+                        {
+                    <tr>
+                        <td>
+                            @item.restricao
+
+                            @*&nbsp;&nbsp;
+                                <a href='@Url.Action("Edit", "Lote", new { id = item.Id })'>
+                                    <span class="glyphicon glyphicon-edit text-info"
+                                          data-toggle="tooltip" data-placement="top"
+                                          title="Editar"></span>
+                                </a>*@
+                        </td>
+
+                        <td></td>
+                    </tr>
+                        }
+                    }
+
+
+                </table>
+
+                <hr />
+
+            </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-2">
+                &nbsp;<button class="form-control btn-info input-sm" value="true" name="SalvarDados">Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<script>
+    $("#txtCpf").mask("000.000.000-00", { selectOnFocus: true });
+    $("#txtCnpj").mask("99.999.999/9999-99", { selectOnFocus: true });
+    $("#txtCep").mask("99999-999", { selectOnFocus: true });
+
+    $("#txtCpfArrendatario").mask("999.999.999-99", { selectOnFocus: true });
+    $("#txtCnpjArrendatario").mask("99.999.999/9999-99", { selectOnFocus: true });
+    $("#txtCepArrendatario").mask("99999-999", { selectOnFocus: true });
+
+    $("#txtCpfComunicacaoVenda").mask("999.999.999-99", { selectOnFocus: true });
+    $("#txtCnpjComunicacaoVenda").mask("99.999.999/9999-99", { selectOnFocus: true });
+    $("#txtCepComunicacaoVenda").mask("99999-999", { selectOnFocus: true });
+
+    $("#txtano").mask("0000/0000", { placeholder: "____/____" });
+
+    $("#txtrenavam").mask("0#");
+    $("#txtquilometragem").mask("0#");
+
+    $('#txtvaloravaliacao').mask("#.##0,00", { reverse: true });
+    //$('#txtvaloravaliacao').mask('000.000.000.000.000,00', { reverse: true });
+    $('#txtlanceminimo').mask('000.000.000.000.000,00', { reverse: true });
+
+
+    //Proprietário
+    function PreencheEndereco() {
+        $.ajax({
+            url: '@Url.Action("ConsultaCEP")',
+            data: { cep: $("#txtCep").val() },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            type: "GET",
+            success: function (dados) {
+                $("#txtEndereco").val(dados.MeuCEP.end);
+                $("#txtBairro").val(dados.MeuCEP.bairro);
+                $("#txtMunicipio").val(dados.MeuCEP.cidade);
+                $("#txtUF").val(dados.MeuCEP.uf);
+            },
+            error: function () {
+                alert("CEP não encontrado");
+            }
+        });
+    };
+
+    //Arrendatário
+    function PreencheEnderecoArrend() {
+        $.ajax({
+            url: '@Url.Action("ConsultaCEP")',
+            data: { cep: $("#txtCepArrendatario").val() },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            type: "GET",
+            success: function (dados) {
+                $("#txtEnderecoArrendatario").val(dados.MeuCEP.end);
+                $("#txtBairroArrendatario").val(dados.MeuCEP.bairro);
+                $("#txtMunicipioArrendatario").val(dados.MeuCEP.cidade);
+                $("#txtUFArrend").val(dados.MeuCEP.uf);
+            },
+            error: function () {
+                alert("CEP não encontrado");
+            }
+        });
+    };
+
+    //Comunicação de venda
+    function PreencheEnderecoCom() {
+        $.ajax({
+            url: '@Url.Action("ConsultaCEP")',
+            data: { cep: $("#txtCepComunicacaoVenda").val() },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            type: "GET",
+            success: function (dados) {
+                $("#txtEnderecoComunicacaoVenda").val(dados.MeuCEP.end);
+                $("#txtBairroComunicacaoVenda").val(dados.MeuCEP.bairro);
+                $("#txtMunicipioComunicacaoVenda").val(dados.MeuCEP.cidade);
+                $("#txtUFComunicacaoVenda").val(dados.MeuCEP.uf);
+            },
+            error: function () {
+                alert("CEP não encontrado");
+            }
+        });
+    };
+
+    $(function () {
+        $("#btnConsultaCep").on("click", function () {
+            if ($("#txtcep").val() == "") {
+                alert("Preencha o CEP corretamente para pesquisa");
+            }
+            else {
+                PreencheEndereco();
+            }
+        });
+    });
+
+    $(function () {
+        $("#btnConsultaCepArrend").on("click", function () {
+            if ($("#txtCepArrendatario").val() == "") {
+                alert("Preencha o CEP corretamente para pesquisa");
+            }
+            else {
+                PreencheEnderecoArrend();
+            }
+        });
+    });
+
+    $(function () {
+        $("#btnConsultaCepCom").on("click", function () {
+            if ($("#txtCepComunicacaoVenda").val() == "") {
+                alert("Preencha o CEP corretamente para pesquisa");
+            }
+            else {
+                PreencheEnderecoCom();
+            }
+        });
+    });
+
+</script>
+
+<link href="~/css/jquery.fileupload.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery.ui.widget.js"></script>
+<script src="~/Scripts/jquery.fileupload.js"></script>
+
+<script type="text/javascript">
+
+    function carregar(id) {
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            url: '@Url.Action("CarregaArquivo/")' + id,
+            autoUpload: true,
+            done: function (e, data) {
+
+                //$("#tabela").append("<tr>");
+                //$("#tabela").append("<td>IMG-20160104-WA0002.jpg</td>");
+                //$("#tabela").append("<td>615662</td>");
+                //$("#tabela").append("<td>image/jpeg</td>");
+                //$("#tabela").append("<td><input class='form- control input- sm' id='id_arquivo' name='id_arquivo' type='hidden' value='7'></td>");
+                //$("#tabela").append("<td><a href='/Lote/Index/7'><span class='glyphicon glyphicon-remove' data-toggle='tooltip' data-placement='top' title='EXCLUIR'></span></a></td>");
+                //$("#tabela").append("<td><a href='/Lote/Index/7'><span class='glyphicon glyphicon-download text-success' data-toggle='tooltip' data-placement='top' title='DOWNLOAD'></span></a></td>");
+                //$("#tabela").append("</tr>");
+
+                $("#tabela").append("<tr><td>" + data.result.ArquivoPericia[0].Nome + "</td><td>" + data.result.ArquivoPericia[0].Tamanho + "</td><td>" + data.result.ArquivoPericia[0].Tipo + "</td><td></td><td></td><td></td></tr><br/>");
+            }
+        }).on('fileuploadprogressall', function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            //$('.progress .progress-bar').css('width', progress + '%');
+        });
+    }
+
+
+</script>

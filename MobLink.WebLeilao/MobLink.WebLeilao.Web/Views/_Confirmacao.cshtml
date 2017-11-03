@@ -1,0 +1,39 @@
+﻿<div class="modal fade" id="confirmacao" tabindex="-1" role="dialog" aria-labelledby="confirmacao">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Confirmação</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="id" name="id" />
+                <span id="msg"></span>
+            </div>
+            <div class="modal-footer">
+                @Html.Partial("../_SimNao")
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#confirmacao').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        var cabecalho = button.data('cab')
+
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        //modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-title').text(cabecalho)
+        //modal.find('.modal-body input').val(recipient)
+
+        $('#id').val(recipient);
+
+        $('#msg').text(recipient);
+
+    })
+
+</script>

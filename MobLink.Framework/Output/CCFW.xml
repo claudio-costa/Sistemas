@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CCFW</name>
+    </assembly>
+    <members>
+        <member name="T:CCFW.Funcoes.DataUtils">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CCFW.Funcoes.DataUtils.PrimeiroEUltimoDiaDaSemana">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CCFW.Funcoes.TextoUtils">
+            <summary>
+            Esta classe trata operações com strings
+            </summary>
+        </member>
+        <member name="M:CCFW.Funcoes.TextoUtils.Primeira_Palavra(System.String)">
+            <summary>
+            Retorna a primeira palavra de um texto.
+            </summary>
+            <param name="Texto">Cadeia de caracteres da qual deve ser retirada a primeira palavra.</param>
+            <returns>Retorna a primeira palavra de um texto.</returns>
+            <remarks>
+            Esta função foi retirada da internet e aprimorada por Cláudio Costa
+            </remarks>
+        </member>
+        <member name="M:CCFW.Funcoes.TextoUtils.Obter_Propriedades(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="Objeto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CCFW.Conversoes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CCFW.Conversoes.ConversaoSegura``1(System.Object,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="valor"></param>
+            <param name="valorPadrao"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CCFW.Interfaces.ICrud`2">
+            <summary>
+            Implementa operações básicas de CRUD na classe que a implementa
+            </summary>
+            <typeparam name="TEntidade">Entidade modelo</typeparam>
+            <typeparam name="TChave">Tipo de dados da primary key da entidade</typeparam>
+        </member>
+        <member name="M:CCFW.Interfaces.ICrud`2.SelecionarTudo">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CCFW.Interfaces.ICrud`2.SelecionarPorId(`1)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CCFW.Interfaces.ICrud`2.Inserir(`0)">
+            <summary>
+            
+            </summary>
+            <param name="entidade"></param>
+        </member>
+        <member name="M:CCFW.Interfaces.ICrud`2.Alterar(`0)">
+            <summary>
+            
+            </summary>
+            <param name="entidade"></param>
+        </member>
+        <member name="M:CCFW.Interfaces.ICrud`2.Excluir(`0)">
+            <summary>
+            
+            </summary>
+            <param name="entidade"></param>
+        </member>
+        <member name="M:CCFW.Interfaces.ICrud`2.ExcluirPorId(`1)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+        </member>
+    </members>
+</doc>

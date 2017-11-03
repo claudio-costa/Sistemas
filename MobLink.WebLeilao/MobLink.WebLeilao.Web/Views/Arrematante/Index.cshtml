@@ -1,0 +1,117 @@
+﻿@model List<MobLink.WebLeilao.Dominio.Arrematante>
+
+@{
+    ViewBag.Title = "Arrematantes";
+}
+
+<p>
+    @Html.ActionLink("Voltar para lista", "PrestacaoContas", "Leilao")
+</p>
+
+
+
+@if (Model.Count > 0)
+{
+    <span>Leilão @Model.FirstOrDefault().leilao</span><hr />    
+
+    @*using (Html.BeginForm())
+    {
+        <button class="btn btn-sm" type="submit" name="recarregar" value="true">TESTES-RECARREGAR</button>
+    }*@
+}
+else
+{
+    @*<div class="col-md-6">
+        <h2>Arrematantes</h2>
+    </div>*@
+
+    @*using (Html.BeginForm())
+    {
+        <div class="col-md-6 text-right">
+            <br />
+            <button class="btn btn-sm" type="submit" name="recarregar" value="false">Carregar arrematantes do leilão</button>
+        </div>
+    }*@
+}
+
+<div style="width:100%; height: 450px; overflow: auto; border-width: 2px; border-style: solid">
+    <table class="table table-striped small">
+
+        <tr>
+            <th>Processo</th>
+            <th>Placa</th>
+            <th>Chassi</th>
+            <th>Nome</th>
+            <th>Avaliação</th>
+            <th>Arrematação</th>
+            <th>Taxas</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Cód.Sap Cliente</th>
+            <th>Cód.Sap Ordem Interna</th>
+        </tr>
+
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                //var valorAvaliacao = (Math.Round(double.Parse(item.avaliacao), 2)).ToString("C");
+
+                //var valorArrematacao = (Math.Round(double.Parse(item.arrematacao), 2)).ToString("C");
+
+                //var valorComissao = (Math.Round(double.Parse(item.comissao), 2)).ToString("C");
+
+                //var valorTotal = (Math.Round(double.Parse(item.valor_total), 2)).ToString("C");
+
+                //var valorTaxas = (Math.Round(double.Parse(item.Taxa_Administrativa + item.Outras_Taxas + item.Tarifa_Bancaria), 2)).ToString("C");
+
+                //var taxas = (Math.Round(double.Parse(item.taxa_administrativa), 2) +
+                //            Math.Round(double.Parse(item.outras_taxas), 2) +
+                //            Math.Round(double.Parse(item.tarifa_bancaria), 2) +
+                //            Math.Round(double.Parse(item.comissao), 2)).ToString("C");
+
+                //var descricaoTaxas = "Taxa Administrativa: " + (Math.Round(double.Parse(item.taxa_administrativa), 2)).ToString("C") + "\n" +
+                //                     "Outras Taxas: " + (Math.Round(double.Parse(item.outras_taxas), 2)).ToString("C") + "\n" +
+                //                     "Tarifa Bancária: " + (Math.Round(double.Parse(item.tarifa_bancaria), 2)).ToString("C") + "\n" +
+                //                     "Comissão: " + (Math.Round(double.Parse(item.comissao), 2)).ToString("C") + "\n\n" +
+                //                     "Total: " + (Math.Round(double.Parse(item.taxa_administrativa), 2) +
+                //                                  Math.Round(double.Parse(item.outras_taxas), 2) +
+                //                                  Math.Round(double.Parse(item.tarifa_bancaria), 2) +
+                //                                  Math.Round(double.Parse(item.comissao), 2)).ToString("C");
+
+                //valor total = (taxa administrativa + outras taxas + tarifa bancaria + arrematacao + comissao) - descontos
+
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.numero_processo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.placa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.chassi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.nome_arrematante)</td>
+
+                    @*<td>@valorAvaliacao</td>
+                        <td>@valorArrematacao</td>*@
+                    @*<td>@taxas &nbsp; <span class="alert-danger" style="cursor: help    " data-toggle="tooltip" data-placement="top" title="@descricaoTaxas">?</span></td>*@
+
+                    <td>@Html.DisplayFor(modelItem => item.avaliacao)</td>
+                    <td>@Html.DisplayFor(modelItem => item.arrematacao)</td>
+                    <td>@Html.DisplayFor(modelItem => item.outras_taxas)</td>
+
+
+                    @*<td>@valorTotal</td>*@
+
+                    <td>@Html.DisplayFor(modelItem => item.valor_total)</td>
+
+                    <td>@Html.DisplayFor(modelItem => item.status_boleto)</td>
+
+                    <td>@Html.DisplayFor(modelItem => item.id_documento_cliente_sap)</td>
+
+                    <td>@Html.DisplayFor(modelItem => item.id_documento_fb70_sap)</td>
+
+                </tr>
+            }
+        }
+
+
+
+    </table>
+
+</div>

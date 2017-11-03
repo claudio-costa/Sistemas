@@ -1,0 +1,56 @@
+﻿@{ SelectList Leiloes = ViewBag.Leiloes; }
+@{ SelectList Status = ViewBag.Status; }
+
+@{
+    ViewBag.Title = "Emissão de Ordem de Serviço de Perícia";
+}
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script type="text/javascript">
+    function onBegin() {
+        $("#Lotes").html("");
+        $("#divLoading").html('<br /><br /><br /><br /> <image src="../Content/aguarde.gif" alt="Loading, please wait" />');
+    }
+    function onComplete() {
+        $("#divLoading").html("");
+        
+    }
+</script>
+
+<div class="row">
+
+    @using (Ajax.BeginForm("CarregarLotes", "Pericia", new AjaxOptions { UpdateTargetId = "Lotes", OnBegin = "onBegin", OnComplete = "onComplete" }))
+    {
+        <div class="col-md-3">
+            Selecione um leilão:
+            @Html.DropDownList("IDLEILAO", Leiloes, "Selecione um leilão", new { @class = "form-control input-sm" })
+        </div>
+
+        <div class="col-md-3">
+            Selecione o status dos lotes:
+            @Html.DropDownList("IDSTATUS", Status, "Selecione um status de lote", new { @class = "form-control input-sm" })
+        </div>
+
+        <div class="col-md-1"><br />
+            <input type="submit" value="Carregar Lotes" class="btn-primary btn-sm" />
+        </div>
+
+    }
+    <br /><br /><br /><br />
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="Lotes" name="Lotes"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <div id="divLoading">
+            @*<image src="../Content/loader.gif" alt="Loading, please wait" />*@
+        </div>
+    </div>
+</div>

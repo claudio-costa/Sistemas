@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://linkpatios/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://linkpatios/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://linkpatios/">
+      <s:element name="TesteOrdemVenda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="value" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TesteOrdemVendaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TesteOrdemVendaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FB70">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Entrada" type="tns:OrdemInternaFB70" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrdemInternaFB70">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="numero_ordem_interna" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="data_fatura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="data_pagamento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigo_empresa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigo_banco" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="transacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigo_cliente" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="montante_bruto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="valor_comissao" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="valor_desconto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="opcao_valor_desconto" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="valor_lote" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="valor_total_pago" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="valor_pagamento_maior" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="opcao_valor_pagamento_maior" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="valor_tarifa_bancaria" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="opcao_valor_tarifa_bancaria" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="valor_taxa_administrativa" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="identificacao_leilao_patio_lote" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numero_boleto_pagamento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="forma_pagamento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="condicao_pagamento" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FB70Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FB70Result" type="tns:Retorno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Retorno">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Resultado" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mensagem" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CadastrarClienteSAP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Cliente" type="tns:ClienteSap" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ClienteSap">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Transacao_SAP" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Codigo_Empresa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Organizacao_Vendas" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nome_Cliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endereco_Rua" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endereco_Numero" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endereco_Edificio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endereco_Edificio_Andar" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endereco_Bairro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endereco_CEP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endereco_Cidade" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endereco_Regiao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telefone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CNPJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Inscricao_Estadual" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Inscricao_Municipal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Forma_Pagamento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Condicao_Pagamento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endereco_Pais" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo_Parceiro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Codigo_Parceiro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Codigo_Organizacao_Parceiro" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id_GRV" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CadastrarClienteSAPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CadastrarClienteSAPResult" type="tns:Retorno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CadastrarOrdemVendaSAP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrdemVenda" type="tns:OrdemVendaSAP" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrdemVendaSAP">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IDTRANSACAO" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="centro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroContrato" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigoCliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigoPedido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="textoCabecalho" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="itensVenda" type="tns:ArrayOfITEMS" />
+          <s:element minOccurs="0" maxOccurs="1" name="documentosPagamento" type="tns:ArrayOfDOC_PAGAM" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroProcesso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Periodo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroLeilaoPatioLote" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfITEMS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ITEMS" type="tns:ITEMS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ITEMS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codigoMaterial" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="quantidade" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="valorBruto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="valorComDesconto" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigoOrdem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipoDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="textoCabecalho" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdAtendimento" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipoComposicao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListaIDFaturamentoComposicao" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="id_grupo" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigo_material_agrupamento" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDOC_PAGAM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DOC_PAGAM" type="tns:DOC_PAGAM" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DOC_PAGAM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="meioPagamento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CadastrarOrdemVendaSAPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CadastrarOrdemVendaSAPResult" type="tns:Retorno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IngressaTransacaoSAP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Transacao" type="tns:Transacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Transacao">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="idTransacao" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="retDocId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="retMensagens" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="retnota" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="retdtemissao" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IngressaTransacaoSAPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IngressaTransacaoSAPResult" type="tns:Retorno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TesteOrdemVendaSoapIn">
+    <wsdl:part name="parameters" element="tns:TesteOrdemVenda" />
+  </wsdl:message>
+  <wsdl:message name="TesteOrdemVendaSoapOut">
+    <wsdl:part name="parameters" element="tns:TesteOrdemVendaResponse" />
+  </wsdl:message>
+  <wsdl:message name="FB70SoapIn">
+    <wsdl:part name="parameters" element="tns:FB70" />
+  </wsdl:message>
+  <wsdl:message name="FB70SoapOut">
+    <wsdl:part name="parameters" element="tns:FB70Response" />
+  </wsdl:message>
+  <wsdl:message name="CadastrarClienteSAPSoapIn">
+    <wsdl:part name="parameters" element="tns:CadastrarClienteSAP" />
+  </wsdl:message>
+  <wsdl:message name="CadastrarClienteSAPSoapOut">
+    <wsdl:part name="parameters" element="tns:CadastrarClienteSAPResponse" />
+  </wsdl:message>
+  <wsdl:message name="CadastrarOrdemVendaSAPSoapIn">
+    <wsdl:part name="parameters" element="tns:CadastrarOrdemVendaSAP" />
+  </wsdl:message>
+  <wsdl:message name="CadastrarOrdemVendaSAPSoapOut">
+    <wsdl:part name="parameters" element="tns:CadastrarOrdemVendaSAPResponse" />
+  </wsdl:message>
+  <wsdl:message name="IngressaTransacaoSAPSoapIn">
+    <wsdl:part name="parameters" element="tns:IngressaTransacaoSAP" />
+  </wsdl:message>
+  <wsdl:message name="IngressaTransacaoSAPSoapOut">
+    <wsdl:part name="parameters" element="tns:IngressaTransacaoSAPResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WSSapLinkPatiosSoap">
+    <wsdl:operation name="TesteOrdemVenda">
+      <wsdl:input message="tns:TesteOrdemVendaSoapIn" />
+      <wsdl:output message="tns:TesteOrdemVendaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FB70">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Cadastra FB70</wsdl:documentation>
+      <wsdl:input message="tns:FB70SoapIn" />
+      <wsdl:output message="tns:FB70SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarClienteSAP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Cadastra ou modifica um cliente no SAP</wsdl:documentation>
+      <wsdl:input message="tns:CadastrarClienteSAPSoapIn" />
+      <wsdl:output message="tns:CadastrarClienteSAPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarOrdemVendaSAP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Cadastra ordem de venda no SAP</wsdl:documentation>
+      <wsdl:input message="tns:CadastrarOrdemVendaSAPSoapIn" />
+      <wsdl:output message="tns:CadastrarOrdemVendaSAPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IngressaTransacaoSAP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método exclusivo para consumo do SAP</wsdl:documentation>
+      <wsdl:input message="tns:IngressaTransacaoSAPSoapIn" />
+      <wsdl:output message="tns:IngressaTransacaoSAPSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSSapLinkPatiosSoap" type="tns:WSSapLinkPatiosSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TesteOrdemVenda">
+      <soap:operation soapAction="http://linkpatios/TesteOrdemVenda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FB70">
+      <soap:operation soapAction="http://linkpatios/FB70" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarClienteSAP">
+      <soap:operation soapAction="http://linkpatios/CadastrarClienteSAP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarOrdemVendaSAP">
+      <soap:operation soapAction="http://linkpatios/CadastrarOrdemVendaSAP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IngressaTransacaoSAP">
+      <soap:operation soapAction="http://linkpatios/IngressaTransacaoSAP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSSapLinkPatiosSoap12" type="tns:WSSapLinkPatiosSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TesteOrdemVenda">
+      <soap12:operation soapAction="http://linkpatios/TesteOrdemVenda" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FB70">
+      <soap12:operation soapAction="http://linkpatios/FB70" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarClienteSAP">
+      <soap12:operation soapAction="http://linkpatios/CadastrarClienteSAP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CadastrarOrdemVendaSAP">
+      <soap12:operation soapAction="http://linkpatios/CadastrarOrdemVendaSAP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IngressaTransacaoSAP">
+      <soap12:operation soapAction="http://linkpatios/IngressaTransacaoSAP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSSapLinkPatios">
+    <wsdl:port name="WSSapLinkPatiosSoap" binding="tns:WSSapLinkPatiosSoap">
+      <soap:address location="http://179.107.47.90:82/WSSapLinkPatios.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSSapLinkPatiosSoap12" binding="tns:WSSapLinkPatiosSoap12">
+      <soap12:address location="http://179.107.47.90:82/WSSapLinkPatios.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

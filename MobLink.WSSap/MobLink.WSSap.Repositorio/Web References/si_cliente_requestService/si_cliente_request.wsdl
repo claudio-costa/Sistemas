@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:p1="http://www.l2r.com.br/pi/clientes" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" name="si_cliente_request" targetNamespace="http://www.l2r.com.br/pi/clientes" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation />
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="OP_si_cliente_request" />
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.l2r.com.br/pi/clientes" targetNamespace="http://www.l2r.com.br/pi/clientes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="mt_cliente_request" type="p1:dt_cliente_request" />
+      <xsd:complexType name="dt_cliente_request">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">f9a9db40f51511e5b6060000010fa856</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="IDTRANSACAO" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">b2a2f680eb8511e59fc000ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="BUKRS">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">bcf652588e0311e5c1a900ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0" />
+                <xsd:maxLength value="4" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="VKORG">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">bcf652598e0311e5bc4900ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0" />
+                <xsd:maxLength value="4" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="NAME1">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db667ccd11e5aa0b00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="120" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="STRAS">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db677ccd11e5cf8100ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="35" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="HOUSE_NUM1">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db687ccd11e5bbd100ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="10" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="BUILDING">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db697ccd11e5811200ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="20" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="FLOOR">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db6a7ccd11e583b000ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="10" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="ORT02">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db6b7ccd11e5b20000ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="35" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="PSTLZ">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db6c7ccd11e5927400ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="10" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="MCOD3">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">986ecc7682ee11e5a19800ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="40" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="REGIO">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db6d7ccd11e5927c00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="3" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="LAND1">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="2" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="TELF1">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db6e7ccd11e58c5a00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="16" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="SMTP_ADDR">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db6f7ccd11e5c20300ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="241" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="STCD1">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db707ccd11e5c97800ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="16" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="STCD2">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db717ccd11e5c91c00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="16" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="STCD3">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db727ccd11e5ced100ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="11" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="STCD4">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db737ccd11e5cf5600ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="18" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="ZWELS">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f7db747ccd11e58f7500ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="10" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="ZTERM">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">14f804747ccd11e5928f00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="4" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="mt_cliente_request">
+    <wsdl:documentation />
+    <wsdl:part name="mt_cliente_request" element="p1:mt_cliente_request" />
+  </wsdl:message>
+  <wsdl:portType name="si_cliente_request">
+    <wsdl:documentation />
+    <wsdl:operation name="si_cliente_request">
+      <wsdl:documentation />
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_si_cliente_request" />
+      </wsp:Policy>
+      <wsdl:input message="p1:mt_cliente_request" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="si_cliente_requestBinding" type="p1:si_cliente_request">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <wsdl:operation name="si_cliente_request">
+      <operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="si_cliente_requestService">
+    <wsdl:port name="HTTP_Port" binding="p1:si_cliente_requestBinding">
+      <address location="http://srvsappidev:50100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=LINKPATIOS_2_QAD&amp;receiverParty=&amp;receiverService=&amp;interface=si_cliente_request&amp;interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fclientes" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+    <wsdl:port name="HTTPS_Port" binding="p1:si_cliente_requestBinding">
+      <address location="https://srvsappidev:50101/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=LINKPATIOS_2_QAD&amp;receiverParty=&amp;receiverService=&amp;interface=si_cliente_request&amp;interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fclientes" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

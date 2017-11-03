@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:p1="http://www.l2r.com.br/pi/ordemvenda" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" name="si_ordemvenda_request" targetNamespace="http://www.l2r.com.br/pi/ordemvenda" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation />
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="OP_si_ordemvenda_request" />
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.l2r.com.br/pi/ordemvenda" targetNamespace="http://www.l2r.com.br/pi/ordemvenda" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="mt_ordemvenda_request" type="p1:dt_ordemvenda_request" />
+      <xsd:complexType name="dt_ordemvenda_request">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">6a3496d0a21b11e793640000010fa856</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="IDTRANSACAO" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">7ef6f2ce8e0a11e5cc4e00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="AUART">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">3fec500b79a811e5a6e000ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0" />
+                <xsd:maxLength value="4" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="WERKS">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">3fec81b379a811e5abf400ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0" />
+                <xsd:maxLength value="4" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="VBELN">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">3fec81b479a811e5ca2e00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0" />
+                <xsd:maxLength value="10" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="FKDAT">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">692331cf1c5d11e6ade616b7e2d5b40d</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="1" />
+                <xsd:maxLength value="10" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="KUNNR">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">3fec81b679a811e5c68d00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0" />
+                <xsd:maxLength value="10" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="BSTNK">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e8e60a837cab11e5cacc00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0" />
+                <xsd:maxLength value="20" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ORDER_TXT" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">53b8766a92ce11e5849e00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ZZPROC">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">5a9cfd9b273511e6cca4001c429f3afa</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="30" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ZZPERI">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">5a9cfd9c273511e684fc001c429f3afa</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="10" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ZZLEIL">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">5a9cfd9d273511e68310001c429f3afa</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="25" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ZTERM">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="4" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element maxOccurs="unbounded" name="ITEMS">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">8803f1e2823e11e5976900ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="MATNR">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">3fec81b879a811e5cd2d00ff8ca326f2</xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:minLength value="0" />
+                      <xsd:maxLength value="18" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="MENGE">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">3fec81b979a811e5b80900ff8ca326f2</xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:decimal">
+                      <xsd:totalDigits value="15" />
+                      <xsd:fractionDigits value="3" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="KBETR">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">3fec81ba79a811e5809200ff8ca326f2</xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:decimal">
+                      <xsd:totalDigits value="11" />
+                      <xsd:fractionDigits value="3" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="KBRTR_DESC">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">cdc9f217cbfe11e5824900ff8ca326f2</xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:decimal">
+                      <xsd:totalDigits value="11" />
+                      <xsd:fractionDigits value="3" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="AUFNR">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">3fec81b579a811e5cb7800ff8ca326f2</xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:minLength value="0" />
+                      <xsd:maxLength value="12" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="DOC_PAGAM">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">37f670e692d211e596bc00ff8ca326f2</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="0" name="MEIO_PAG">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">53b8766b92ce11e5a3b500ff8ca326f2</xsd:appinfo>
+                    <xsd:documentation>I = Deposito ; D = Boleto</xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:minLength value="0" />
+                      <xsd:maxLength value="1" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="DOCUMENTO">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">37f670e592d211e5ae8d00ff8ca326f2</xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:minLength value="0" />
+                      <xsd:maxLength value="100" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="mt_ordemvenda_request">
+    <wsdl:documentation />
+    <wsdl:part name="mt_ordemvenda_request" element="p1:mt_ordemvenda_request" />
+  </wsdl:message>
+  <wsdl:portType name="si_ordemvenda_request">
+    <wsdl:documentation />
+    <wsdl:operation name="si_ordemvenda_request">
+      <wsdl:documentation />
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_si_ordemvenda_request" />
+      </wsp:Policy>
+      <wsdl:input message="p1:mt_ordemvenda_request" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="si_ordemvenda_requestBinding" type="p1:si_ordemvenda_request">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <wsdl:operation name="si_ordemvenda_request">
+      <operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="si_ordemvenda_requestService">
+    <wsdl:port name="HTTP_Port" binding="p1:si_ordemvenda_requestBinding">
+      <address location="http://srvsappidev:50100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=LINKPATIOS_2_QAD&amp;receiverParty=&amp;receiverService=&amp;interface=si_ordemvenda_request&amp;interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fordemvenda" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

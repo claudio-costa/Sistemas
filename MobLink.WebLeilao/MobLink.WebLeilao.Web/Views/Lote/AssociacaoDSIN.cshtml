@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Associação DSIN";
+
+    MobLink.WebLeilao.Dominio.Leilao Leilao = ViewBag.Leilao;
+}
+
+<h5>ATENÇÃO: OS LOTES SERÃO CARREGADOS AUTOMATICAMENTE CONFORME FORAM ASSOCIADOS AO LEILÃO NO DSIN</h5><hr />
+
+@using (Html.BeginForm())
+{   
+    <div class="col-md-3">
+        <span>LEILÃO: </span>
+        <input class="form-control" type="text" name="NOME_LEILAO" value="@Leilao.descricao.Trim()" autofocus="" /><br />
+        <input type="submit" class="btn btn-primary btn-sm" value="ASSOCIAR" />
+    </div>
+}
+
+
+

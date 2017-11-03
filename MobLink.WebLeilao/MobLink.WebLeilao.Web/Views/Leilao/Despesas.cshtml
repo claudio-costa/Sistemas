@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MobLink.WebLeilao.Dominio.Despesa_Leilao>
+
+@{
+    ViewBag.Title = "Despesas";
+
+    var leilao = MobLink.WebLeilao.Repositorio.RepositorioGlobal.Leilao.SelecionarPorId(ViewBag.idleilao);
+
+    using (Html.BeginForm("InserirDespesa", "Leilao"))
+    {
+        <input type="hidden" id="leilao" name="leilao" value="@leilao.id" />
+        @Html.Partial("_InserirDespesa");
+    }
+}
+
+Leilão: @leilao.descricao
+
+&nbsp;|&nbsp;
+
+<a href="" class="elements" data-toggle="modal" , data-target="#modal_inserir_despesa">
+    <span>Nova despesa</span>
+</a>
+
+&nbsp;|&nbsp;
+
+@Html.ActionLink("Voltar para lista", "PrestacaoContas", "Leilao")
+<br /><br />
+
+<table class="table">
+    <tr>
+        <th>
+            Despesa
+        </th>
+        <th>
+            Valor
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescricaoDespesa)
+                </td>
+                <td>
+                    @string.Format("{0:C}", item.Valor)
+                </td>
+                <td>
+                    @Html.ActionLink("Excluir", "ExcluirDespesa", new { id = item.Id, idleilao = item.Id_Leilao })
+                    @*@Html.ActionLink("Excluir", "ExcluirDespesa", new { id = item })*@
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+

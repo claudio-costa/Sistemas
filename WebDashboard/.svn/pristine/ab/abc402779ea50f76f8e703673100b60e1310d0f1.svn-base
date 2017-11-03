@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace WebPatios.Dashboard.Controllers
+{
+    public class SaidasController : Controller
+    {
+        // GET: Saidas
+        public ActionResult Index()
+        {
+            ViewBag.Title = "Saídas";
+            //var cliente = new Business.ClienteBLL().getDadosCliente();
+            //ViewBag.NomeCliente = cliente.nome + string.Concat(", DEPÓSITO ", (cliente).depositos.FirstOrDefault().nome);
+
+            var sai = new Business.SaidaBLL();
+
+            ViewBag.Saidas = sai.getSaidas();
+
+            return View();
+        }
+    }
+}

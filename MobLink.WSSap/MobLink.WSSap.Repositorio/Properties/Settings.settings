@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MobLink.WSSap.Repositorio.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MobLink_WSSap_Repositorio_si_cliente_requestService_si_cliente_requestService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://srvsappidev:50100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=LINKPATIOS_2_QAD&amp;receiverParty=&amp;receiverService=&amp;interface=si_cliente_request&amp;interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fclientes</Value>
+    </Setting>
+    <Setting Name="MobLink_WSSap_Repositorio_si_modificacao_parceiroService_si_modificacao_parceiroService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://srvsappidev:50100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=LINKPATIOS_2_QAD&amp;receiverParty=&amp;receiverService=&amp;interface=si_modificacao_parceiro&amp;interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fmodificacao_parceiro</Value>
+    </Setting>
+    <Setting Name="MobLink_WSSap_Repositorio_si_ordemvenda_requestService_si_ordemvenda_requestService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://srvsappidev:50100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=LINKPATIOS_2_QAD&amp;receiverParty=&amp;receiverService=&amp;interface=si_ordemvenda_request&amp;interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fordemvenda</Value>
+    </Setting>
+    <Setting Name="MobLink_WSSap_Repositorio_si_ordem_interna_requestService_si_ordem_interna_requestService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://srvsappidev:50100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=LINKPATIOS_2_QAD&amp;receiverParty=&amp;receiverService=&amp;interface=si_ordem_interna_request&amp;interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Ftitulo_ordem_interna</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MobLink.WebLeilao.Dominio.StatusPericia>
+
+@{
+    ViewBag.Title = "Status de perícia";
+}
+
+<p>
+    @Html.ActionLink("Novo", "Create")
+</p>
+<table class="table table-striped small table-hover table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.descricao)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.descricao)
+        </td>
+        <td>
+            @Html.ActionLink("EDITAR", "Edit", new { id=item.id })
+            
+        </td>
+        <td>
+            @Html.ActionLink("EXCLUIR", "Delete", new { id = item.id })
+        </td>
+    </tr>
+}
+
+</table>

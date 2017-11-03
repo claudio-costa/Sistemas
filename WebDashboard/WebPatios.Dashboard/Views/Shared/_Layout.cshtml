@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Cláudio Costa">
+    <meta equiv="refresh" content="1">
+    <title>@ViewBag.Title</title>
+    
+    <link rel="shortcut icon" href="~/favicon.ico" />
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/css/bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/dashboard.css")" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="@Url.Content("~/js/bootstrap.js")"></script>
+
+    <script src="~/js/jquery.circlechart.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <span class="navbar-brand">
+                    @*<img src="~/images/logo_mobilink.png" height="20" width="60" />&nbsp;&nbsp;&nbsp;*@
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        var tituloPagina = @ViewBag.Title;
+
+                        <span class="glyphicon glyphicon-check" style="color:orange"></span>
+                        <b>&nbsp;@tituloPagina</b>
+                    }
+                </span>
+
+                @*<ul class="nav navbar-nav">
+                        <li class="dropdown dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                        </li>
+                    </ul>*@
+
+                @*Recupera os clientes e pátios*@
+                @*@if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecione o pátio<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+
+                                @if (HttpContext.Current.Application["USUARIO"] != null && (HttpContext.Current.Application["USUARIO"] as WebPatios.Model.Usuario).depositosUsuario.Count > 0)
+                                {
+                                    foreach (var item in (HttpContext.Current.Application["USUARIO"] as WebPatios.Model.Usuario).depositosUsuario)
+                                    {
+                                        
+
+                                        <li>
+                                            @Html.ActionLink(item.descricaoClienteDeposito, "Filtro", "Home", new { filtroDeposito = item.idDeposito, filtroCliente = item.clienteDeposito.idCliente }, null)
+                                        </li>
+                                    }
+
+                                }
+
+                            </ul>
+
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    
+                }*@
+
+
+                
+
+
+            </div>
+
+            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecione o pátio<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+
+                            @if (HttpContext.Current.Application["USUARIO"] != null && (HttpContext.Current.Application["USUARIO"] as WebPatios.Model.Usuario).depositosUsuario.Count > 0)
+                            {
+                                foreach (var item in (HttpContext.Current.Application["USUARIO"] as WebPatios.Model.Usuario).depositosUsuario)
+                                {
+
+
+                                    <li>
+                                        @Html.ActionLink(item.descricaoClienteDeposito, "Filtro", "Home", new { filtroDeposito = item.idDeposito, filtroCliente = item.clienteDeposito.idCliente }, null)
+                                    </li>
+                                }
+
+                            }
+
+                        </ul>
+
+                    </li>
+                </ul>
+            }
+            else
+            {
+                @*<span>&nbsp;&nbsp;&nbsp;WEBPÁTIOS - LOGIN</span>*@
+            }
+
+            <div class="navbar-collapse collapse">
+
+                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Dashboard", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Entradas", "Index", "Entradas")</li>
+                        <li>@Html.ActionLink("Saídas", "Index", "Saidas")</li>
+                        <li>@Html.ActionLink("Estoque", "Index", "Estoque")</li>
+                        <li>@Html.ActionLink("Por Cliente", "Index", "Faturamento")</li>
+                        <li>@Html.ActionLink("Pátios UF", "Index", "Diretoria")</li>
+                        <li>@Html.ActionLink("Pátios Mensal", "EvolucaoMensalPorPatio", "Diretoria")</li>
+                        <li>@Html.ActionLink("Logoff", "Logoff", "Autenticacao")</li>
+                    </ul>
+                }
+
+            </div>
+
+
+
+
+
+            @*<div class="navbar-collapse collapse">
+
+                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Dashboard", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Entradas", "Index", "Entradas")</li>
+                        <li>@Html.ActionLink("Saídas", "Index", "Saidas")</li>
+                        <li>@Html.ActionLink("Estoque", "Index", "Estoque")</li>
+                        <li>@Html.ActionLink("Faturamento", "Index", "Faturamento")</li>
+                        <li>@Html.ActionLink("Diretoria", "Index", "Diretoria")</li>
+                        <li>@Html.ActionLink("Logoff", "Logoff", "Autenticacao")</li>
+                    </ul>
+                }
+
+            </div>*@
+        </div>
+    </div>
+
+
+
+
+
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        var nomeCliente = ((WebPatios.Model.Deposito)ViewBag.DepositoFiltrado) != null ? ((WebPatios.Model.Deposito)ViewBag.DepositoFiltrado).clienteDeposito.nomeCliente : "NENHUM";
+        var nomePatio = ((WebPatios.Model.Deposito)ViewBag.DepositoFiltrado) != null ? ((WebPatios.Model.Deposito)ViewBag.DepositoFiltrado).descricaoDeposito : "NENHUM PÁTIO SELECIONADO";
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <span class="navbar-brand glyphicon glyphicon-road" style="color:black"></span>
+                    <span class="navbar-brand "><small><b>@nomeCliente</b></small></span>
+                    <span class="navbar-brand glyphicon glyphicon-map-marker" style="color:black"></span>
+                    <span class="navbar-brand "><small><b>@nomePatio</b></small></span>
+                </div>
+
+                <div class="navbar-right">
+                    <span class="navbar-brand glyphicon glyphicon-time"></span>
+                    <span class="navbar-brand "><small>Última Atualização: @DateTime.Now.ToLongTimeString()</small></span>
+
+                    <span class="navbar-brand glyphicon glyphicon-user"></span>
+                    <span class="navbar-brand "><small>Usuário: @HttpContext.Current.User.Identity.Name.ToUpper()</small></span>
+                </div>
+            </div>
+        </nav>
+    }
+
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-0 main">
+            <div class="row placeholders">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+    @*<div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li class="active"><a href="#">Overview</a></li>
+                        <li><a href="#">Reports</a></li>
+                        <li><a href="#">Analytics</a></li>
+                        <li><a href="#">Export</a></li>
+                    </ul>
+                    <ul class="nav nav-sidebar">
+                        <li><a href="">Nav item</a></li>
+                        <li><a href="">Nav item again</a></li>
+                        <li><a href="">One more nav</a></li>
+                        <li><a href="">Another nav item</a></li>
+                        <li><a href="">More navigation</a></li>
+                    </ul>
+                    <ul class="nav nav-sidebar">
+                        <li><a href="">Nav item again</a></li>
+                        <li><a href="">One more nav</a></li>
+                        <li><a href="">Another nav item</a></li>
+                    </ul>
+                </div>
+                @RenderBody()
+            </div>
+        </div>*@
+
+
+
+    <div class="navbar-header" style="display: none">
+        <form name="cd">
+            <center>
+                <span class="navbar-brand">
+                    <small><input style="display: none" disabled="disabled" id="txt" readonly="readonly" type="text" border="0" name="disp"></small>
+                </span>
+            </center>
+        </form>
+    </div>
+
+    <footer class="footer text-center" style="position: relative; bottom: 0; width: 100%">
+        <div class="glyphicon glyphicon-road "></div>
+        <small>WebPátios - Desenvolvido por Mob-Link&reg; - Todos os direitos reservados&copy; - @DateTime.Now.Year.ToString()</small>
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            <small> - Última atualização: @DateTime.Now.ToLongTimeString()</small>
+        }
+    </footer>
+
+
+
+</body>
+</html>
+
+
+@*<script>
+    var mins
+    var secs;
+    function cd() {
+        mins = 1 * m("1");
+        secs = 0 + s(":01");
+        redo();
+    }
+
+    function m(obj) {
+        for (var i = 0; i < obj.length; i++) {
+            if (obj.substring(i, i + 1) == ":")
+                break;
+        }
+        return (obj.substring(0, i));
+    }
+
+    function s(obj) {
+        for (var i = 0; i < obj.length; i++) {
+            if (obj.substring(i, i + 1) == ":")
+                break;
+        }
+        return (obj.substring(i + 1, obj.length));
+    }
+
+    function dis(mins, secs) {
+        var disp;
+        if (mins <= 9) {
+            disp = " 0";
+        } else {
+            disp = " ";
+        }
+        disp += mins + ":";
+        if (secs <= 9) {
+            disp += "0" + secs;
+        } else {
+            disp += secs;
+        }
+        return (disp);
+    }
+
+    function redo() {
+        secs--;
+        if (secs == -1) {
+            secs = 59;
+            mins--;
+        }
+        document.cd.disp.value = dis(mins, secs);
+        if ((mins == 0) && (secs == 0)) {
+            //window.alert("Time is up. Press OK to continue.");
+            window.location.href = window.location;
+        } else {
+            cd = setTimeout("redo()", 1000);
+        }
+    }
+
+    function init() {
+        cd();
+    }
+    window.onload = init;
+
+</script>*@ 

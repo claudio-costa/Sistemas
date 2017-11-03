@@ -1,0 +1,62 @@
+﻿@model IEnumerable < WebPatios.Model.Entradas.EntradaAnalitica>
+
+@{
+    ViewBag.Title = "Analytics";
+}
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_grv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numero_formulario_grv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nome_autoridade_responsavel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.placa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.renavam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.data_hora_guarda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.divisao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_grv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numero_formulario_grv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nome_autoridade_responsavel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.placa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.renavam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.data_hora_guarda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.divisao)
+        </td>
+        
+    </tr>
+}
+
+</table>

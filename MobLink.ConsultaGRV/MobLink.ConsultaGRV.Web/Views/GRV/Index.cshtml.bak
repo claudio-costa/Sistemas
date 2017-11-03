@@ -1,0 +1,429 @@
+﻿@model Model.GRV.GRV
+
+@{ List<Model.Faturamento.Servicos.ViewFaturamentoServicosGRV> ItensFaturamento = ViewBag.modelo; }
+@{ string IdGRV = ViewBag.idgrv; }
+
+
+
+
+
+                <h5>Nota Fiscal</h5>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        Nome: <input type="text" class="form-control input-sm" placeholder="Digite placa" name="placa" autofocus="" value="@ViewBag.pPlaca" />
+                    </div>
+
+                    <div class="col-md-6">
+                        CPF: <input type="number" class="form-control input-sm" placeholder="Digite placa" name="placa" autofocus="" value="@ViewBag.pPlaca" />
+                    </div>
+
+                    <div class="col-md-6">
+                        CNPJ: <input type="number" class="form-control input-sm" placeholder="Digite placa" name="placa" autofocus="" value="@ViewBag.pPlaca" />
+                    </div>
+                </div>
+
+            </div>
+
+            @using (Html.BeginForm())
+            {
+                {
+                    Model.GRV.GRV grvTeste = new Model.GRV.GRV();
+                    grvTeste.bairro = "BAIRRO TESTE";
+                }
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-primary" value="1" name="EmissaoBoleto">Sim</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+        <div class="container-fluid">
+
+        </div>
+    </div>
+</body>
+
+<div class="main">
+
+
+
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Erro))
+            {
+        <div class="alert alert-danger" role="alertdialog">@ViewBag.Erro</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Msg))
+            {
+        <div class="alert alert-success" role="alert">@ViewBag.Msg</div>
+    }
+
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <span class="panel-title">
+
+                @using (Html.BeginForm())
+                {
+                    <div class="form-horizontal">
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                Placa: <input type="text" class="form-control input-sm" placeholder="Digite placa" name="placa" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                            <div class="col-md-2">
+                                Chassi: <input type="text" class="form-control input-sm" placeholder="Digite chassi" name="chassi" value="@ViewBag.pChassi" />
+                            </div>
+
+                            <div class="col-md-2">
+                                Nº GRV: <input type="text" class="form-control input-sm" placeholder="Digite GRV" name="grv" value="@ViewBag.pGrv" />
+                            </div>
+
+                            <div class="col-md-1">
+                                &nbsp;<input type="submit" class="form-control btn-primary input-sm" value="Consultar" />
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </span>
+        </div>
+        @*<div class="panel-body">
+            </div>*@
+    </div>
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 class="panel-title">Informações do processo</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-12">
+                    @*<h4>Informações do Veículo</h4><hr />*@
+
+                    <div class="col-md-2 col-sm-2">
+                        <span>Formulário GRV:</span><br />
+                        <span>Placa:</span><br />
+                        <span>Renavam:</span><br />
+                        <span>Chassi:</span><br />
+                        <span>Marca/Modelo:</span><br />
+                        <span>Tipo de Veículo:</span><br />
+                        <span>Data/Hora Guarda:</span>
+                    </div>
+
+                    <div class="col-md-10 col-sm-10">
+                        <code id="lblTipoVeiculo">@ViewBag.numero_formulario_grv</code><br />
+                        <code id="lblPlaca">@ViewBag.placa</code><br />
+                        <code id="lblRenavam">@ViewBag.renavam</code><br />
+                        <code id="lblChassi">@ViewBag.chassi</code><br />
+                        <code id="lblMarcaModelo">@ViewBag.marcaModeloDesc</code><br />
+                        <code id="lblTipoVeiculo">@ViewBag.tipoVeiculoDesc</code><br />
+                        <code id="lblTipoVeiculo">@ViewBag.data_hora_guarda</code><br />
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 class="panel-title">Serviços prestados</h3>
+        </div>
+        <div class="panel-body">
+
+
+
+            <div class="row">
+
+                @if (ItensFaturamento != null)
+                {
+                    <div class="col-md-12">
+
+                        <span class="text-center">
+                            *Os valores exibidos abaixo, são válidos somente para esta data - @DateTime.Now.ToShortDateString()
+                        </span>
+
+                        @*<span>Detalhamento das cobranças</span><hr />*@
+
+                        <table class="table table-condensed table-condensed table-sm">
+                            <tr style="background-color: #efeded">
+                                <th>
+                                    Tipo
+                                </th>
+                                <th>
+                                    Valor
+                                </th>
+                                <th>
+                                    Quantidade
+                                </th>
+                                <th>
+                                    Subtotal
+                                </th>
+                            </tr>
+
+                            @{ decimal total = 0; string servico_descricao = string.Empty; }
+
+                            @foreach (var item in ItensFaturamento)
+                            {
+
+                                if (servico_descricao == item.servico_descricao)
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    servico_descricao = item.servico_descricao;
+                                }
+
+                                if (item.flag_realizar_cobranca == 'N')
+                                {
+                                    continue;
+                                }
+
+                                if (item.flag_rebocada == 'S' && Model.flag_comboio == 'S')
+                                {
+                                    continue;
+                                }
+
+                                <tr>
+
+                                    @if (item.tipo_cobranca == 'D')
+                                    {
+                                        @*tipo*@
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.servico_descricao)
+                                        </td>
+
+                                        @*Valor unitário*@
+                                        <td>
+                                            R$&nbsp;@Html.DisplayFor(modelItem => item.preco_padrao)
+                                        </td>
+
+                                        int diarias = ViewBag.diarias;
+
+                                        //Quantidade
+                                        <td>
+                                            @Html.DisplayFor(modelItem => diarias)
+                                        </td>
+
+                                        //Subtotal
+                                        <td>
+                                            @{ decimal subtotal = item.preco_padrao * diarias;}
+
+                                            R$&nbsp;@Html.DisplayFor(modelItem => subtotal)
+                                        </td>
+
+                                                    total += item.preco_padrao * diarias;
+                                                }
+                                                else if (item.tipo_cobranca == 'Q')
+                                                {
+                                                    if (item.flag_rebocada == 'S')
+                                                    {
+                                                        item.valor = 1;
+                                                    }
+
+                                                    if (item.valor == 0)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    @*tipo*@
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.servico_descricao)
+                                                    </td>
+
+                                                    @*Valor unitário*@
+                                                    <td>
+                                                        R$&nbsp;@Html.DisplayFor(modelItem => item.preco_padrao)
+                                                    </td>
+
+                                                    decimal valor = item.valor;
+
+                                                    if (item.valor == 0 && item.flag_servico_obrigatorio == 'S')
+                                                    {
+                                                        valor = 1;
+                                                    }
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => valor)
+                                                    </td>
+
+                                                    <td>
+                                                        @{ decimal subtotal = item.preco_padrao * valor;}
+                                                        R$&nbsp;@Html.DisplayFor(modelItem => subtotal)
+                                                    </td>
+
+                                                                total += item.preco_padrao * valor;
+                                                            }
+                                </tr>
+                                                            }
+
+                            <tfoot class="bg-primary">
+                                <tr>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>R$ @Html.DisplayFor(modelItem => total)</th>
+                                    @{ ViewBag.nota = total.ToString("c"); }
+                                </tr>
+                            </tfoot>
+
+                        </table>
+
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-barcode"></span> Pagamento
+                        </button>
+                    </div>
+
+
+                                        }
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    <strong><u>DADOS PARA NOTA FISCAL</u></strong><br />
+                    Valor Total da nota: <span style="color: green"><strong>@ViewBag.nota</strong></span> 
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm())
+                {
+                    Html.HiddenFor(Model => Model.id_grv);
+                    <input type="hidden" value="@IdGRV" name="GRV" />
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Nome: <input type="text" required=""  class="form-control input-sm" placeholder="Digite o nome" name="NOME" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                CPF: <input type="text" id="txtCPF" class="form-control input-sm" placeholder="Digite CPF" name="CPF" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                            <div class="col-md-6">
+                                CNPJ: <input type="text" id="txtCNPJ" class="form-control input-sm" placeholder="Digite CNPJ" name="CNPJ" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                CEP: <input type="text" id="txtCEP"  required="" class="form-control input-sm" placeholder="Digite CEP" name="CEP" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                            <div class="col-md-9">
+                                Endereço: <input type="text"  required="" class="form-control input-sm" placeholder="Digite endereço" name="ENDERECO" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                Número: <input type="number" id="txtNumero" required="" class="form-control input-sm" placeholder="Digite numero" name="NUMERO" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                            <div class="col-md-7">
+                                Complemento: <input type="text" class="form-control input-sm" placeholder="Digite complemento" name="COMPLEMENTO" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                Bairro: <input type="text" required=""  class="form-control input-sm" placeholder="Digite bsirro" name="BAIRRO" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                            <div class="col-md-7">
+                                Município: <input type="text"  required="" class="form-control input-sm" placeholder="Digite município" name="MUNICIPIO" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                            <div class="col-md-2">
+                                UF: <input type="text" id="txtUF" required="" class="form-control input-sm" placeholder="Digite UF" name="UF" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                DDD: <input type="text" id="txtDDD" required=""  class="form-control input-sm" placeholder="Digite DDD" name="DDD" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                            <div class="col-md-7">
+                                Telefone principal: <input type="text" required=""  id="txtTelefone" class="form-control input-sm" placeholder="Digite telefone" name="TELEFONE" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+
+                            <div class="col-md-12">
+                                Email: <input type="text" id="txtEmail" required="" class="form-control input-sm" placeholder="Digite Email" name="EMAIL" autofocus="" value="@ViewBag.pPlaca" />
+                            </div>
+                        </div>
+                       
+
+                    </div>  @*FormGroup*@
+
+                    <div class="modal-footer">
+                        <div class="text-left">
+                            <span class="danger small">Atenção! A emissão deste faturamento será somente para o proprietário do veículo e os valores são validos somente para  a data atual, deseja prosseguir?</span><br />
+                        </div>
+
+                        <hr />
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-primary" data-dismiss="" value="true" name="EMITE_BOLETO">Sim</button>
+                    </div>
+                }
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/js/jquery.maskedinput.min.js"></script>
+<script>
+    $("#txtCPF").mask("999.999.999-99");
+    $("#txtCNPJ").mask("99.999.999/9999-99");
+    $("#txtCEP").mask("99999-999", { selectOnFocus: true });
+    $("#txtDDD").mask("(99)", { selectOnFocus: true });
+    $("#txtTelefone").mask("99999-9999", { selectOnFocus: true });
+    $("#txtUF").mask("aa", { selectOnFocus: true });
+</script>

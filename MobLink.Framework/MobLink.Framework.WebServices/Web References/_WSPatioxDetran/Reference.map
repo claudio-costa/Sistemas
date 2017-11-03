@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://179.107.47.90:94/WSPatioxDetran.asmx?wsdl" filename="WSPatioxDetran.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://179.107.47.90:94/WSPatioxDetran.asmx?disco" filename="WSPatioxDetran.disco" />
+  </Results>
+</DiscoveryClientResultsFile>

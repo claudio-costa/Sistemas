@@ -1,0 +1,100 @@
+﻿@{ List<WebPatios.Model.Saidas.Saida> saidas = ViewBag.Saidas; }
+@{ List<WebPatios.Model.Saidas.SaidaDiaSemana> SaidasDiaSemana = ViewBag.SaidasDiaSemana; }
+@{ List<WebPatios.Model.Saidas.SaidaTiposVeiculo> SaidaTiposVeiculo = ViewBag.SaidasTipoVeiculo; }
+
+
+
+
+@*Saídas por divisão*@
+<div class="col-md-4">
+    <div class="list-group">
+        <div class="list-group-item" style="background-color: lightsalmon">
+            <b>Saídas por divisão</b>
+        </div>
+
+        @{ int counter2 = 0; }
+        @foreach (var item in saidas)
+        {
+            <div class="list-group-item text-left">
+                <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span>
+                @Html.DisplayFor(modelItem => item.descricaoDivisao)
+            </div>
+            counter2 += item.quantidade;
+        }
+
+        <div class="list-group-item text-left"  style="background-color: lightsalmon">
+            @*style="background-color: gold">*@
+            <span class="badge"> @counter2.ToString() </span>
+            <b>TOTAL</b>
+            <div class="glyphicon glyphicon-hand-right"></div>
+        </div>
+
+    </div>
+</div>
+
+@*Saídas por dia de semana*@
+<div class="col-md-4">
+    <div class="panel" style="background-color: gold">
+        <div class="panel-heading">
+            <B>Saídas por dia de semana</B>
+        </div>
+
+        <div class="table-responsive small">
+            <table class="table table-striped">
+                <tbody>
+
+                    @{ int counterSaidasDiaSemana = 0; }
+                    @foreach (var item in SaidasDiaSemana)
+                    {
+                        <tr>
+                            <td class="text-left">@Html.DisplayFor(modelItem => item.diaSemana)</td>
+                            <td class="text-right">@Html.DisplayFor(modelItem => item.quantidade)</td>
+                        </tr>
+                        counterSaidasDiaSemana += item.quantidade;
+                    }
+
+
+
+                    <tr>
+                        <td>
+                            <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                        </td>
+                        <td>@counterSaidasDiaSemana.ToString()</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*Saídas por tipo de veículo*@
+<div class="col-md-4">
+    <div class="list-group">
+        <div class="list-group-item list-group-item-info">
+            <b>Saídas por tipo de veículo</b>
+        </div>
+
+        @{ int counterEntradasTipoVeiculo = 0; }
+
+        @foreach (var item in SaidaTiposVeiculo)
+            {
+            <div class="list-group-item text-left">
+                <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span>
+                @Html.DisplayFor(modelItem => item.tipoVeiculo)
+            </div>
+            counterEntradasTipoVeiculo += item.quantidade;
+        }
+
+        <div class="list-group-item text-left list-group-item-info">
+            @*style="background-color: gold">*@
+            <span class="badge"> @counterEntradasTipoVeiculo.ToString() </span>
+            <b>TOTAL</b>
+            <div class="glyphicon glyphicon-hand-right"></div>
+        </div>
+
+    </div>
+</div>
+
+
+

@@ -1,0 +1,76 @@
+﻿@model MobLink.WebLeilao.Dominio.Leilao
+
+@{
+    ViewBag.Title = "Geração de edital de leilão";
+
+    SelectList Leiloes = ViewBag.Leiloes = new SelectList(
+        MobLink
+        .WebLeilao
+        .Repositorio
+        .RepositorioGlobal
+        .Leilao
+        .SelecionarTudo()
+        .ToList(), "id", "Descricao", null);
+}
+
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-md-3">
+                @Html.DropDownList("id", Leiloes, "SELECIONE UM LEILÃO", new { @class = "form-control input-sm" })
+            </div>
+
+            <div class="col-md-3">
+                <input type="submit" value="Carregar Editais" class="btn-primary btn-sm" />
+            </div>
+        </div>
+    }
+
+    @if (Model != null)
+    {
+        <br />
+
+        @Html.ActionLink("GERAR EDITAL", "GerarEdital", new { id = Model.Id })
+
+        <table class="table table-striped small table-hover table-condensed">
+            <tr>
+                <th>Data de geração</th>
+                <th>Usuário</th>
+                <th></th>
+            </tr>
+
+            @{
+                var editais = MobLink.WebLeilao.Repositorio
+                    .RepositorioGlobal.Edital
+                    .SelecionarTudo(new MobLink.WebLeilao.Dominio.Leilao()
+                    {
+                        Id = Convert.ToInt32(Model.Id)
+                    });
+            }
+
+            @foreach (var item in editais)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data_geracao)
+                    </td>
+
+                    <td>
+                        @MobLink.WebLeilao.Repositorio.RepositorioGlobal.Usuario.SelecionarUsuario(item.id_usuario_geracao).Login
+                    </td>
+
+                    <td>
+                        <span class="glyphicon glyphicon-file"></span>
+                        @Html.ActionLink("VISUALIZAR", "Delete", new { id = item.id })
+
+                        <span class="glyphicon glyphicon-save-file"></span>
+                        @Html.ActionLink("DOWNLOAD", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+                }
+</div>

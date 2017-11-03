@@ -1,0 +1,33 @@
+﻿@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+
+        <div class="row small">
+            <div class="col-md-2">
+                <span for="pPlaca">Placa</span>
+                <input type="text" class="form-control input-sm" placeholder="Digite placa" 
+                       name="Placa" value="@ViewBag.pPlaca" />
+            </div>
+
+            <div class="col-md-2">
+                <span for="pChassi">Chassi</span>
+                <input type="text" class="form-control input-sm" placeholder="Digite chassi" 
+                       name="Chassi" value="@ViewBag.pChassi" />
+            </div>
+
+            <div class="col-md-2">
+                <span for="pProcesso">Processo</span>
+                <input type="text" class="form-control input-sm" placeholder="Nº do numero_formulario_grv" 
+                       name="Processo" value="@ViewBag.pProcesso" />
+            </div>
+
+            <div class="col-md-1">
+                &nbsp;<input type="submit" class="form-control btn-default input-sm" value="Consultar" />
+            </div>
+
+        </div>
+
+    </div>
+}
+
+<br />

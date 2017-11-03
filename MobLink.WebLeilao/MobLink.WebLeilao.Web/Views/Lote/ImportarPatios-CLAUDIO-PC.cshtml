@@ -1,0 +1,190 @@
+﻿@model MobLink.WebLeilao.Dominio.Leilao
+@{ SelectList Clientes = ViewBag.clientes; }
+@{ SelectList Depositos = ViewBag.depositos; }
+
+@{
+    ViewBag.Title = "Importação de lotes via consulta de pátios";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <blockquote>
+            Leilão: <span class="label label-default">@Model.descricao</span>
+            <span class="label label-default" id="data_execucao">@Model.data_leilao</span>
+            <span class="label label-default">@Model.comitente.descricao</span>
+
+            @Html.HiddenFor(p => p.comitente.id_cliente)
+            <input type="hidden" name="Cliente" value="@Model.comitente.id_cliente" id="cliente">
+
+        </blockquote>
+
+        <h5>Pátios encontrados:</h5>
+
+        <div class="form-group">
+
+            <fieldset id="depositos">
+
+                @foreach (var dep in Model.depositos)
+                {
+                    <div class="checkbox-inline">
+                        <label>
+                            <input type="checkbox" value="@dep.Id_Deposito" name="chkDep[]" id="chkDep[]" checked>
+                            <span class="label label-success"> @dep.Descricao</span>
+                        </label>
+                    </div>
+                }
+            </fieldset>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+                <div class="col-md-2">
+                    <input type="number" id="txtNumLotes" placeholder="Nº de lotes" class="form-control input-sm" />
+                </div>
+
+                <div class="col-md-2">
+                    <input type="number" id="txtNumDias" placeholder="Nº de dias" class="form-control input-sm" />
+                </div>
+
+                <a class="btn btn-primary btnFiltrar btn-sm" id="btnFiltrar" name="listagrv">Filtrar</a>
+            </div>
+            <div class="panel-body">
+
+                @using (Html.BeginForm())
+                {
+                    <div id="divGridProdutos" class="col-md-12">
+
+                        @try
+                        {
+                            Html.Partial("_ImportarPatios", Model.lotes);
+                        }
+                        catch
+                        {
+                            <span>Nenhum lote encontrado</span>
+                        }
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //Coloque aqui o id do primeiro dropdownlist
+        $('#ddlCliente').change(function () {
+            //obtém o valor selecionado
+            var id = $(this).find(":selected").val();
+            //Chama a Action para popular o segundo DropDownList
+
+            var path = '/Lote/getDepositosPorCliente';
+            //var path = '/WebLeilao/Lote/getDepositosPorCliente';
+            //http://localhost:62889/Lote/getDepositosPorCliente?idCliente=1
+
+            $.getJSON(path, { idCliente: id }, function (data) {
+                //Remove os dados que já possui
+                //Aqui entra o ID do segundo DropDownList
+                $('#ddlDepositos option').remove();
+                $('#ddlDepositos').append('<option value="">Escolha um pátio</option>');
+                //Popula os options com os valores retornados em JSON
+                for (var i = 0; i < data.length; i++) {
+                    $('#ddlDepositos').append('<option value="' +
+                        data[i].Id_Deposito + '"> ' +
+                        data[i].Descricao + '</option>');
+                    //[{ "Id_Deposito": 1, "Id_Cliente": 1, "Descricao": "SÃO GONÇALO", "Cliente": { "Id_Cliente": 0, "Nome": null, "Depositos": [] } }]
+                }
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+        $("#btnFiltrar").click(function () {
+
+            $("#btnFiltrar").attr("disabled", "disabled");
+
+            //var objCliente = document.getElementById("ddlCliente");
+            //var idCliente = objCliente.options[objCliente.selectedIndex].value;
+
+            //var objDeposito = document.getElementById("ddlDepositos");
+            //var idDeposito = objDeposito.options[objDeposito.selectedIndex].value;
+
+            //var checkados = "";
+
+            //for (var i = 0; i < cbl.length; i++) {
+            //    if (cbl[i].checked) {
+            //        checkados = checkados + cbl[i].value;
+            //    }
+            //}
+
+            //alert(cbl[i].value);
+            //if (i + 1 < cbl.length) {
+            //    checkados = checkados + ",";
+            //}
+
+            @*<div class="checkbox-inline">
+                    <label>
+                        <input type="checkbox" value="@dep.Id_Deposito" name="cbl[@iteracao]" id="cbl" checked >
+                        @dep.Descricao
+                    </label>
+                </div>*@
+            var idDepositos = "";
+
+            var obj = document.getElementById('depositos').getElementsByTagName('input');
+
+            var tam = obj.length;
+            var cnt = 0;
+
+            for (cnt = 0; cnt < tam; cnt++) {
+                if (obj[cnt].checked == true) {
+                    //alert(obj.value+"\n id:"+cnt);
+                    //chkSupervisor + obj[cnt].value + "_";// o underline é meu separador para fazer o split no outro lado da aplicação
+                    idDepositos += obj[cnt].value + "_";
+                }
+            } 
+
+
+
+            $.ajax({
+                url: '@Url.Action("ListarGrv")',
+                //data: { "cliente": idCliente, "deposito": idDeposito, "numLotes": $("#txtNumLotes").val(), "numDias": $("#txtNumDias").val(), "cbl": $("#cbl").val() },
+                data: {
+                    "cliente": $("#cliente").val(),
+                    //"deposito": idDeposito,
+                    "numLotes": $("#txtNumLotes").val(),
+                    "numDias": $("#txtNumDias").val(),
+                    //"cbl": $("#cbl%").val(),
+                    //"cbl": $('#depositos').getElementsByTagName('input'),
+                    "data": $("#data_execucao").text(),
+                    "depositos": idDepositos
+                },
+                success: function (data) {
+                    $("#divGridProdutos").html(data);
+                }
+            });
+
+            $("#btnFiltrar").removeAttr("disabled");
+        });
+    });
+
+</script>
+
+

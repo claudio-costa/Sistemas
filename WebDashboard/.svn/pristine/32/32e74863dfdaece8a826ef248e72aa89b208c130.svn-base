@@ -1,0 +1,1399 @@
+﻿
+@{ List<WebPatios.Model.Dashboard.Infracao> Infracoes = ViewBag.Infracoes; }
+
+@{ WebPatios.Model.Dashboard.ResumoPeriodico ResumoPeriodico = ViewBag.ResumoPeriodico; }
+@{ WebPatios.Model.Dashboard.TicketMedio TicketMedio = ViewBag.TicketMedio; }
+@{ WebPatios.Model.Dashboard.TaxaLiberacao TaxaLiberacao = ViewBag.TaxaLiberacao; }
+
+@{ WebPatios.Model.Cliente Cliente = ViewBag.Cliente; }
+
+
+@{ int counterEntradas3 = 0; }
+@{ int counterEstoque = 0; }
+@{ int counterEntradasTipoVeiculo = 0; }
+@{ int counterEntradasDiaSemana = 0; }
+@{ int counter2 = 0; }
+@{ int counterEntradas = 0; }
+@{ int counter = 0; }
+
+
+@*a linha abaixo indenta a direita o corpo para entrar o menu*@
+@*<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">*@
+@*<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-0 main">*@
+
+
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="panel" style="background-color: gold">
+                    <div class="panel-heading">
+                        @*<B>A P R E E N S Õ E S</B>*@
+                        <B>Total de apreensões</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+
+                                <tr style="font-size: 16px">
+                                    <td class="text-center" style="background-color: gold">
+                                        Hoje:<br />
+                                        <b><span class="text-success" style="font-size: 24px">@Html.DisplayFor(x => ResumoPeriodico.apreensoesHoje)</span></b>
+                                    </td>
+                                    <td class="text-left">
+                                        <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Esta semana: <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Este mês: <br />
+                                    </td>
+                                    <td class="text-danger text-right">
+                                        <br />
+                                        @Html.DisplayFor(x => ResumoPeriodico.apreensoesSemana)  <span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                        @Html.DisplayFor(x => ResumoPeriodico.apreensoesMes)  <span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                        <br />
+                                    </td>
+                                </tr>
+                                @*<tr>
+                                        <td>
+                                            <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                                        </td>
+                                    </tr>*@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="panel" style="background-color: lightcoral">
+                    <div class="panel-heading">
+                        @*<b>L I B E R A Ç Õ E S</b>*@
+                        <b>Total de liberações</b>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+
+                                <tr style="font-size: 16px">
+                                    <td class="text-center" style="background-color: lightcoral">
+                                        Hoje:<br />
+                                        <b><span class="text-danger" style="font-size: 24px">@Html.DisplayFor(x => ResumoPeriodico.saidasHoje)</span></b>
+                                    </td>
+                                    <td class="text-left">
+                                        <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Esta semana: <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Este mês: <br />
+                                    </td>
+                                    <td class="text-danger text-right">
+                                        <br />
+                                        @Html.DisplayFor(x => ResumoPeriodico.saidasSemana)<span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                        @Html.DisplayFor(x => ResumoPeriodico.saidasMes)  <span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                        <br />
+                                    </td>
+                                </tr>
+                                @*<tr>
+                                        <td>
+                                            <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                                        </td>
+                                    </tr>*@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="panel" style="background-color: darkseagreen">
+                    <div class="panel-heading">
+                        @*<B>F A T U R A M E N T O</B>*@
+                        <B>Total de faturamento</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+
+                                <tr style="font-size: 16px">
+                                    <td class="text-center" style="background-color: darkseagreen">
+                                        Hoje:<br />
+                                        <b><span class="text-success" style="font-size: 32px">@Html.DisplayFor(x => ResumoPeriodico.FaturamentoHoje)</span></b>
+                                    </td>
+                                    <td class="text-left">
+                                        <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Esta semana: <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Este mês: <br />
+                                    </td>
+                                    <td class="text-danger text-right">
+                                        <br />
+                                        <b>@Html.DisplayFor(x => ResumoPeriodico.FaturamentoSemana)</b><br />
+                                        <b>@Html.DisplayFor(x => ResumoPeriodico.FaturamentoMes)</b><br /><br />
+                                    </td>
+                                </tr>
+                                @*<tr>
+                                        <td>
+                                            <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                                        </td>
+                                    </tr>*@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="panel" style="background-color: dodgerblue">
+                    <div class="panel-heading">
+                        <B>Taxa de liberação - Indicador Mensal</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        @*<hr />*@
+                                        <div style="font-size: 36px; color: black">
+                                            @TaxaLiberacao.taxaLiberacao
+                                            @*<span class="glyphicon glyphicon-thumbs-up"></span>*@
+                                        </div>
+                                        @*<hr />*@
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @*<b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel" style="background-color: coral">
+                    <div class="panel-heading">
+                        <B>Ticket Médio - Indicador Mensal</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        @*<hr />*@
+                                        <div style="font-size: 36px; color: black">
+                                            @TicketMedio.ticketMedio
+                                            @*<span class="glyphicon glyphicon-thumbs-up"></span>*@
+                                        </div>
+                                        @*<hr />*@
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @*<b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel" style="background-color: plum">
+                    <div class="panel-heading">
+                        <B>Top 10 Infrações</B>
+                    </div>
+
+                    <div class="table-responsive small bg-success">
+                        <table class="table table-bordered">
+                            <tr>
+                                @foreach (var item in Infracoes)
+                                {
+                                <td>
+                                    Cód.<br /><span class="badge"><b>@Html.DisplayFor(modelItem => item.infracaoCodigo)</b></span>
+                                </td>
+                                }
+                            </tr>
+
+                            <tr>
+                                @foreach (var item in Infracoes)
+                                {
+                                <td>
+                                    <span class="glyphicon glyphicon-warning-sign"></span><br />
+                                    @Html.DisplayFor(modelItem => item.infracaoDescricao)
+                                </td>
+                                }
+                            </tr>
+
+                            <tr>
+                                @foreach (var item in Infracoes)
+                                {
+                                <td>
+                                    <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span><br />
+
+                                    @if (item.quantidade > 1)
+                                        {
+                                        @*@Html.Label("Infrações");*@
+                                        @Html.Name("Infrações");
+                                        }
+                                        else
+                                        {
+                                        @Html.Name("Infração");
+                                        }
+
+
+                                </td>
+                                }
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-danger">
+                        <b>Infrações - Top 10</b>
+                    </div>
+
+                    @foreach (var item in Infracoes)
+                    {
+                    <div class="list-group-item text-left">
+                        <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span>
+                        @Html.DisplayFor(modelItem => item.infracaoDescricao)
+                    </div>
+                    }
+
+                    @*<div class="list-group-item text-left list-group-item-danger" X>
+                            style="background-color: gold">
+                            <span class="badge"> @counter2.ToString() </span>
+                            <b>TOTAL</b>
+                            <div class="glyphicon glyphicon-hand-right"></div>
+                        </div>*@<div class="list-group-item text-left list-group-item-danger" X>
+                        <span class="badge"></span>
+                        <b></b>
+                        <div class="glyphicon glyphicon-hand-right"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            
+
+
+
+           
+
+
+            <div class="col-md-3">
+
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-danger">
+                        <b></b>
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge"></span>
+                        <span class="glyphicon glyphicon-time"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        @*<div class="row">
+
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="http://placehold.it/100x100/0D8FDB/000" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Hoje</h4>
+                    <span class="text-muted">Clique para filtrar</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="http://placehold.it/200x200/39DBAC/000" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Semana atual</h4>
+                    <span class="text-muted">Clique para filtrar</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="http://placehold.it/200x200/0D8FDB/000" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Última semana</h4>
+                    <span class="text-muted">Clique para filtrar</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="http://placehold.it/200x200/39DBAC/000" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Último mês</h4>
+                    <span class="text-muted">Clique para filtrar</span>
+                </div>
+
+            </div>*@<div class="row">
+
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="http://placehold.it/100x100/0D8FDB/000" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4></h4>
+                <span class="text-muted"></span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="http://placehold.it/200x200/39DBAC/000" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4></h4>
+                <span class="text-muted"></span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="http://placehold.it/200x200/0D8FDB/000" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4></h4>
+                <span class="text-muted"></span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="http://placehold.it/200x200/39DBAC/000" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4></h4>
+                <span class="text-muted"></span>
+            </div>
+
+        </div>
+        @*<img src="/Home/getGrafico" />
+            <div class="row">
+
+                <div class="col-md-6">
+                    <img src="/Home/getGraficoDB" />
+                </div>
+                <div class="col-md-6">
+                    <img src="/Home/getGraficoDB2" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="/Home/getGraficoEntradas" />
+                </div>
+
+                <div class="col-md-6">
+                    <div class="list-group">
+                        <div class="list-group-item list-group-item-info">
+                            <b>ENTRADAS</b>
+                        </div>
+
+                        @{ int counter = 0; }
+                        @foreach (var item in Model)
+                        {
+                            <div class="list-group-item text-left">
+                                <span class="badge">@Html.DisplayFor(modelItem => item.quantidade)</span>
+                                @Html.DisplayFor(modelItem => item.descricaoDivisao)
+                            </div>
+                            counter += item.quantidade;
+                        }
+
+                        <div class="list-group-item text-left list-group-item-info">
+                            @*style="background-color: gold">
+                            <span class="badge"> @counter.ToString() </span>
+                            <b>TOTAL</b>
+                            <div class="glyphicon glyphicon-hand-right"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>*@<img src="/Home/getGrafico" />
+        <div class="row">
+
+            <div class="col-md-6">
+                <img src="/Home/getGraficoDB" />
+            </div>
+            <div class="col-md-6">
+                <img src="/Home/getGraficoDB2" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <img src="/Home/getGraficoEntradas" />
+            </div>
+
+            <div class="col-md-6">
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-info">
+                        <b></b>
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge"></span>
+                    </div>
+
+                    <div class="list-group-item text-left list-group-item-info">
+                        <span class="badge"></span>
+                        <b></b>
+                        <div class="glyphicon glyphicon-hand-right"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-2">
+                <div class="panel" style="background-color: gold">
+                    <div class="panel-heading">
+                        <B>Veículos apreendidos</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+
+
+                                <tr style="font-size: 16px">
+                                    <td class="text-left">
+                                        <span class="glyphicon glyphicon-calendar"></span>  Hoje: <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Semana: <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Mês: <br />
+                                    </td>
+
+                                    <td class="text-danger text-right">
+                                        <b>29  </b><span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                        <b>191  </b><span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                        <b>433  </b><span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @*<b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="panel" style="background-color: gold">
+                    <div class="panel-heading">
+                        <B>Veículos apreendidos</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+
+
+                                <tr style="font-size: 16px">
+                                    <td class="text-left">
+                                        <span class="glyphicon glyphicon-calendar"></span>  Hoje: <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Semana: <br />
+                                        <span class="glyphicon glyphicon-calendar"></span>  Mês: <br />
+                                    </td>
+
+                                    <td class="text-danger text-right">
+                                        <b>29  </b><span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                        <b>191  </b><span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                        <b>433  </b><span class="glyphicon glyphicon-thumbs-up"></span> <br />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @*<b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="panel" style="background-color: coral">
+                    <div class="panel-heading">
+                        <B>Veículos Entregues</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        @*<hr />*@
+                                        <div style="font-size: 72px; color: black">
+                                            31
+                                            @*<span class="glyphicon glyphicon-thumbs-up"></span>*@
+                                        </div>
+                                        @*<hr />*@
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @*<b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="panel" style="background-color: aquamarine">
+                    <div class="panel-heading">
+                        <B>Veículos no pátio</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        @*<hr />*@
+                                        <div style="font-size: 72px; color: black">
+                                            @counterEstoque.ToString()
+                                            @*<span class="glyphicon glyphicon-thumbs-up"></span>*@
+                                        </div>
+                                        @*<hr />*@
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @*<b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>*@
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-info">
+                        <b>ENTRADAS NO MÊS</b>
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">122</span>
+                        DETRAN
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">6</span>
+                        PM
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">3</span>
+                        PREF MUNIC
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">2</span>
+                        <div class="">N INF</div>
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">1</span>
+                        DESCONHECIDO
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">0</span>
+                        OUTROS
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">134</span>
+                        <b>TOTAL</b>
+                        <div class="glyphicon glyphicon-hand-right"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-success">
+                        <b>SAÍDAS NO MÊS</b>
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">8</span>
+                        BOLETO
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">0</span>
+                        LEILÃO
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">0</span>
+                        OUTROS
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">8</span>
+                        <b>TOTAL</b>
+                        <div class="glyphicon glyphicon-hand-right"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-warning">
+                        <b>ARRECADAÇÕES</b>
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">8</span>
+                        ESTADIAS
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">0</span>
+                        LEILÃO
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">0</span>
+                        OUTROS
+                    </div>
+
+                    <div class="list-group-item text-left">
+                        <span class="badge">8</span>
+                        <b>TOTAL</b>
+                        <div class="glyphicon glyphicon-hand-right"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        @*Resumo*@
+        @*<div class="panel panel-default">
+                <div class="bg-danger"><div class="panel-heading">ITENS</div></div>
+                <div class="bg-success"><div class="panel-heading">ENTRADAS</div></div>
+                <div class="bg-info"><div class="panel-heading">SAÍDAS</div></div>
+                <div class="bg-primary"><div class="panel-heading">ARRECADAÇÕES</div></div>
+                <div class="bg-warning"><div class="panel-heading">ARRECADAÇÕES</div></div>
+            </div>*@<div class="panel panel-default">
+            <div class="bg-danger"><div class="panel-heading"></div></div>
+            <div class="bg-success"><div class="panel-heading"></div></div>
+            <div class="bg-info"><div class="panel-heading"></div></div>
+            <div class="bg-primary"><div class="panel-heading"></div></div>
+            <div class="bg-warning"><div class="panel-heading"></div></div>
+        </div>
+
+        <div class="row">
+            @*Entradas*@
+            <div class="col-md-6">
+                <div class="panel" style="background-color: darkseagreen">
+                    <div class="panel-heading">
+                        <B>ENTRADAS</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            @*
+                                <thead>
+                                    <tr>
+                                        <th>MÊS</th>
+                                        <th>DETRAN</th>
+                                        <th>PM</th>
+                                        <th>PREF MUNIC</th>
+                                        <th>N. INF</th>
+                                        <th>DESCONHECIDO</th>
+                                        <th>Outros</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>*@
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                <tr>
+                                    <td>MÊS</td>
+                                    <td>DETRAN</td>
+                                    <td>PM</td>
+                                    <td>PREF MUNIC</td>
+                                    <td>N. INF</td>
+                                    <td>DESCONHECIDO</td>
+                                    <td>Outros</td>
+                                    <td>Total    </td>
+                                </tr>
+                                <tr>
+                                    <td>Abr.</td>
+                                    <td>122</td>
+                                    <td>6</td>
+                                    <td>3</td>
+                                    <td>2</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>134</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Total <span class="glyphicon glyphicon-hand-right"></span> </b>
+                                    </td>
+                                    <td>122</td>
+                                    <td>6</td>
+                                    <td>3</td>
+                                    <td>2</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>134</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @*Saídas*@
+            <div class="col-md-6">
+                <div class="panel" style="background-color: gold">
+                    <div class="panel-heading">
+                        <B>SAÍDAS</B>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <th>Boleto</th>
+                                    <th>Leilão</th>
+                                    <th>Outros</th>
+                                    <th>Total</th>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td>8</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>8</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Arrecadações*@
+        <div class="panel" style="background-color: deepskyblue">
+            <div class="panel-heading">
+                <B>ARRECADAÇÕES</B>
+            </div>
+
+            <div class="table-responsive small">
+                <table class="table table-striped">
+                    <thead>
+
+                        <tr>
+                            <th style="text-align: center">Remoção</th>
+                            <th style="text-align: center"> </th>
+                            <th style="text-align: center">Estadia</th>
+                            <th style="text-align: center">Leilão</th>
+                            <th style="text-align: center">Outros</th>
+                            <th style="text-align: center">Total</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">Qtde.</th>
+                            <th style="text-align: center">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>7</td>
+                            <td>R$ 1.435,00</td>
+                            <td>R$ 3.324,00</td>
+                            <td>R$ 0,00</td>
+                            <td>R$ 0,00</td>
+                            <td>R$ 4.759,00</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>R$ 1.435,00</td>
+                            <td>R$ 3.324,00</td>
+                            <td>R$ 0,00</td>
+                            <td>R$ 0,00</td>
+                            <td>R$ 4.759,00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        @*<div class="panel panel-heading">
+                <div class="row">
+                    <div class="col-md-3 bg-info">
+                        <div class="panel-heading">coluna 1</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="panel-heading">coluna 2</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="panel-heading">coluna 3</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="panel-heading">coluna 4</div>
+                    </div>
+                </div>
+            </div>*@<div class="panel panel-heading">
+            <div class="row">
+                <div class="col-md-3 bg-info">
+                    <div class="panel-heading"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel-heading"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel-heading"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel-heading"></div>
+                </div>
+            </div>
+        </div>
+        @*Primeira linha de caixas*@
+        <div class="row">
+
+            @*Estimativa de Receita*@
+            <div class="col-xs-6 col-sm-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <b>Estimativa de Receita</b>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            @*
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                </thead>*@
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Remoção</td>
+                                    <td>R$ 243.663,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Estada</td>
+                                    <td>R$ 1.178.699,20</td>
+                                </tr>
+                                <tr>
+                                    <td>TOTAL</td>
+                                    <td>R$ 1.422.362,20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            @*Média de Receita por Veículo*@
+            <div class="col-xs-6 col-sm-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <b>Média de Receita por Veículo</b>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th> </th>
+                                    <th>REBOQUE</th>
+                                    <th>ESTADIA</th>
+                                    <th>TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Total (R$)</td>
+                                    <td>1.435,00</td>
+                                    <td>3.324,00</td>
+                                    <td>4.759,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Qtde.</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                    <td>15</td>
+                                </tr>
+                                <tr>
+                                    <td>TOTAL</td>
+                                    <td>205,00</td>
+                                    <td>415,50</td>
+                                    <td>317,27</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            @*Recuperação Financeira*@
+            <div class="col-xs-6 col-sm-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <b>Recuperação Financeira</b>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Multas</td>
+                                    <td>R$ 0,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Licenciamento</td>
+                                    <td>R$ 0,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Estadias</td>
+                                    <td>R$ 3.324,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Reboque</td>
+                                    <td>R$ 1.435,00</td>
+                                </tr>
+                                <tr>
+                                    <td>TOTAL</td>
+                                    <td>R$ 4.759,00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        @*Segunda linha de caixas*@
+        <div class="row">
+
+            @*Média de Apreensão por Dia*@
+            <div class="col-xs-6 col-sm-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Média de Apreensão por Dia</div>
+
+                    outra tabela
+
+                </div>
+            </div>
+
+            @*Veículos no Pátio*@
+            <div class="col-xs-6 col-sm-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Média de Receita por Veículo</div>
+
+                    outra tabela
+
+                </div>
+            </div>
+
+            @*Veículos no Pátio em: 28/04/2016*@
+            <div class="col-xs-6 col-sm-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Veículos no Pátio em: 28/04/2016</div>
+
+                    outra tabela
+
+                </div>
+            </div>
+
+        </div>
+
+        @*Terceira linha de caixas*@
+        <div class="row">
+
+            @*Veículos Rebocados*@
+            <div class="col-xs-6 col-sm-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Veículos Rebocados</div>
+
+                    outra tabela
+
+                </div>
+            </div>
+
+            @*Veículos Apreendidos*@
+            <div class="col-xs-6 col-sm-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Veículos Apreendidos</div>
+
+                    outra tabela
+
+                </div>
+            </div>
+
+            @*Veículos Liberados*@
+            <div class="col-xs-6 col-sm-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Veículos Liberados</div>
+
+                    outra tabela
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                <span class="sr-only">40% Complete (success)</span>
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                <span class="sr-only">20% Complete</span>
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                <span class="sr-only">60% Complete (warning)</span>
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                <span class="sr-only">80% Complete (danger)</span>
+            </div>
+        </div>
+
+
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                <span class="sr-only">45% Complete</span>
+            </div>
+        </div>
+
+
+        <div class="progress">
+            <div class="progress-bar progress-bar-success" style="width: 35%">
+                <span class="sr-only">35% Complete (success)</span>
+            </div>
+            <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 20%">
+                <span class="sr-only">20% Complete (warning)</span>
+            </div>
+            <div class="progress-bar progress-bar-danger" style="width: 10%">
+                <span class="sr-only">10% Complete (danger)</span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge">14</span>
+                    Cras justo odio
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">14</span>
+                    claudio
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">14</span>
+                    Cras justo odio
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    mariano
+                </a>
+                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item">Morbi leo risus</a>
+                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
+                <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
+                <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
+                <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+            </ul>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-success">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item list-group-item-info">Cras sit amet nibh libero</a>
+                <a href="#" class="list-group-item list-group-item-warning">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item list-group-item-danger">Vestibulum at eros</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        <h4 class="list-group-item-heading">List group item heading</h4>
+                        <p class="list-group-item-text">...</p>
+                    </a>
+                </div>
+                <div class="panel panel-primary">...</div>
+                <div class="panel panel-success">...</div>
+                <div class="panel panel-info">...</div>
+                <div class="panel panel-warning">...</div>
+                <div class="panel panel-danger">...</div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Panel heading without title</div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+   
+
+    <h2 class="sub-header">Entradas</h2>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Panel heading</div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1,001</td>
+                        <td>Lorem</td>
+                        <td>ipsum</td>
+                        <td>dolor</td>
+                        <td>sit</td>
+                    </tr>
+                    <tr>
+                        <td>1,002</td>
+                        <td>amet</td>
+                        <td>consectetur</td>
+                        <td>adipiscing</td>
+                        <td>elit</td>
+                    </tr>
+                    <tr>
+                        <td>1,003</td>
+                        <td>Integer</td>
+                        <td>nec</td>
+                        <td>odio</td>
+                        <td>Praesent</td>
+                    </tr>
+                    <tr>
+                        <td>1,003</td>
+                        <td>libero</td>
+                        <td>Sed</td>
+                        <td>cursus</td>
+                        <td>ante</td>
+                    </tr>
+                    <tr>
+                        <td>1,004</td>
+                        <td>dapibus</td>
+                        <td>diam</td>
+                        <td>Sed</td>
+                        <td>nisi</td>
+                    </tr>
+                    <tr>
+                        <td>1,005</td>
+                        <td>Nulla</td>
+                        <td>quis</td>
+                        <td>sem</td>
+                        <td>at</td>
+                    </tr>
+                    <tr>
+                        <td>1,006</td>
+                        <td>nibh</td>
+                        <td>elementum</td>
+                        <td>imperdiet</td>
+                        <td>Duis</td>
+                    </tr>
+                    <tr>
+                        <td>1,007</td>
+                        <td>sagittis</td>
+                        <td>ipsum</td>
+                        <td>Praesent</td>
+                        <td>mauris</td>
+                    </tr>
+                    <tr>
+                        <td>1,008</td>
+                        <td>Fusce</td>
+                        <td>nec</td>
+                        <td>tellus</td>
+                        <td>sed</td>
+                    </tr>
+                    <tr>
+                        <td>1,009</td>
+                        <td>augue</td>
+                        <td>semper</td>
+                        <td>porta</td>
+                        <td>Mauris</td>
+                    </tr>
+                    <tr>
+                        <td>1,010</td>
+                        <td>massa</td>
+                        <td>Vestibulum</td>
+                        <td>lacinia</td>
+                        <td>arcu</td>
+                    </tr>
+                    <tr>
+                        <td>1,011</td>
+                        <td>eget</td>
+                        <td>nulla</td>
+                        <td>Class</td>
+                        <td>aptent</td>
+                    </tr>
+                    <tr>
+                        <td>1,012</td>
+                        <td>taciti</td>
+                        <td>sociosqu</td>
+                        <td>ad</td>
+                        <td>litora</td>
+                    </tr>
+                    <tr>
+                        <td>1,013</td>
+                        <td>torquent</td>
+                        <td>per</td>
+                        <td>conubia</td>
+                        <td>nostra</td>
+                    </tr>
+                    <tr>
+                        <td>1,014</td>
+                        <td>per</td>
+                        <td>inceptos</td>
+                        <td>himenaeos</td>
+                        <td>Curabitur</td>
+                    </tr>
+                    <tr>
+                        <td>1,015</td>
+                        <td>sodales</td>
+                        <td>ligula</td>
+                        <td>in</td>
+                        <td>libero</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Panel heading</div>
+
+        outra tabela
+
+    </div>
+
+
