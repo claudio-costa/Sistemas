@@ -385,11 +385,11 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MobLink.WebLeilao.Dominio\MobLink.LinkLeiloes.Dominio.csproj">
+    <ProjectReference Include="..\MobLink.LinkLeiloes.Dominio\MobLink.LinkLeiloes.Dominio.csproj">
       <Project>{46834f07-64ab-489a-abc4-7149312eb1db}</Project>
       <Name>MobLink.LinkLeiloes.Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MobLink.WebLeilao.Repositorio\MobLink.LinkLeiloes.Repositorio.csproj">
+    <ProjectReference Include="..\MobLink.LinkLeiloes.Repositorio\MobLink.LinkLeiloes.Repositorio.csproj">
       <Project>{c0106801-d65c-4bcc-94ac-a7e0de18a6d3}</Project>
       <Name>MobLink.LinkLeiloes.Repositorio</Name>
     </ProjectReference>

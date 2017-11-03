@@ -49,11 +49,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MobLink.WebLeilao.Repositorio\MobLink.WebLeilao.Repositorio.csproj">
-      <Project>{c0106801-d65c-4bcc-94ac-a7e0de18a6d3}</Project>
-      <Name>MobLink.WebLeilao.Repositorio</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

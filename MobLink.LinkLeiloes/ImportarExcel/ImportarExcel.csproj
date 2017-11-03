@@ -4,15 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18AA7CDA-CC95-47C4-8914-D5FA248BD9F4}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>MobLink.WebLeilao.PreLeilao</RootNamespace>
-    <AssemblyName>MobLink.WebLeilao.PreLeilao</AssemblyName>
+    <ProjectGuid>{6E561132-03FB-4B82-BCA0-369EBBDC9C69}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ImportarExcel</RootNamespace>
+    <AssemblyName>ImportarExcel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,8 +23,10 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,45 +48,53 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="MobLink.Framework">
       <HintPath>..\..\..\Comum\MobLink.Framework\Output\MobLink.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="MobLink.Framework.WebServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Comum\MobLink.Framework\Output\MobLink.Framework.WebServices.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Brbid\Brbid_Mapper_Profile.cs" />
+    <Compile Include="PRFPB\LotePRFPB.cs" />
+    <Compile Include="Transguard\Transguard_MapProfile.cs" />
+    <Compile Include="Brbid\Brbid_Arrematante.cs" />
+    <Compile Include="Transguard\CADASTRADOS.cs" />
+    <Compile Include="Financeiras\Financeira.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ProjectInstaller.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ProjectInstaller.Designer.cs">
-      <DependentUpon>ProjectInstaller.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PreLeilao.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PreLeilao.Designer.cs">
-      <DependentUpon>PreLeilao.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Financeiras\Repositorio.cs" />
+    <Compile Include="Transguard\DETALHE_RENAINF.cs" />
+    <Compile Include="Transguard\MULTAS.cs" />
+    <Compile Include="Transguard\NAO_CADASTRADOS_DETRAN_RJ.cs" />
+    <Compile Include="Transguard\RESTRICOES.cs" />
+    <Compile Include="Transguard\SITUACAO_ROUBOFURTO_BIN.cs" />
+    <Compile Include="Transguard\TransguardRepositorio.cs" />
+    <Compile Include="Transguard\TRIBUTOS.cs" />
+    <Compile Include="VipLeiloes\VipRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ProjectInstaller.resx">
-      <DependentUpon>ProjectInstaller.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -99,12 +107,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MobLink.WebLeilao.Repositorio\MobLink.LinkLeiloes.Repositorio.csproj">
-      <Project>{c0106801-d65c-4bcc-94ac-a7e0de18a6d3}</Project>
-      <Name>MobLink.LinkLeiloes.Repositorio</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

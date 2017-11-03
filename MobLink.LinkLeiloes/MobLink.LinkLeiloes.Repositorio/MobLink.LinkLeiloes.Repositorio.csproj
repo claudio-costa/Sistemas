@@ -7,8 +7,8 @@
     <ProjectGuid>{C0106801-D65C-4BCC-94AC-A7E0DE18A6D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MobLink.WebLeilao.Repositorio</RootNamespace>
-    <AssemblyName>MobLink.WebLeilao.Repositorio</AssemblyName>
+    <RootNamespace>MobLink.LinkLeiloes.Repositorio</RootNamespace>
+    <AssemblyName>MobLink.LinkLeiloes.Repositorio</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -97,7 +97,7 @@
     <Compile Include="UsuarioRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MobLink.WebLeilao.Dominio\MobLink.LinkLeiloes.Dominio.csproj">
+    <ProjectReference Include="..\MobLink.LinkLeiloes.Dominio\MobLink.LinkLeiloes.Dominio.csproj">
       <Project>{46834f07-64ab-489a-abc4-7149312eb1db}</Project>
       <Name>MobLink.LinkLeiloes.Dominio</Name>
     </ProjectReference>

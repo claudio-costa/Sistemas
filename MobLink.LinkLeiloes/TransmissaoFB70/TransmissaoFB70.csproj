@@ -118,15 +118,5 @@
   <ItemGroup>
     <None Include="Web References\WSSapLinkPatios\WSSapLinkPatios.disco" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MobLink.WebLeilao.Dominio\MobLink.WebLeilao.Dominio.csproj">
-      <Project>{46834f07-64ab-489a-abc4-7149312eb1db}</Project>
-      <Name>MobLink.WebLeilao.Dominio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MobLink.WebLeilao.Repositorio\MobLink.WebLeilao.Repositorio.csproj">
-      <Project>{c0106801-d65c-4bcc-94ac-a7e0de18a6d3}</Project>
-      <Name>MobLink.WebLeilao.Repositorio</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
