@@ -12,7 +12,11 @@ namespace ImportarExcel
     {
         static void Main(string[] args)
         {
-            FileStream stream = File.Open(@"C:\Temp\Caruaru\Caruaru.xlsx", FileMode.Open, FileAccess.Read);
+            MobLink.Framework.WebServices.WSPatioxDetran ws = new MobLink.Framework.WebServices.WSPatioxDetran(Ambientes.Producao);
+            var ret = ws.ConsultaVeiculo("IGG2033", "ROOT");
+
+
+            FileStream stream = File.Open(@"C:\Temp\Garanhuns\Garanhuns.xlsx", FileMode.Open, FileAccess.Read);
 
             IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
@@ -21,27 +25,24 @@ namespace ImportarExcel
             DataSet result = excelReader.AsDataSet();
 
             var Arrematantes = result.Tables[0].ConverterParaLista<MobLink.LinkLeiloes.Dominio.Arrematante>();
-
-
-
-
+            
 
             foreach (var arrematante in Arrematantes)
             {
-                var del = string.Format(@"delete tb_leilao_lotes_arrematantes where leilao = 'TRGD02.17' and lote = '{0}'", arrematante.lote);
-                RepositorioGlobal.Util.ExecutaSqlGenerico(Util.LerConfiguracao("CONEXAO"), del);
+                //var del = string.Format(@"delete tb_leilao_lotes_arrematantes where id_leilao = 91 and lote = '{0}'", arrematante.lote);
+                //RepositorioGlobal.Util.ExecutaSqlGenerico(Util.LerConfiguracao("CONEXAO"), del);
 
-                Console.WriteLine(arrematante.chassi);
+                Console.WriteLine(arrematante.placa);
 
-                if (arrematante.numero_processo.Contains("_"))
-                {
-                    arrematante.numero_processo = arrematante.numero_processo.Replace("_", "");
-                }
+                //if (arrematante.numero_processo.Contains("_"))
+                //{
+                //    arrematante.numero_processo = arrematante.numero_processo.Replace("_", "");
+                //}
 
-                if (arrematante.numero_processo.Substring(0, 1) == "0")
-                {
-                    arrematante.numero_processo = arrematante.numero_processo.Substring(1, arrematante.numero_processo.Length - 1);
-                }
+                //if (arrematante.numero_processo.Substring(0, 1) == "0")
+                //{
+                //    arrematante.numero_processo = arrematante.numero_processo.Substring(1, arrematante.numero_processo.Length - 1);
+                //}
 
                 if (!string.IsNullOrEmpty(arrematante.placa) || !string.IsNullOrEmpty(arrematante.chassi))
                 {
@@ -50,17 +51,17 @@ namespace ImportarExcel
                         arrematante.placa = arrematante.placa.Substring(0, 7);
                     }
 
-                    //var sql = string.Format(@"SELECT * 
-                    //                        FROM tb_leilao_lotes ll
-                    //                       INNER JOIN tb_leilao l ON l.id = ll.id_leilao
-                    //                       WHERE l.descricao = '{0}'
-                    //                         AND ll.placa = '{1}' OR ll.chassi = '{2}'", arrematante.leilao, arrematante.placa, arrematante.chassi);
+                    var sql = string.Format(@"SELECT * 
+                                            FROM tb_leilao_lotes ll
+                                           INNER JOIN tb_leilao l ON l.id = ll.id_leilao
+                                           WHERE l.descricao = '{0}'
+                                             AND ll.placa = '{1}' OR ll.chassi = '{2}'", arrematante.leilao, arrematante.placa, arrematante.chassi);
 
-                    //var dtLote = RepositorioGlobal.Util.ConsultaGenerica(Util.DetectarConexao(), sql).ConverterParaLista<MobLink.LinkLeiloes.Dominio.Lote>();
+                    var dtLote = RepositorioGlobal.Util.ConsultaGenerica(Util.DetectarConexao(), sql).ConverterParaLista<MobLink.LinkLeiloes.Dominio.Lote>();
 
-                    //arrematante.numero_processo = dtLote.Count > 0 ? dtLote[0].numero_formulario_grv : string.Empty;
+                    arrematante.numero_processo = dtLote.Count > 0 ? dtLote[0].numero_formulario_grv : string.Empty;
 
-                    var sql = string.Format(@"SELECT * FROM tb_dep_grv WHERE numero_formulario_grv = '{0}'", arrematante.numero_processo);
+                    sql = string.Format(@"SELECT * FROM tb_dep_grv WHERE numero_formulario_grv = '{0}'", arrematante.numero_processo);
 
                     MobLink.LinkLeiloes.Dominio.GRV grv = new MobLink.LinkLeiloes.Dominio.GRV();
 
@@ -78,7 +79,7 @@ namespace ImportarExcel
                     try
                     {
                         //var lote = RepositorioGlobal.Lote.SelecionarPorId(grv.id_grv.Value);
-                        //lote.id_status_lote = "22"; //LOTE ARREMATADO
+                        //lote.id_status_lote = 22; //LOTE ARREMATADO
                         //RepositorioGlobal.Lote.Alterar(lote);
 
                         var upd = string.Format(@"UPDATE dbo.tb_dep_grv SET id_status_operacao = '3' WHERE id_grv = {0}", grv.id_grv);

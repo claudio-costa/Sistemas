@@ -143,7 +143,7 @@ namespace MobLink.LinkLeiloes.Repositorio
                 DbSqlServer.AppendFormat("						'{0}',  ", Entidade.logradouro.Replace('\'', ' '));
                 DbSqlServer.AppendFormat("						'{0}',  ", Entidade.numero);
                 DbSqlServer.AppendFormat("						'{0}',  ", Entidade.complemento);
-                DbSqlServer.AppendFormat("						'{0}',  ", Entidade.bairro.Replace('\'', ' '));
+                DbSqlServer.AppendFormat("						'{0}',  ", string.IsNullOrEmpty(Entidade.bairro) ? "" : Entidade.bairro.Replace('\'', ' '));
                 DbSqlServer.AppendFormat("						'{0}',  ", Entidade.cidade);
                 DbSqlServer.AppendFormat("						'{0}',  ", Entidade.estado);
                 DbSqlServer.AppendFormat("						'{0}',  ", Entidade.cep);
