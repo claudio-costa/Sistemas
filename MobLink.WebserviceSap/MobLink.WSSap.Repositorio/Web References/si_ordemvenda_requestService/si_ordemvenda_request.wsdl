@@ -8,7 +8,8 @@
       <xsd:element name="mt_ordemvenda_request" type="p1:dt_ordemvenda_request" />
       <xsd:complexType name="dt_ordemvenda_request">
         <xsd:annotation>
-          <xsd:appinfo source="http://sap.com/xi/VersionID">6a3496d0a21b11e793640000010fa856</xsd:appinfo>
+          <xsd:documentation xml:lang="EN">Ordem de Vendas</xsd:documentation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">1b2223bfc0da11e7c9bd0000010fa856</xsd:appinfo>
         </xsd:annotation>
         <xsd:sequence>
           <xsd:element name="IDTRANSACAO" type="xsd:integer">
@@ -118,6 +119,9 @@
             </xsd:simpleType>
           </xsd:element>
           <xsd:element minOccurs="0" name="ZTERM">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">99c6d814c0d911e7afd7847bebfde8f3</xsd:appinfo>
+            </xsd:annotation>
             <xsd:simpleType>
               <xsd:restriction base="xsd:string">
                 <xsd:maxLength value="4" />
@@ -249,7 +253,7 @@
   </wsdl:binding>
   <wsdl:service name="si_ordemvenda_requestService">
     <wsdl:port name="HTTP_Port" binding="p1:si_ordemvenda_requestBinding">
-      <address location="http://srvsappidev:50100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=LINKPATIOS_2_QAD&amp;receiverParty=&amp;receiverService=&amp;interface=si_ordemvenda_request&amp;interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fordemvenda" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://srvsappiprd:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=LINKPATIOS&amp;receiverParty=&amp;receiverService=&amp;interface=si_ordemvenda_request&amp;interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fordemvenda" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

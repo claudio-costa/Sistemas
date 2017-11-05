@@ -109,10 +109,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>MobLink_WSSap_Repositorio_si_modificacao_parceiroService_si_modificacao_parceiroService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="C:\Users\Claudio Costa\OneDrive\Clientes\Mob-Link\Sistemas\WSSap\Arquivos\qad\ordem_venda_novo\si_ordemvenda_requestService.wsdl">
+    <WebReferenceUrl Include="C:\Users\Claudio Costa\OneDrive\Clientes\Mob-Link\Sistemas\MobLink.WebserviceSap\Arquivos\prd\si_ordemvenda_requestService.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\si_ordemvenda_requestService\</RelPath>
-      <UpdateFromURL>C:\Users\Claudio Costa\OneDrive\Clientes\Mob-Link\Sistemas\WSSap\Arquivos\qad\ordem_venda_novo\si_ordemvenda_requestService.wsdl</UpdateFromURL>
+      <UpdateFromURL>C:\Users\Claudio Costa\OneDrive\Clientes\Mob-Link\Sistemas\MobLink.WebserviceSap\Arquivos\prd\si_ordemvenda_requestService.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

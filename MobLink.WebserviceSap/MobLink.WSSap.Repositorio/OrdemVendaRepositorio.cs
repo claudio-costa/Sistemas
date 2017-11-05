@@ -89,7 +89,7 @@ namespace MobLink.WSSap.Repositorio
                         iTEMS.id_grupo = dp.CapturaGrupo(item.codigoMaterial.ToString()).ToInt32();
                         iTEMS.codigo_material_agrupamento = dp.CapturaMaterialAgrupamento(iTEMS.id_grupo.Value);
                         iTEMS.tipoDocumento = dp.CapturaTipoDocumentoAgrupamento(iTEMS.id_grupo.Value);
-
+                        
                         lista_notas.Add(iTEMS);
                     };
 

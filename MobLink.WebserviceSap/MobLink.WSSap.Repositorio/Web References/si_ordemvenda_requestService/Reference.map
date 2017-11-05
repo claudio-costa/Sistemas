@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="file:///C:/Users/Claudio Costa/OneDrive/Clientes/Mob-Link/Sistemas/WSSap/Arquivos/qad/ordem_venda_novo/si_ordemvenda_requestService.wsdl" filename="si_ordemvenda_request.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="file:///C:/Users/Claudio Costa/OneDrive/Clientes/Mob-Link/Sistemas/MobLink.WebserviceSap/Arquivos/prd/si_ordemvenda_requestService.wsdl" filename="si_ordemvenda_request.wsdl" />
   </Results>
 </DiscoveryClientResultsFile>

@@ -51,9 +51,9 @@ namespace MobLink.WSSap.Repositorio.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://srvsappidev:50100/XISOAPAdapter/MessageServlet?senderParty=&senderService=" +
-            "LINKPATIOS_2_QAD&receiverParty=&receiverService=&interface=si_ordemvenda_request" +
-            "&interfaceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fordemvenda")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://srvsappiprd:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=" +
+            "LINKPATIOS&receiverParty=&receiverService=&interface=si_ordemvenda_request&inter" +
+            "faceNamespace=http%3A%2F%2Fwww.l2r.com.br%2Fpi%2Fordemvenda")]
         public string MobLink_WSSap_Repositorio_si_ordemvenda_requestService_si_ordemvenda_requestService {
             get {
                 return ((string)(this["MobLink_WSSap_Repositorio_si_ordemvenda_requestService_si_ordemvenda_requestServi" +
